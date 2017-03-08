@@ -74,7 +74,7 @@ function shipClass() {
 			scoreMultiplierLifeSpan--;
 		}
 		if(scoreMultiplierLifeSpan == 0){
-			scoreMultiplier = 0;
+			scoreMultiplier = 1;
 		}
 
 		if(this.keyHeld_Gas) {

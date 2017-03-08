@@ -1,5 +1,5 @@
-const RAIL_SPEED = 18.0;
-const RAIL_LIFE = 3000;
+const RAIL_SPEED = 18.0; //18
+const RAIL_LIFE = 3000; //3000
 const RAIL_DISPLAY_RADIUS = 3;
 const SHOT_OFFSET = 30;
 
@@ -13,6 +13,8 @@ function railSlugClass() {
 	this.yv = 0;
 	this.deltaX = 0;
 	this.deltaY = 0;
+
+	this.railColor = 'red';
 
 	this.shotLife = 30;
 	this.timeUntilCanHitAgain = 0;
@@ -44,48 +46,47 @@ function railSlugClass() {
 		this.x = shipFiring.x + Math.cos(shipFiring.ang) * shotDistFromShipCenter;
 		this.y = shipFiring.y + Math.sin(shipFiring.ang) * shotDistFromShipCenter;
 
-		/*
-		this.deltaX = SHOT_OFFSET - shipFiring.x;
-		this.deltaY = SHOT_OFFSET - shipFiring.y;
-
-		this.x = Math.sqrt(this.deltaX*this.deltaX);
-		this.y = Math.sqrt(this.deltaY*this.deltaY);
-		*/
-
-		/*TODO drawing an offset bullet lies within here.
-		var deltaX = testX-this.x;
-		var deltaY = testY-this.y;
-		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
-		*/
-
-		/*TODO drawing an offset bullet lies within here.
-		var deltaX = testX-this.x;
-		var deltaY = testY-this.y;
-		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
-		*/
 		this.xv = Math.cos(shipFiring.ang) * RAIL_SPEED + shipFiring.xv;
 		this.yv = Math.sin(shipFiring.ang) * RAIL_SPEED + shipFiring.yv;
 
 		this.shotLife = RAIL_LIFE;
 	}
 
-	this.superClassMove	=	this.move; //saving reference to parent class' move.
-	this.move = function() {
-		if(this.shotLife > 0){
-			this.shotLife--;
-			this.superClassMove();
+	this.increaseScoreMultiplier = function(){
+		if(scoreMultiplier < 8){
+			scoreMultiplier *= 2;
 		}
+	}
+
+	this.handleScreenWrap = function(){
 		if(this.x > canvas.width){
-			scoreMultiplier*2;
+			this.x = 0;
+			this.increaseScoreMultiplier();
 		}
 		if(this.x < 0){
-			console.log(scoreMultiplier);
+			this.x = canvas.width;
+			this.increaseScoreMultiplier();
 		}
 		if(this.y < 0){
-			console.log(scoreMultiplier);
+			this.y = canvas.height;
+			this.increaseScoreMultiplier();
 		}
 		if(this.y > canvas.height){
-			console.log(scoreMultiplier);
+			this.y = 0;
+			this.increaseScoreMultiplier();
+		}
+	}
+
+	//this.superClassMove	=	this.move; //saving reference to parent class' move.
+	this.move = function() {
+		if(this.shotLife == 0){
+			scoreMultiplier = 1;
+		}
+		if(this.shotLife > 0){
+			this.shotLife--;
+			this.x += this.xv;
+			this.y += this.yv;
+			this.handleScreenWrap();
 		}
 	}
 
@@ -100,9 +101,29 @@ function railSlugClass() {
 	}
 
 	this.draw = function() {
+		if(scoreMultiplier == 1){
+			this.railColor = 'red';
+			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+		}
+
+		if(scoreMultiplier == 2){
+			this.railColor = 'green';
+			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+		}
+
+		if(scoreMultiplier == 4){
+			this.railColor = 'blue';
+			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+		}
+
+		if(scoreMultiplier == 8){
+			this.railColor = 'purple';
+			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+		}
+
 		if(this.shotLife > 0){
 			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,40,3,"red", ship.ang);
+			colorRect(this.x,this.y,40,3,this.railColor, ship.ang);
 		}
 	}
 }

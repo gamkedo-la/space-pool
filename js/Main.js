@@ -28,7 +28,7 @@ function imageLoadingDoneSoStartGame() {
 function resetGame(){
 	endScore = score;
 	score = 0;
-	scoreMultiplier = 0;
+	scoreMultiplier = 1;
 	clearAllAsteroids(colliders);
 	loadLevel();
 	showingGameOverScreen = true;
