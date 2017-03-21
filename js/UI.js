@@ -5,7 +5,7 @@ function drawUI(){
 }
 
 function titleScreen(){
-	var titleText = "asteroids clone!"
+	var titleText = "space pool"
 	var subText = "up to increase speed, left and right to turn"
 	var subSubText = "space to fire, enter to start"
 	canvasContext.fillStyle = "white";

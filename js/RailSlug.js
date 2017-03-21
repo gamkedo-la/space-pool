@@ -14,6 +14,8 @@ function railSlugClass() {
 	this.deltaX = 0;
 	this.deltaY = 0;
 
+	this.edgeCrossCount = 0;
+
 	this.railColor = 'red';
 
 	this.shotLife = 30;
@@ -49,6 +51,8 @@ function railSlugClass() {
 		this.xv = Math.cos(shipFiring.ang) * RAIL_SPEED + shipFiring.xv;
 		this.yv = Math.sin(shipFiring.ang) * RAIL_SPEED + shipFiring.yv;
 
+		this.shotAng = shipFiring.ang;
+
 		this.shotLife = RAIL_LIFE;
 	}
 
@@ -59,20 +63,25 @@ function railSlugClass() {
 	}
 
 	this.handleScreenWrap = function(){
+		var edgeCrossed = false;
 		if(this.x > canvas.width){
 			this.x = 0;
-			this.increaseScoreMultiplier();
+			edgeCrossed = true;
 		}
 		if(this.x < 0){
 			this.x = canvas.width;
-			this.increaseScoreMultiplier();
+			edgeCrossed = true;
 		}
 		if(this.y < 0){
 			this.y = canvas.height;
-			this.increaseScoreMultiplier();
+			edgeCrossed = true;
 		}
 		if(this.y > canvas.height){
 			this.y = 0;
+			edgeCrossed = true;
+		}
+		if(edgeCrossed){
+			this.edgeCrossCount++;
 			this.increaseScoreMultiplier();
 		}
 	}
@@ -91,6 +100,10 @@ function railSlugClass() {
 	}
 
 	this.hitTest = function(thisEnemy) {
+		if(this.edgeCrossCount == 0){
+			return false;
+		}
+
 		if(this.shotLife <= 0){
 			return false;
 		}
@@ -123,7 +136,7 @@ function railSlugClass() {
 
 		if(this.shotLife > 0){
 			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,40,3,this.railColor, ship.ang);
+			colorRect(this.x,this.y,40,3,this.railColor, this.shotAng);
 		}
 	}
 }

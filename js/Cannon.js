@@ -6,7 +6,7 @@ function cannonClass(){
   this.cannonFire = function(ship){
     if(this.shotArray.length < NUMBER_OF_SHOTS) {
       if(railGunActive){
-        var tempShot = new railSlugClass(ship);
+        var tempShot = new railSlugClass();
       }
       this.shotArray.push(tempShot);
       tempShot.reset();
