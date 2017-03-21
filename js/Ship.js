@@ -50,6 +50,7 @@ function shipClass() {
 		this.speed = 0;
 		this.x = canvas.width/2;
 		this.y = canvas.height/2;
+		this.cannon.clearShots();
 	} // end of shipReset func
 
 	this.isOverlappingPoint = function(testX, testY){

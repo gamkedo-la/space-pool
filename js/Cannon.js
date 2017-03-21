@@ -3,6 +3,10 @@ const NUMBER_OF_SHOTS = 1;
 function cannonClass(){
   this.shotArray = [];
 
+  this.clearShots = function() {
+    this.shotArray = [];
+  }
+
   this.cannonFire = function(ship){
     if(this.shotArray.length < NUMBER_OF_SHOTS) {
       if(railGunActive){
@@ -29,6 +33,7 @@ function cannonClass(){
 
       if( this.shotArray[i].hitTest(ship) ) {
         resetGame();
+        return; // bail to avoid null this.shotArray[i]
       }
 
       for(var currentCollider = 0; currentCollider < colliders.length; currentCollider++){
