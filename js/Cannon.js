@@ -40,7 +40,7 @@ function cannonClass(){
       }
 
       for(var currentCollider = 0; currentCollider < colliders.length; currentCollider++){
-        if( this.shotArray[i].hitTest(colliders[currentCollider]) && colliders[currentCollider].invicibilityTimer == 0) {
+        if( this.shotArray[i].hitTest(colliders[currentCollider]) && colliders[currentCollider].invincibilityTimer == 0) {
 
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if(colliders[currentCollider].hp < 0){

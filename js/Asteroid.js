@@ -77,7 +77,7 @@ function asteroidClass(size) {
 	this.hp = 3;
 
 	this.isReadyToRemove = false;
-	this.invicibilityTimer = INVINCIBILITY_TIMER;
+	this.invincibilityTimer = INVINCIBILITY_TIMER;
 
 	this.superClassReset = this.reset;
 	this.reset = function(whichImage) {
@@ -132,8 +132,8 @@ function asteroidClass(size) {
 		this.yv += Math.sin(this.ang) * ASTEROID_SPEED;
 		this.xv *= SPACESPEED_DECAY_MULT;
 		this.yv *= SPACESPEED_DECAY_MULT;
-		if(this.invicibilityTimer > 0){
-			this.invicibilityTimer--;
+		if(this.invincibilityTimer > 0){
+			this.invincibilityTimer--;
 		}
 		this.superClassMove();
 	}
