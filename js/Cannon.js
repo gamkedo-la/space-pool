@@ -25,6 +25,9 @@ function cannonClass(){
   this.iterateThroughShotArray = function(colliders, ship){
     if(colliders.length < (START_NUMBER_OF_ASTEROIDS/2)){
       spawnAndResetAsteroids();
+      waves++;
+      console.log("I'm running more than Ashleigh thinks I am !");
+      console.log(colliders.length);
     }
     for(var i = 0; i < this.shotArray.length; i++){
       if(this.shotArray[i].isShotReadyToFire()){

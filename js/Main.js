@@ -1,8 +1,12 @@
+const NUMBER_OF_LIVES = 3;
+
 var canvas, canvasContext;
 
 var ship;
 var UFO;
 var score = 0;
+var waves = 0;
+var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
@@ -32,12 +36,12 @@ function resetGame(){
 	clearAllAsteroids(colliders);
 	loadLevel();
 	showingGameOverScreen = true;
+	//waves = 0;
 }
 
 
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
-	//spawnAndResetAsteroids();
 }
 
 function updateAll() {

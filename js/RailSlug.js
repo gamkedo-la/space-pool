@@ -101,8 +101,8 @@ function railSlugClass() {
 
 	this.hitTest = function(thisEnemy) {
 		if(this.edgeCrossCount == 0){
-			return false;
-		}
+			//return false;
+		} // prevent the rail from destroying rocks without wrapping at least once.
 
 		if(this.shotLife <= 0){
 			return false;

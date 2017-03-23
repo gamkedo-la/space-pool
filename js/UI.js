@@ -20,7 +20,7 @@ function titleScreen(){
 
 function gameOverScreen(){
 	var titleText = "game over"
-	var subText = "score: " + endScore;
+	var subText = "score: " + endScore + " waves reached: " + waves;
 	var subSubText = "press enter to reset"
 	canvasContext.fillStyle = "white";
 	canvasContext.textAlign="center";
