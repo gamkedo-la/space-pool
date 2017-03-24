@@ -33,8 +33,7 @@ function cannonClass(){
       }
 
       if( this.shotArray[i].hitTest(ship) ) {
-        console.log(lives);
-        if(lives = 0){
+        if(lives == 0){
           resetGame();
         } else {
           resetRound();

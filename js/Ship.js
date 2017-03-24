@@ -63,10 +63,19 @@ function shipClass() {
   this.checkMyShipCollisonAgainst = function(colliders) {
 		for(var c = 0; c < colliders.length; c++){
 			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
-				resetGame();
-			}
-		}
-  }
+				console.log(lives);
+				if(lives == 0){
+					resetGame();
+				} //if the player runs out of lives, end the game
+				else {
+					resetRound();
+					if(lives > 0){
+						lives--;
+					}
+				} //if lives > 0, reset the round
+			} // check if the current collider is overlapping the ship
+		} //loop through colliders
+  } //end of checkMyShipCollisonAgainst functions
 
 	this.superClassMove = this.move;
 	this.move = function(colliders) {

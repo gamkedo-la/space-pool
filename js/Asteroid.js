@@ -10,7 +10,6 @@ const INVINCIBILITY_TIMER = 4;
 function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	//TODO when this is done by # of wrap it'll need to be 3, not 4.
 	if(currentAsteroid.size == 'big' && scoreMultiplier < 4){
-		/*
 		colliders.splice(currentAsteroidOffset, 1);
 		for(var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++){
 			var tempAsteroid = new asteroidClass('small');
@@ -18,7 +17,6 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 			tempAsteroid.shootFrom(currentAsteroid);
 			colliders.push(tempAsteroid);
 		}
-		*/
 		currentAsteroid.isReadyToRemove = true;
 	} else {
 		currentAsteroid.isReadyToRemove = true;

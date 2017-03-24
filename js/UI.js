@@ -1,7 +1,7 @@
 function drawUI(){
-	var scoreText = score.toString() + ' ' + scoreMultiplier.toString() + 'x';
+	var upperRightText = 'lives: ' + lives + ' ' + 'score: ' + ' ' + score.toString() + ' ' + scoreMultiplier.toString() + 'x';
 	canvasContext.font = "14px Arial";
-	colorText(scoreText, canvas.width-50, 50, 'white');
+	colorText(upperRightText, canvas.width-100, 50, 'white');
 }
 
 function titleScreen(){
@@ -19,13 +19,19 @@ function titleScreen(){
 }
 
 function gameOverScreen(){
-	var titleText = "game over"
+	if(lives == 0){
+		var titleText = "game over"
+	} else {
+		var titleText = "ouch you died!"
+	}
 	var subText = "score: " + endScore + " waves reached: " + endWave;
 	var subSubText = "press enter to reset"
 	canvasContext.fillStyle = "white";
 	canvasContext.textAlign="center";
 	canvasContext.font = "14px Arial";
-	canvasContext.fillText((subText), canvas.width/2, 270);
+	if(lives == 0){
+		canvasContext.fillText((subText), canvas.width/2, 270);
+	}	
 	canvasContext.font = "14px Arial";
 	canvasContext.fillText((subSubText), canvas.width/2, 300);
 	canvasContext.font = "20px Arial";

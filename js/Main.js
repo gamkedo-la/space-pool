@@ -34,6 +34,7 @@ function resetGame(){
 	endWave = waves;
 	score = 0;
 	waves = 0;
+	lives = 3;
 	scoreMultiplier = 1;
 	clearAllAsteroids(colliders);
 	loadLevel();
@@ -41,6 +42,8 @@ function resetGame(){
 }
 
 function resetRound(){
+	endScore = score;
+	endWave = waves;
 	scoreMultiplier = 1;
 	clearAllAsteroids(colliders);
 	loadLevel();
