@@ -31,17 +31,26 @@ function imageLoadingDoneSoStartGame() {
 
 function resetGame(){
 	endScore = score;
+	endWave = waves;
 	score = 0;
+	waves = 0;
 	scoreMultiplier = 1;
 	clearAllAsteroids(colliders);
 	loadLevel();
 	showingGameOverScreen = true;
-	//waves = 0;
+}
+
+function resetRound(){
+	scoreMultiplier = 1;
+	clearAllAsteroids(colliders);
+	loadLevel();
+	showingGameOverScreen = true;
 }
 
 
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
+	spawnAndResetAsteroids();
 }
 
 function updateAll() {

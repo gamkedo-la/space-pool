@@ -33,7 +33,6 @@ function sweepAsteroidsReadyForRemoval(){
 	}
 }
 function clearAllAsteroids(colliders){
-	console.log(colliders.length);
 	for(var i = colliders.length-1; i >= 0; i--){
 		colliders.splice(colliders[i], 1);
 	}

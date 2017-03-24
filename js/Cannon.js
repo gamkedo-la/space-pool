@@ -23,19 +23,25 @@ function cannonClass(){
   }
 
   this.iterateThroughShotArray = function(colliders, ship){
-    if(colliders.length < (START_NUMBER_OF_ASTEROIDS/2)){
+    if(colliders.length < (START_NUMBER_OF_ASTEROIDS/2) && colliders.length != 0){
       spawnAndResetAsteroids();
       waves++;
-      console.log("I'm running more than Ashleigh thinks I am !");
-      console.log(colliders.length);
-    }
+    } //spawn a new wave of asteroids after half of the current batch is destroyed
     for(var i = 0; i < this.shotArray.length; i++){
       if(this.shotArray[i].isShotReadyToFire()){
         this.shotArray[i].shootFrom(ship);
       }
 
       if( this.shotArray[i].hitTest(ship) ) {
-        resetGame();
+        console.log(lives);
+        if(lives = 0){
+          resetGame();
+        } else {
+          resetRound();
+          if(lives > 0){
+            lives--;
+          }
+        }
         return; // bail to avoid null this.shotArray[i]
       }
 
