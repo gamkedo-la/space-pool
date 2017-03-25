@@ -3,14 +3,12 @@ const NUMBER_OF_LIVES = 3;
 var canvas, canvasContext;
 
 var ship;
-var UFO;
 var score = 0;
 var waves = 0;
 var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
-var explosions = [];
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -83,6 +81,5 @@ function drawAll() {
 		drawUI();
 		ship.draw();
 		drawAsteroids();
-		//drawExplosions();
 	}
 }
