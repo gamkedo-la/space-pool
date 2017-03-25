@@ -3,7 +3,7 @@ const RAIL_LIFE = 3000; //3000
 const RAIL_DISPLAY_RADIUS = 3;
 const SHOT_OFFSET = 30;
 
-RailSlug.prototype = new movingWrapPosition();
+RailSlug.prototype = new MovingWrapPosition();
 
 function RailSlug() {
 	this.attackValue = 4;
