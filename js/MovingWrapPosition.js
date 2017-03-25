@@ -1,4 +1,4 @@
-function movingWrapPositionClass() {
+function movingWrapPosition() {
 	this.x = 150;
 	this.y = 150;
 	this.xv = 0;

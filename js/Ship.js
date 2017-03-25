@@ -9,11 +9,11 @@ var endScore;
 var scoreMultiplier = 1;
 var scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 
-shipClass.prototype = new movingWrapPositionClass();
+Ship.prototype = new movingWrapPosition();
 
-function shipClass() {
+function Ship() {
 
-	this.cannon = new cannonClass();
+	this.cannon = new Cannon();
 
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;
@@ -64,7 +64,7 @@ function shipClass() {
 		for(var c = 0; c < colliders.length; c++){
 			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
 				console.log(lives);
-				if(lives == 0){
+				if(lives === 0){
 					resetGame();
 				} //if the player runs out of lives, end the game
 				else {

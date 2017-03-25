@@ -12,7 +12,7 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	if(currentAsteroid.size == 'big' && scoreMultiplier < 4){
 		colliders.splice(currentAsteroidOffset, 1);
 		for(var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++){
-			var tempAsteroid = new asteroidClass('small');
+			var tempAsteroid = new Asteroid('small');
 			tempAsteroid.reset(asteroidPic2);
 			tempAsteroid.shootFrom(currentAsteroid);
 			colliders.push(tempAsteroid);
@@ -39,7 +39,7 @@ function clearAllAsteroids(colliders){
 function spawnAndResetAsteroids(){
 	var tempAsteroidWave = [];
 	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
-		var tempAsteroid = new asteroidClass('big');
+		var tempAsteroid = new Asteroid('big');
 		colliders.push(tempAsteroid);
 		tempAsteroidWave.push(tempAsteroid);
 	}
@@ -60,9 +60,9 @@ function drawAsteroids(){
 	}
 }
 
-asteroidClass.prototype = new movingWrapPositionClass();
+Asteroid.prototype = new movingWrapPosition();
 
-function asteroidClass(size) {
+function Asteroid(size) {
 	this.type = 'asteroid';
 	this.size = size;
 	this.x = 100;
