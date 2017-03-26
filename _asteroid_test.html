@@ -41,7 +41,7 @@
   function drawAsteroid(x, y) {
     var i;
     var strokeColor = 'white';
-    var fillColor = 'red';
+    var fillColor = 'rgba(200,200,255,0.07)';
     var verts = [];
 
     // Tweak these numbers a bit to change the shape of the asteroid
@@ -76,7 +76,7 @@
     canvasContext.shadowOffsetY = 0;
 	
     canvasContext.closePath();
-    //canvasContext.fill();
+    canvasContext.fill();
     canvasContext.stroke();
   }
 </script>
