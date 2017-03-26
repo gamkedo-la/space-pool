@@ -1,4 +1,5 @@
 const NUMBER_OF_LIVES = 3;
+const FULL_SIZE_CANVAS = true;
 
 var canvas, canvasContext;
 
@@ -17,12 +18,26 @@ window.onload = function() {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
   loadImages();
+  if (FULL_SIZE_CANVAS) {
+    window.addEventListener("resize", onResize);
+    onResize();
+  }
 };
 
+<<<<<<< HEAD
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+=======
+function onResize() // full screen
+{
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+}
+
+
+>>>>>>> origin/master
 function imageLoadingDoneSoStartGame() {
   var framesPerSecond = 30;
   setInterval(updateAll, 1000 / framesPerSecond);
