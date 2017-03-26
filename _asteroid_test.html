@@ -68,8 +68,15 @@
     canvasContext.lineWidth = 2;
     canvasContext.strokeStyle = strokeColor;
     canvasContext.fillStyle = fillColor;
+	
+	// make the lines glow
+	canvasContext.shadowColor = '#ffffff';
+    canvasContext.shadowBlur = 8;
+    canvasContext.shadowOffsetX = 0;
+    canvasContext.shadowOffsetY = 0;
+	
     canvasContext.closePath();
-    canvasContext.fill();
+    //canvasContext.fill();
     canvasContext.stroke();
   }
 </script>
