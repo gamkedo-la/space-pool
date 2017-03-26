@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Space Pool</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8">
+  <style>
+  body { padding:0; margin:0; width:100% height:100%; overflow:hidden; }
+  #overlay { position:absolute; top:0px; left:0px; right:0px; bottom:0px; background-image:url(images/oldschool_scanline_grid.png); }
+  </style>
+</head>
+
+<body>
+<canvas id="gameCanvas" width="600" height="600"></canvas>
+<div id="overlay"></div>
+<p id="debugText"></p>
+<script src="js/GraphicsCommon.js"></script>
+<script src="js/ImageLoading.js"></script>
+<script src="js/MovingWrapPosition.js"></script>
+<script src="js/Asteroid.js"></script>
+<script src="js/RailSlug.js"></script>
+<script src="js/Cannon.js"></script>
+<script src="js/Ship.js"></script>
+<script src="js/Input.js"></script>
+<script src="js/UI.js"></script>
+<script>
+  canvas = document.getElementById('gameCanvas');
+  canvasContext = canvas.getContext('2d');
+  colorRect(0, 0, canvas.width, canvas.height, 'black');
+
+  function randomFloat(min, max) {
+    return (Math.random() * (max - min)) + min;
+  }
+
+  for (var r = 0; r < 6; r++) {
+    for (var c = 0; c < 6; c++) {
+      drawAsteroid(50 + c * 70, 50 + r * 70);
+    }
+  }
+
+  function drawAsteroid(x, y) {
+    var i;
+    var strokeColor = 'white';
+    var fillColor = 'red';
+    var verts = [];
+
+    // Tweak these numbers a bit to change the shape of the asteroid
+    var num_verts = randomFloat(6, 10);
+    var size = randomFloat(20, 30);
+    // This makes the irregular shape of the asteroid
+    var sizeNoise = randomFloat(size * 0.4, size * 0.5);
+
+    // Generate the asteroid verticies
+    var ang = (Math.PI * 2) / num_verts;
+    for (i = 0; i < num_verts; i++) {
+      verts.push({
+        x: Math.cos(ang * i) * (size + randomFloat(-sizeNoise, sizeNoise)) + x,
+        y: Math.sin(ang * i) * (size + randomFloat(-sizeNoise, sizeNoise)) + y
+      });
+    }
+
+    // Draw the asteroid
+    canvasContext.beginPath();
+    canvasContext.moveTo(verts[0].x, verts[0].y);
+    for (i = 1; i < verts.length; i++) {
+      canvasContext.lineTo(verts[i].x, verts[i].y);
+    }
+    canvasContext.lineWidth = 2;
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.fillStyle = fillColor;
+    canvasContext.closePath();
+    canvasContext.fill();
+    canvasContext.stroke();
+  }
+</script>
+</body>
+</html>
