@@ -26,3 +26,14 @@ function colorText(showWords, textX,textY, fillColor) {
   canvasContext.fillStyle = fillColor;
   canvasContext.fillText(showWords, textX,textY);
 }
+
+function drawLines(fillColor, pointArray) {
+  canvasContext.beginPath();
+  canvasContext.moveTo(pointArray[0].x, pointArray[0].y);
+  for (var i = 1; i < pointArray.length; i++) {
+    canvasContext.lineTo(pointArray[i].x, pointArray[i].y);
+  }
+  canvasContext.strokeStyle = fillColor;
+  canvasContext.closePath();
+  canvasContext.stroke();
+}

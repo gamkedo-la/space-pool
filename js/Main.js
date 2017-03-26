@@ -19,6 +19,10 @@ window.onload = function() {
   loadImages();
 };
 
+function randomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function imageLoadingDoneSoStartGame() {
   var framesPerSecond = 30;
   setInterval(updateAll, 1000 / framesPerSecond);

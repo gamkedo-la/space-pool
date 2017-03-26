@@ -73,7 +73,33 @@ function Asteroid(size) {
   this.yv = 0;
   this.ang = Math.random() * Math.PI;
 
+  this.verticies = [];
+
   this.hp = 3;
+
+  this.generateVectorPolygon = function(){
+    //Math.random()
+    for(var i = 0; i < 6; i++){
+      var x = randomInteger(-50, 50);
+      var y = randomInteger(-50, 50);
+      var theta = Math.atan2(y, x);
+      this.verticies.push({x:x, y:y, theta:theta});
+    }
+    this.verticies.sort(function(a, b){
+      return a.theta - b.theta;
+    });
+    console.log(this.verticies);
+  }
+
+  this.generateVectorPolygon();
+
+  this.getPolygon = function(){
+    var tempVertices = [];
+    for(var i = 0; i < this.verticies.length; i++){
+      tempVertices.push({x:this.verticies[i].x+this.x, y:this.verticies[i].y+this.y})
+    }
+    return tempVertices;
+  }
 
   this.isReadyToRemove = false;
   this.invincibilityTimer = INVINCIBILITY_TIMER;
@@ -85,22 +111,22 @@ function Asteroid(size) {
     this.speed = 0;
     //the formula to spawn an asteroid between x and 1
     //SPAWN RANDOMLY ON THE TOP SIDE
-    this.randomSide = Math.floor(Math.random() * 4) + 1;
+    this.randomSide = randomInteger(1, 4);
     if (this.randomSide == 1) {
       this.x = -100;
-      this.y = Math.floor(Math.random() * 600) + 1;
+      this.y = randomInteger(1, 600);
     }
     if (this.randomSide == 2) {
-      this.x = Math.floor(Math.random() * 600) + 1;
+      this.x = randomInteger(1, 600);
       this.y = -100;
     }
     if (this.randomSide == 3) {
-      this.x = Math.floor(Math.random() * 600) + 1;
+      this.x = randomInteger(1, 600);
       this.y = 700;
     }
     if (this.randomSide == 4) {
       this.x = 700;
-      this.y = Math.floor(Math.random() * 600) + 1;
+      this.y = randomInteger(1, 600);
     }
   }; // end of asteroidReset func
 
@@ -139,5 +165,7 @@ function Asteroid(size) {
 
   this.draw = function() {
     drawBitmapCenteredWithRotation(this.myAsteroidPic, this.x, this.y, this.ang);
+    //draw verticies
+    drawLines('red', this.getPolygon());
   }
 }
