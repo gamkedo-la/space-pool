@@ -24,20 +24,16 @@ window.onload = function() {
   }
 };
 
-<<<<<<< HEAD
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-=======
 function onResize() // full screen
 {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 }
 
-
->>>>>>> origin/master
 function imageLoadingDoneSoStartGame() {
   var framesPerSecond = 30;
   setInterval(updateAll, 1000 / framesPerSecond);
