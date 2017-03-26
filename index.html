@@ -6,11 +6,13 @@
   <meta content="utf-8">
   <style>
   body { padding:0; margin:0; width:100% height:100%; overflow:hidden; }
+  #overlay { position:absolute; top:0px; left:0px; right:0px; bottom:0px; background-image:url(images/oldschool_scanline_grid.png); }
   </style>
 </head>
 
 <body>
 <canvas id="gameCanvas" width="600" height="600"></canvas>
+<div id="overlay"></div>
 <p id="debugText"></p>
 <script src="js/GraphicsCommon.js"></script>
 <script src="js/ImageLoading.js"></script>
