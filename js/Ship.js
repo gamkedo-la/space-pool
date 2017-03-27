@@ -58,13 +58,17 @@ function Ship() {
     var deltaX = testX - this.x;
     var deltaY = testY - this.y;
     var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-    return (dist <= SHIP_COLLISION_RADIUS);
+    var didHit = dist <= SHIP_COLLISION_RADIUS;
+    return didHit;
   };
 
   this.checkMyShipCollisonAgainst = function(colliders) {
     for (var c = 0; c < colliders.length; c++) {
       if (colliders[c].isOverlappingPoint(this.x, this.y)) {
-        console.log(lives);
+        if(testingCheats){
+          console.log('player collison detected - cheatmode on!');
+          return;
+        }
         if (lives === 0) {
           resetGame();
         } //if the player runs out of lives, end the game

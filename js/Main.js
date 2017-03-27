@@ -2,6 +2,8 @@ const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
 const MOTION_BLUR = true;
 
+var testingCheats = false;
+
 var canvas, canvasContext;
 
 var ship;
@@ -13,6 +15,9 @@ var showingGameOverScreen = false;
 var colliders = [];
 
 window.onload = function() {
+  if(testingCheats){
+    console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
+  }
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
   ship = new Ship();
@@ -82,14 +87,14 @@ function moveAll() {
 }
 
 function drawAll() {
-  
+
   if (MOTION_BLUR) {
 	darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
   }
   else {
   	colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque
   }
-  
+
   if (showingTitleScreen) {
     titleScreen();
   }

@@ -15,6 +15,8 @@ const KEY_1 = 49;
 const KEY_2 = 50;
 const KEY_3 = 51;
 
+const KEY_C = 67; //toggle cheats
+
 var peaShooterActive = false;
 var railGunActive = true;
 var shotSnakeActive = false;
@@ -37,7 +39,7 @@ function setupInput() {
   document.addEventListener("keydown", function() {
   });
 
-  ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR);
+  ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR, KEY_C);
 }
 
 function updateMousePos(evt) {
@@ -70,12 +72,18 @@ function keySet(keyEvent, setTo) {
   if (keyEvent.keyCode == ship.controlKeyForShotFire) {
     ship.keyHeld_Fire = setTo;
   }
-  if (keyEvent.keyCode == KEY_ENTER) {
-    if (showingTitleScreen) {
-      showingTitleScreen = false;
+  if(setTo){ //only detecting when key goes down not held keys
+    if (keyEvent.keyCode == KEY_ENTER) {
+      if (showingTitleScreen) {
+        showingTitleScreen = false;
+      }
+      if (showingGameOverScreen) {
+        showingGameOverScreen = false;
+      }
     }
-    if (showingGameOverScreen) {
-      showingGameOverScreen = false;
+    if(keyEvent.keyCode == KEY_C){
+      testingCheats = !testingCheats;
+      console.log('testingCheats is ' + testingCheats);
     }
   }
 }

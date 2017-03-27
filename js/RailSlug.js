@@ -103,7 +103,7 @@ function RailSlug() {
 	}
 
 	this.hitTest = function(thisEnemy) {
-		if(this.edgeCrossCount == 0){
+		if(this.edgeCrossCount == 0 && testingCheats == false){
 			return false;
 		} // prevent the rail from destroying rocks without wrapping at least once.
 
