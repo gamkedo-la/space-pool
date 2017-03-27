@@ -54,6 +54,7 @@ function RailSlug() {
 		this.shotAng = shipFiring.ang;
 
 		this.shotLife = RAIL_LIFE;
+		scoreMultiplier = 1;
 	}
 
 	this.increaseScoreMultiplier = function(){
