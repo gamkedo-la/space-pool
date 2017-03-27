@@ -114,29 +114,33 @@ function RailSlug() {
 	}
 
 	this.draw = function() {
+		var shotSize = 3
 		if(scoreMultiplier == 1){
-			this.railColor = 'red';
+			this.railColor = 'white';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 		}
 
 		if(scoreMultiplier == 2){
 			this.railColor = 'green';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			shotSize = 6
 		}
 
 		if(scoreMultiplier == 4){
 			this.railColor = 'blue';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			shotSize = 8
 		}
 
 		if(scoreMultiplier == 8){
 			this.railColor = 'purple';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			shotSize = 15
 		}
 
 		if(this.shotLife > 0){
 			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,40,3,this.railColor, this.shotAng);
+			colorRect(this.x,this.y,40,shotSize,this.railColor, this.shotAng);
 		}
 	}
 }
