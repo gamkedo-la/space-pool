@@ -73,37 +73,44 @@ function Asteroid(size) {
   this.yv = 0;
   this.ang = Math.random() * Math.PI;
 
-  //this.verticies = [];
+  this.verts = [];
 
   this.hp = 3;
 
-  // Tweak these numbers a bit to change the shape of the asteroid
-  this.num_verts = randomFloat(6, 10);
-  this.vectorAsteroidSize = randomFloat(20, 30);
-  // This makes the irregular shape of the asteroid
-  this.sizeNoise = randomFloat(this.vectorAsteroidSize * 0.4, this.vectorAsteroidSize * 0.5);
+  //gets called automatically on creation
+  this.generateAsteroid = function(){
+
+    // Tweak these numbers a bit to change the shape of the asteroid
+    var num_verts = randomFloat(6, 10);
+    var vectorAsteroidSize = randomFloat(20, 30);
+    // This makes the irregular shape of the asteroid
+    var sizeNoise = randomFloat(vectorAsteroidSize * 0.4, vectorAsteroidSize * 0.5);
+
+    this.verts = [];
+
+    // Generate the asteroid verticies
+    var ang = (Math.PI * 2) / num_verts;
+    for (i = 0; i < num_verts; i++) {
+      this.verts.push({
+        x: Math.cos(ang * i) * (vectorAsteroidSize + randomFloat(-sizeNoise, sizeNoise)),
+        y: Math.sin(ang * i) * (vectorAsteroidSize + randomFloat(-sizeNoise, sizeNoise))
+      });
+    }
+  }
+
+  this.generateAsteroid();
 
   this.drawAsteroid = function(x, y) {
     console.log('drawAsteroid is being called');
     var i;
     var strokeColor = 'white';
     var fillColor = 'rgba(200,200,255,0.07)';
-    var verts = [];
-
-    // Generate the asteroid verticies
-    var ang = (Math.PI * 2) / this.num_verts;
-    for (i = 0; i < this.num_verts; i++) {
-      verts.push({
-        x: Math.cos(ang * i) * (this.vectorAsteroidSize + randomFloat(-this.sizeNoise, this.sizeNoise)) + x,
-        y: Math.sin(ang * i) * (this.vectorAsteroidSize + randomFloat(-this.sizeNoise, this.sizeNoise)) + y
-      });
-    }
 
     // Draw the asteroid
     canvasContext.beginPath();
-    canvasContext.moveTo(verts[0].x, verts[0].y);
-    for (i = 1; i < verts.length; i++) {
-      canvasContext.lineTo(verts[i].x, verts[i].y);
+    canvasContext.moveTo(this.verts[0].x + this.x, this.verts[0].y + this.y);
+    for (i = 1; i < this.verts.length; i++) {
+      canvasContext.lineTo(this.verts[i].x + this.x, this.verts[i].y + this.y);
     }
     canvasContext.lineWidth = 2;
     canvasContext.strokeStyle = strokeColor;
