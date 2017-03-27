@@ -1,4 +1,4 @@
-const RAIL_SPEED = 31.0; //18
+const RAIL_SPEED = 15.5;
 const RAIL_LIFE = 3000; //3000
 const RAIL_DISPLAY_RADIUS = 3;
 const SHOT_OFFSET = 30;

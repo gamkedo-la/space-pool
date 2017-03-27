@@ -32,8 +32,7 @@ function onResize() // full screen
 }
 
 function imageLoadingDoneSoStartGame() {
-  var framesPerSecond = 30;
-  setInterval(updateAll, 1000 / framesPerSecond);
+  requestAnimationFrame(updateAll);
   setupInput();
   loadLevel();
 }
@@ -67,6 +66,7 @@ function loadLevel(whichLevel) {
 function updateAll() {
   moveAll();
   drawAll();
+  requestAnimationFrame(updateAll);
 }
 
 function moveAll() {
