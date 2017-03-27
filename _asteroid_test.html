@@ -28,14 +28,16 @@
   canvasContext = canvas.getContext('2d');
   colorRect(0, 0, canvas.width, canvas.height, 'black');
 
-  function randomFloat(min, max) {
-    return (Math.random() * (max - min)) + min;
-  }
 
+  //Draws the rocks in a grid I think
   for (var r = 0; r < 6; r++) {
     for (var c = 0; c < 6; c++) {
       drawAsteroid(50 + c * 70, 50 + r * 70);
     }
+  }
+
+  function randomFloat(min, max) {
+    return (Math.random() * (max - min)) + min;
   }
 
   function drawAsteroid(x, y) {
@@ -68,13 +70,13 @@
     canvasContext.lineWidth = 2;
     canvasContext.strokeStyle = strokeColor;
     canvasContext.fillStyle = fillColor;
-	
+
 	// make the lines glow
 	canvasContext.shadowColor = '#ffffff';
     canvasContext.shadowBlur = 8;
     canvasContext.shadowOffsetX = 0;
     canvasContext.shadowOffsetY = 0;
-	
+
     canvasContext.closePath();
     canvasContext.fill();
     canvasContext.stroke();
