@@ -73,32 +73,51 @@ function Asteroid(size) {
   this.yv = 0;
   this.ang = Math.random() * Math.PI;
 
-  this.verticies = [];
+  //this.verticies = [];
 
   this.hp = 3;
 
-  this.generateVectorPolygon = function(){
-    //Math.random()
-    for(var i = 0; i < 6; i++){
-      var x = randomInteger(-50, 50);
-      var y = randomInteger(-50, 50);
-      var theta = Math.atan2(y, x);
-      this.verticies.push({x:x, y:y, theta:theta});
-    }
-    this.verticies.sort(function(a, b){
-      return a.theta - b.theta;
-    });
-    console.log(this.verticies);
-  }
+  // Tweak these numbers a bit to change the shape of the asteroid
+  this.num_verts = randomFloat(6, 10);
+  this.vectorAsteroidSize = randomFloat(20, 30);
+  // This makes the irregular shape of the asteroid
+  this.sizeNoise = randomFloat(this.vectorAsteroidSize * 0.4, this.vectorAsteroidSize * 0.5);
 
-  this.generateVectorPolygon();
+  this.drawAsteroid = function(x, y) {
+    console.log('drawAsteroid is being called');
+    var i;
+    var strokeColor = 'white';
+    var fillColor = 'rgba(200,200,255,0.07)';
+    var verts = [];
 
-  this.getPolygon = function(){
-    var tempVertices = [];
-    for(var i = 0; i < this.verticies.length; i++){
-      tempVertices.push({x:this.verticies[i].x+this.x, y:this.verticies[i].y+this.y})
+    // Generate the asteroid verticies
+    var ang = (Math.PI * 2) / this.num_verts;
+    for (i = 0; i < this.num_verts; i++) {
+      verts.push({
+        x: Math.cos(ang * i) * (this.vectorAsteroidSize + randomFloat(-this.sizeNoise, this.sizeNoise)) + x,
+        y: Math.sin(ang * i) * (this.vectorAsteroidSize + randomFloat(-this.sizeNoise, this.sizeNoise)) + y
+      });
     }
-    return tempVertices;
+
+    // Draw the asteroid
+    canvasContext.beginPath();
+    canvasContext.moveTo(verts[0].x, verts[0].y);
+    for (i = 1; i < verts.length; i++) {
+      canvasContext.lineTo(verts[i].x, verts[i].y);
+    }
+    canvasContext.lineWidth = 2;
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.fillStyle = fillColor;
+
+  // make the lines glow
+    canvasContext.shadowColor = '#ffffff';
+    canvasContext.shadowBlur = 8;
+    canvasContext.shadowOffsetX = 0;
+    canvasContext.shadowOffsetY = 0;
+
+    canvasContext.closePath();
+    canvasContext.fill();
+    canvasContext.stroke();
   }
 
   this.isReadyToRemove = false;
@@ -164,8 +183,6 @@ function Asteroid(size) {
   };
 
   this.draw = function() {
-    drawBitmapCenteredWithRotation(this.myAsteroidPic, this.x, this.y, this.ang);
-    //draw verticies
-    drawLines('red', this.getPolygon());
+    this.drawAsteroid(this.x, this.y);
   }
 }
