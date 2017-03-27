@@ -52,10 +52,10 @@ function Cannon() {
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();
 
-            destroyAsteroid(colliders, colliders[currentCollider], currentCollider);
+            colliders[currentCollider].explode();
           }
 
-          if (colliders[currentCollider].size == 'big') {
+          if (colliders[currentCollider].radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS) {
             this.shotArray[i].reset();
           }
 
