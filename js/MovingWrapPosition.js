@@ -5,7 +5,7 @@ function MovingWrapPosition() {
   this.yv = 0;
 
   this.reset = function() {
-    this.xv = this.yv = 0.0;
+    //this.xv = this.yv = 0.0;
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
   }; // end of reset func
