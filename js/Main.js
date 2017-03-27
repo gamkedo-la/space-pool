@@ -1,5 +1,6 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
+const MOTION_BLUR = true;
 
 var canvas, canvasContext;
 
@@ -81,7 +82,14 @@ function moveAll() {
 }
 
 function drawAll() {
-  colorRect(0, 0, canvas.width, canvas.height, "black");
+  
+  if (MOTION_BLUR) {
+	darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
+  }
+  else {
+  	colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque
+  }
+  
   if (showingTitleScreen) {
     titleScreen();
   }

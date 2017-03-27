@@ -6,6 +6,16 @@ function drawBitmapCenteredWithRotation(useBitmap, atX,atY, withAng) {
   canvasContext.restore();
 }
 
+function darkenRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor, withAng) {
+  canvasContext.save();
+  canvasContext.globalCompositeOperation = 'darken';
+  canvasContext.fillStyle = fillColor;
+  canvasContext.translate(topLeftX,topLeftY); // added, sets position 'after' rotation
+  canvasContext.rotate(withAng);
+  canvasContext.fillRect(0, 0, boxWidth,boxHeight);
+  canvasContext.restore();
+}
+
 function colorRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor, withAng) {
   canvasContext.save();
   canvasContext.fillStyle = fillColor;
