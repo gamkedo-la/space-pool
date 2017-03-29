@@ -1,5 +1,5 @@
 const ASTEROID_SPEED_MIN = 1.25;
-const ASTEROID_SPEED_MAX = 2.0;
+const ASTEROID_SPEED_MAX = 1.5;//2.0
 const ASTEROID_SPIN_MAX = 0.03;
 const ASTEROID_COLLISION_RADIUS = 50;
 const ASTEROID_DEFAULT_RADIUS = 50;
@@ -127,9 +127,9 @@ function Asteroid(max_radius) {
   this.explode = function() {
     //TODO when this is done by # of wrap it'll need to be 3, not 4.
     // Explode into multiple smaller asteroids if still big enough
-    if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 4) {
+    if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 4) { //why is scoreMultiplier in here??? o_0
       for (var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++) {
-        var tempAsteroid = new Asteroid(this.radius);
+        var tempAsteroid = new Asteroid(this.radius/2);
         tempAsteroid.reset();
         tempAsteroid.shootFrom(this);
         colliders.push(tempAsteroid);
