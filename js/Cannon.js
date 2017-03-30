@@ -8,6 +8,8 @@ function Cannon() {
   };
 
   this.cannonFire = function(ship) {
+    totalNumberOfShotsFired++;
+
     if (this.shotArray.length < NUMBER_OF_SHOTS) {
       if (railGunActive) {
         var tempShot = new RailSlug();
@@ -51,8 +53,8 @@ function Cannon() {
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();
-
             colliders[currentCollider].explode();
+            numberOfSuccessfulShots++;
           }
 
           if (colliders[currentCollider].radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS) {

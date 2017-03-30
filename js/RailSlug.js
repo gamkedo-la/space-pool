@@ -91,10 +91,13 @@ function RailSlug() {
 
 	//this.superClassMove	=	this.move; //saving reference to parent class' move.
 	this.move = function() {
+		console.log(this.shotLife);
 		if(this.shotLife == 0){
+			//console.log('can move again');
 			scoreMultiplier = 1;
 		}
 		if(this.shotLife > 0){
+			//console.log('cannot move right now');
 			this.shotLife--;
 			this.x += this.xv;
 			this.y += this.yv;
