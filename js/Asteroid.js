@@ -137,6 +137,7 @@ function Asteroid(max_radius) {
     }
 
     this.isReadyToRemove = true;
+    asteroidsHit++;
   };
 
   this.superClassMove = this.move; //saving reference to parent class' move.

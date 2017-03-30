@@ -43,7 +43,16 @@ function gameOverScreen() {
   canvasContext.fillText((subSubText), canvas.width / 2, 300);
   canvasContext.font = "20px Arial";
   canvasContext.fillText((titleText), canvas.width / 2, 250);
-  console.log('numberOfSuccessfulShots' + numberOfSuccessfulShots);
-  console.log('totalNumberOfShotsFired' + totalNumberOfShotsFired);
-  console.log('fuelUsed' + fuelUsed);
+  Stats();
+  console.log('Number of Astroids Destroyed: ' + asteroidsHit);
+  console.log('Number of Shots Fired: '+timesShot);
+  console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
+  console.log('FuelUsed: ' + fuelUsed);
+  console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
+  //console.log('totalNumberOfShotsFired' + totalNumberOfShotsFired);
+  timesShotWrap=0;
+  timesShot=0;
+  asteroidsHit=0;
+  fuelUsed=0;
+  accuracy=0;
 }

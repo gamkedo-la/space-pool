@@ -38,12 +38,12 @@ function RailSlug() {
 	this.countdownTimeUntilCanHitAgain = function(){
 		if(this.timeUntilCanHitAgain > 0 ){
 			this.timeUntilCanHitAgain--;
-			console.log(this.timeUntilCanHitAgain);
+			//console.log(this.timeUntilCanHitAgain);
 		}
 	}
 
 	this.shootFrom = function(shipFiring){
-
+		Stats();
 		var shotDistFromShipCenter = SHIP_COLLISION_RADIUS + 2;
 		this.x = shipFiring.x + Math.cos(shipFiring.ang) * shotDistFromShipCenter;
 		this.y = shipFiring.y + Math.sin(shipFiring.ang) * shotDistFromShipCenter;
@@ -55,11 +55,14 @@ function RailSlug() {
 
 		this.shotLife = RAIL_LIFE;
 		scoreMultiplier = 1;
+		timesShot++;
+		//console.log(timesShot)
 	}
 
 	this.increaseScoreMultiplier = function(){
 		if(scoreMultiplier < 8){
 			scoreMultiplier *= 2;
+			timesShotWrap++;
 		} else {
 			this.shotLife = 0;
 		}
@@ -91,7 +94,7 @@ function RailSlug() {
 
 	//this.superClassMove	=	this.move; //saving reference to parent class' move.
 	this.move = function() {
-		console.log(this.shotLife);
+		//console.log(this.shotLife);
 		if(this.shotLife == 0){
 			//console.log('can move again');
 			scoreMultiplier = 1;

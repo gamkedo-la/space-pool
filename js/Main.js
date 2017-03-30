@@ -14,6 +14,13 @@ var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
 
+var timesShotWrap=0;//used for Stats
+var timesShot=0;//used for Stats
+var avgTimesShotsWrapped=0;
+var asteroidsHit=0;
+var fuelUsed=0;
+var accuracy=0;
+
 window.onload = function() {
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
