@@ -45,4 +45,5 @@ function gameOverScreen() {
   canvasContext.fillText((titleText), canvas.width / 2, 250);
   console.log('numberOfSuccessfulShots' + numberOfSuccessfulShots);
   console.log('totalNumberOfShotsFired' + totalNumberOfShotsFired);
+  console.log('fuelUsed' + fuelUsed);
 }

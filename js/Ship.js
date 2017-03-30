@@ -93,6 +93,7 @@ function Ship() {
     }
 
     if (this.keyHeld_Gas) {
+      fuelUsed++
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
     }
