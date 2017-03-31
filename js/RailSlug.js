@@ -2,9 +2,13 @@ const RAIL_SPEED = 15.5;
 const RAIL_LIFE = 3000; //3000
 const RAIL_DISPLAY_RADIUS = 3;
 const SHOT_OFFSET = 30;
-
+const MovingWrapPosition = require("./MovingWrapPosition");
+const config = require("./config");
+const Graphics = require("./GraphicsCommon");
 RailSlug.prototype = new MovingWrapPosition();
-
+var canvas = document.getElementById('gameCanvas');
+var canvasContext = canvas.getContext('2d');
+const Stat = require("./Stats")
 function RailSlug() {
 	this.attackValue = 4;
 	this.x = canvas.width/2;
@@ -43,8 +47,8 @@ function RailSlug() {
 	}
 
 	this.shootFrom = function(shipFiring){
-		Stats();
-		var shotDistFromShipCenter = SHIP_COLLISION_RADIUS + 2;
+		Stat.Stats(); //:D
+		var shotDistFromShipCenter = config.SHIP_COLLISION_RADIUS + 2;
 		this.x = shipFiring.x + Math.cos(shipFiring.ang) * shotDistFromShipCenter;
 		this.y = shipFiring.y + Math.sin(shipFiring.ang) * shotDistFromShipCenter;
 
@@ -54,15 +58,15 @@ function RailSlug() {
 		this.shotAng = shipFiring.ang;
 
 		this.shotLife = RAIL_LIFE;
-		scoreMultiplier = 1;
-		timesShot++;
+		Stat.scoreMultiplier = 1;
+		Stat.timesShot++;
 		//console.log(timesShot)
 	}
 
-	this.increaseScoreMultiplier = function(){
-		if(scoreMultiplier < 4){
-			scoreMultiplier *= 2;
-			timesShotWrap++;
+	this.increasescoreMultiplier = function(){
+		if(Stat.scoreMultiplier < 4){
+			Stat.scoreMultiplier *= 2;
+			Stat.timesShotWrap++;
 		} else {
 			this.shotLife = 0;
 		}
@@ -88,7 +92,7 @@ function RailSlug() {
 		}
 		if(edgeCrossed){
 			this.edgeCrossCount++;
-			this.increaseScoreMultiplier();
+			this.increasescoreMultiplier();
 		}
 	}
 
@@ -97,7 +101,7 @@ function RailSlug() {
 		//console.log(this.shotLife);
 		if(this.shotLife == 0){
 			//console.log('can move again');
-			scoreMultiplier = 1;
+			Stat.scoreMultiplier = 1;
 		}
 		if(this.shotLife > 0){
 			//console.log('cannot move right now');
@@ -109,7 +113,7 @@ function RailSlug() {
 	}
 
 	this.hitTest = function(thisEnemy) {
-		if(this.edgeCrossCount == 0 && testingCheats == false){
+		if(this.edgeCrossCount == 0 && config.testingCheats == false){
 			//return false;
 		} // prevent the rail from destroying rocks without wrapping at least once.
 
@@ -125,36 +129,37 @@ function RailSlug() {
 	this.draw = function() {
 		var shotSize = 5;
 		var shotLength = 40;
-		if(scoreMultiplier == 1){
+		if(Stat.scoreMultiplier == 1){
 			this.railColor = 'white';
-			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			Stat.scoreMultiplierLifeSpan = config.MULTIPLIER_LIFESPAN;
 		}
 
-		if(scoreMultiplier == 2){
+		if(Stat.scoreMultiplier == 2){
 			this.railColor = 'green';
-			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			Stat.scoreMultiplierLifeSpan = config.MULTIPLIER_LIFESPAN;
 			shotSize = 30;
 			shotLength = 240;
 		}
 
-		if(testingCheats == true || scoreMultiplier == 4){
+		if(config.testingCheats == true || Stat.scoreMultiplier == 4){
 			this.railColor = 'blue';
-			//scoreMultiplier = 4;
-			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			//Stat.scoreMultiplier = 4;
+			Stat.scoreMultiplierLifeSpan = config.MULTIPLIER_LIFESPAN;
 			shotSize = 50;
 			shotLength = 400;
 		}
 
-		if(scoreMultiplier == 8){
+		if(Stat.scoreMultiplier == 8){
 			this.reset();
 			this.railColor = 'purple';
-			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+			Stat.scoreMultiplierLifeSpan = config.MULTIPLIER_LIFESPAN;
 			shotSize = 15
 		}
 
 		if(this.shotLife > 0){
 			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,shotLength,shotSize,this.railColor, this.shotAng);
+			Graphics.colorRect(this.x,this.y,shotLength,shotSize,this.railColor, this.shotAng);
 		}
 	}
 }
+module.exports = RailSlug;

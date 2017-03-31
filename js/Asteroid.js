@@ -3,26 +3,37 @@ const ASTEROID_SPEED_MAX = 1.5;//2.0
 const ASTEROID_SPIN_MAX = 0.03;
 const ASTEROID_COLLISION_RADIUS = 50;
 const ASTEROID_DEFAULT_RADIUS = 50;
-const ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS = 20;
 const START_NUMBER_OF_ASTEROIDS = 5;
-
+const GLOBAL_SPEED_SCALE = 0.5; 
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5 * GLOBAL_SPEED_SCALE;
 
 const INVINCIBILITY_TIMER = 4;
+var canvas = document.getElementById('gameCanvas');
+var canvasContext = canvas.getContext('2d');
 
-function sweepAsteroidsReadyForRemoval() {
+const MovingWrapPosition = require("./MovingWrapPosition");
+const Tools = require("./Tools");
+const Stat = require("./Stats");
+const config = require("./config");
+var _Asteroid = {}
+_Asteroid.sweepAsteroidsReadyForRemoval = function sweepAsteroidsReadyForRemoval(colliders) {
   for (var i = colliders.length - 1; i >= 0; i--) {
     if (colliders[i].isReadyToRemove) {
       colliders.splice(i, 1);
     }
   }
+
+  if (colliders.length < (START_NUMBER_OF_ASTEROIDS / 2) && colliders.length != 0) {
+    _Asteroid.spawnAndResetAsteroids();
+    waves++;
+  } //spawn a new wave of asteroids after half of the current batch is destroyed
 }
 function clearAllAsteroids() {
   colliders = [];
 }
 
-function spawnAndResetAsteroids() {
+_Asteroid.spawnAndResetAsteroids = function spawnAndResetAsteroids(colliders) {
   var i;
   var tempAsteroidWave = [];
   for (i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++) {
@@ -33,13 +44,13 @@ function spawnAndResetAsteroids() {
   }
 } //spawns the initial set of asteroids?
 
-function moveAsteroids() {
+_Asteroid.moveAsteroids = function moveAsteroids(colliders) {
   for (var i = 0; i < colliders.length; i++) {
     colliders[i].move();
   }
 }
 
-function drawAsteroids() {
+_Asteroid.drawAsteroids = function drawAsteroids(colliders) {
   for (var i = 0; i < colliders.length; i++) {
     colliders[i].draw();
   }
@@ -51,21 +62,21 @@ function Asteroid(max_radius) {
   if (max_radius == undefined) {
     max_radius = ASTEROID_DEFAULT_RADIUS;
   }
-  this.spin = randomFloat(-ASTEROID_SPIN_MAX, ASTEROID_SPIN_MAX);
+  this.spin = Tools.randomFloat(-ASTEROID_SPIN_MAX, ASTEROID_SPIN_MAX);
   this.ang = Math.random() * Math.PI;
   this.hp = 3;
 
-  var randSpeed = randomFloat(ASTEROID_SPEED_MIN, ASTEROID_SPEED_MAX);
+  var randSpeed = Tools.randomFloat(ASTEROID_SPEED_MIN, ASTEROID_SPEED_MAX);
 
   var driftAngle = Math.PI * 2.0 * Math.random();
   this.xv = Math.cos(driftAngle) * randSpeed;
   this.yv = Math.sin(driftAngle) * randSpeed;
 
   // Tweak these numbers a bit to change the shape of the asteroid
-  var num_verts = randomFloat(6, 10);
-  this.radius = randomInteger(max_radius * .8, max_radius);
+  var num_verts = Tools.randomFloat(6, 10);
+  this.radius = Tools.randomInteger(max_radius * .8, max_radius);
   // This makes the irregular shape of the asteroid
-  var sizeNoise = randomFloat(this.radius * 0.4, this.radius * 0.5);
+  var sizeNoise = Tools.randomFloat(this.radius * 0.4, this.radius * 0.5);
 
   this.verts = [];
 
@@ -73,8 +84,8 @@ function Asteroid(max_radius) {
   var ang = (Math.PI * 2) / num_verts;
   for (var i = 0; i < num_verts; i++) {
     this.verts.push({
-      x: Math.cos(ang * i) * (this.radius + randomFloat(-sizeNoise, sizeNoise)),
-      y: Math.sin(ang * i) * (this.radius + randomFloat(-sizeNoise, sizeNoise))
+      x: Math.cos(ang * i) * (this.radius + Tools.randomFloat(-sizeNoise, sizeNoise)),
+      y: Math.sin(ang * i) * (this.radius + Tools.randomFloat(-sizeNoise, sizeNoise))
     });
   }
 
@@ -86,22 +97,22 @@ function Asteroid(max_radius) {
     this.superClassReset();
     //the formula to spawn an asteroid between x and 1
     //SPAWN RANDOMLY ON THE TOP SIDE
-    this.randomSide = randomInteger(1, 4);
+    this.randomSide = Tools.randomInteger(1, 4);
     if (this.randomSide == 1) {
       this.x = -100;
-      this.y = randomInteger(1, 600);
+      this.y = Tools.randomInteger(1, 600);
     }
     else if (this.randomSide == 2) {
-      this.x = randomInteger(1, 600);
+      this.x = Tools.randomInteger(1, 600);
       this.y = -100;
     }
     else if (this.randomSide == 3) {
-      this.x = randomInteger(1, 600);
+      this.x = Tools.randomInteger(1, 600);
       this.y = 700;
     }
     else if (this.randomSide == 4) {
       this.x = 700;
-      this.y = randomInteger(1, 600);
+      this.y = Tools.randomInteger(1, 600);
     }
   }; // end of asteroidReset func
 
@@ -124,10 +135,10 @@ function Asteroid(max_radius) {
     //this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
   };
 
-  this.explode = function() {
+  this.explode = function(colliders) {
     //TODO when this is done by # of wrap it'll need to be 3, not 4.
     // Explode into multiple smaller asteroids if still big enough
-    if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 2) { //why is scoreMultiplier in here??? o_0
+    if (this.radius >= config.ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && Stat.scoreMultiplier < 2) { //why is Stat.scoreMultiplier in here??? o_0
       for (var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++) {
         var tempAsteroid = new Asteroid(this.radius/2);
         tempAsteroid.reset();
@@ -137,7 +148,7 @@ function Asteroid(max_radius) {
     }
 
     this.isReadyToRemove = true;
-    asteroidsHit++;
+    Stat.asteroidsHit++;
   };
 
   this.superClassMove = this.move; //saving reference to parent class' move.
@@ -181,3 +192,5 @@ function Asteroid(max_radius) {
     canvasContext.restore();
   }
 }
+
+module.exports = _Asteroid

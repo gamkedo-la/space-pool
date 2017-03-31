@@ -1,15 +1,22 @@
-function drawUI() {
-  var upperRightText = 'lives: ' + lives + ' ' + 'score: ' + ' ' + score.toString() + ' ' + scoreMultiplier.toString() + 'x';
+var UI = {}
+var canvas = document.getElementById('gameCanvas');
+var canvasContext = canvas.getContext('2d');
+const Stat = require("./Stats");
+const Graphics = require("./GraphicsCommon");
+const config = require("./config")
+UI.drawUI = function drawUI(score, waves, lives) {
+  var upperRightText = 'lives: ' + lives + ' ' + 'score: ' + ' ' + score.toString() + ' ' + Stat.scoreMultiplier.toString() + 'x';
   canvasContext.font = "14px Arial";
-  colorText(upperRightText, canvas.width - 100, 50, 'white');
-  if(testingCheats){
+  Graphics.colorText(upperRightText, canvas.width - 100, 50, 'white');
+
+  if(config.testingCheats){
     canvasContext.textAlign = 'left';
-    colorText('CHEATS ENABLED, C KEY TO TOGGLE', 80, 50, 'red');
+    Graphics.colorText('CHEATS ENABLED, C KEY TO TOGGLE', 80, 50, 'red');
     canvasContext.textAlign = 'center';
   }
 }
 
-function titleScreen() {
+UI.titleScreen = function titleScreen() {
   var titleText = "space pool";
   var subText = "up to increase speed, left and right to turn";
   var subSubText = "space to fire, enter to start";
@@ -44,15 +51,17 @@ function gameOverScreen() {
   canvasContext.font = "20px Arial";
   canvasContext.fillText((titleText), canvas.width / 2, 250);
   Stats();
-  console.log('Number of Astroids Destroyed: ' + asteroidsHit);
+  console.log('Number of Astroids Destroyed: ' + Stat.asteroidsHit);
   console.log('Number of Shots Fired: '+timesShot);
   console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
-  console.log('FuelUsed: ' + fuelUsed);
+  console.log('Stat.fuelUsed: ' + Stat.fuelUsed);
   console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
   //console.log('totalNumberOfShotsFired' + totalNumberOfShotsFired);
   timesShotWrap=0;
   timesShot=0;
-  asteroidsHit=0;
-  fuelUsed=0;
+  Stat.asteroidsHit=0;
+  Stat.fuelUsed=0;
   accuracy=0;
 }
+
+module.exports = UI;

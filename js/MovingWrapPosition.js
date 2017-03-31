@@ -3,7 +3,7 @@ function MovingWrapPosition() {
   this.y = 150;
   this.xv = 0;
   this.yv = 0;
-
+  var canvas = document.getElementById('gameCanvas');
   this.reset = function() {
     //this.xv = this.yv = 0.0;
     this.x = canvas.width / 2;
@@ -31,3 +31,5 @@ function MovingWrapPosition() {
     this.handleScreenWrap();
   };
 }
+
+module.exports = MovingWrapPosition;

@@ -1,13 +1,21 @@
-var totalNumberOfShotsFired = 0;
-var numberOfSuccessfulShots = 0;
-var fuelUsed = 0;
+var stat = {}
+stat.scoreMultiplier = 1;
+stat.totalNumberOfShotsFired = 0;
+stat.numberOfSuccessfulShots = 0;
+stat.avgTimesShotsWrapped=0;
+stat.fuelUsed = 0;
+stat.timesShotWrap=0;
+stat.timesShot=0;
+stat.asteroidsHit=0;
 
-function Stats(){
+stat.Stats = function Stats(){
 //Avg game shots that wrapped
-avgTimesShotsWrapped=(timesShotWrap)/timesShot;
-accuracy=asteroidsHit/timesShot;
+stat.avgTimesShotsWrapped=(stat.timesShotWrap)/stat.timesShot;
+//TODO: Fix accuracy
+//accuracy=stat.asteroidsHit/stat.timesShot;
 }
+module.exports = stat;
 
 
 //TODO these things might get overwritten
-//var accuracy = numberOfSuccessfulShots/totalNumberOfShotsFired;
+//var accuracy = stat.numberOfSuccessfulShots/totalNumberOfShotsFired;

@@ -3,13 +3,17 @@ const THRUST_POWER = 0.075;
 const TURN_RATE = 0.015;
 const SHIP_COLLISION_RADIUS = 30;
 
-const MULTIPLIER_LIFESPAN = 150;
-
 var endScore;
 var endWave;
-var scoreMultiplier = 1;
-var scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+const Stat = require("./Stats");
+const config = require("./config");
+var scoreMultiplierLifeSpan = config.MULTIPLIER_LIFESPAN;
+const MovingWrapPosition = require("./MovingWrapPosition");
+const Cannon = require("./Cannon");
+const Input = require("./Input");
+const Graphics = require("./GraphicsCommon");
 
+var canvas = document.getElementById('gameCanvas');
 Ship.prototype = new MovingWrapPosition();
 
 function Ship() {
@@ -43,7 +47,7 @@ function Ship() {
     this.controlKeyLeft = leftKey;
     this.controlKeyForShotFire = shotKey;
   };
-
+  
   this.superClassReset = this.reset;
   this.reset = function(whichImage) {
     this.superClassReset();
@@ -65,7 +69,7 @@ function Ship() {
   this.checkMyShipCollisonAgainst = function(colliders) {
     for (var c = 0; c < colliders.length; c++) {
       if (colliders[c].isOverlappingPoint(this.x, this.y)) {
-        if(testingCheats){
+        if(config.testingCheats){
           console.log('player collison detected - cheatmode on!');
           return;
         }
@@ -85,15 +89,15 @@ function Ship() {
   this.superClassMove = this.move;
   this.move = function(colliders) {
 
-    if (scoreMultiplierLifeSpan > 0) {
-      scoreMultiplierLifeSpan--;
+    if (Stat.scoreMultiplierLifeSpan > 0) {
+      Stat.scoreMultiplierLifeSpan--;
     }
-    if (scoreMultiplierLifeSpan == 0) {
-      scoreMultiplier = 1;
+    if (Stat.scoreMultiplierLifeSpan == 0) {
+      Stat.scoreMultiplier = 1;
     }
 
     if (this.keyHeld_Gas) {
-      fuelUsed++
+      Stat.fuelUsed++
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
     }
@@ -115,6 +119,8 @@ function Ship() {
 
   this.draw = function() {
     this.cannon.drawShots(this.myShotArray);
-    drawBitmapCenteredWithRotation(this.myShipPic, this.x, this.y, this.ang);
+    Graphics.drawBitmapCenteredWithRotation(this.myShipPic, this.x, this.y, this.ang);
   };
 }
+
+module.exports = Ship;

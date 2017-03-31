@@ -1,8 +1,15 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
 const MOTION_BLUR = true;
+const Ship = require("./Ship");
+const Graphics = require("./GraphicsCommon");
+const Input = require("./Input");
+const Asteroid = require("./Asteroid");
+const UI = require("./UI");
+const Stat = require("./Stats");
+const Image = require("./ImageLoading")(imageLoadingDoneSoStartGame);
 
-var testingCheats = false;
+const config = require("./config")
 
 var canvas, canvasContext;
 
@@ -17,25 +24,38 @@ var colliders = [];
 var timesShotWrap=0;//used for Stats
 var timesShot=0;//used for Stats
 var avgTimesShotsWrapped=0;
-var asteroidsHit=0;
-var fuelUsed=0;
+
+
 var accuracy=0;
 
 window.onload = function() {
-  if(testingCheats){
+  if(config.testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
   }
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
   ship = new Ship();
-  colorRect(0, 0, canvas.width, canvas.height, 'black');
-  colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
-  loadImages();
+  //WE COULD HAVE MULTIPLE SHIPS :D
+  ship.setupInput(Input.KEY_UP_ARROW, Input.KEY_RIGHT_ARROW, Input.KEY_DOWN_ARROW, Input.KEY_LEFT_ARROW, Input.KEY_SPACEBAR, Input.KEY_C);
+  Input.setShip(ship);
+  Input.setScene = setScene;
+
+  Graphics.colorRect(0, 0, canvas.width, canvas.height, 'black');
+  Graphics.colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
+  Image.loadImages();
   if (FULL_SIZE_CANVAS) {
     window.addEventListener("resize", onResize);
     onResize();
   }
 };
+
+var setScene = function setScene(scene){
+  if(showingTitleScreen){
+    showingTitleScreen = false    
+  } else if (showingGameOverScreen) {    
+    showingGameOverScreen = false
+  }
+}
 
 function onResize() // full screen
 {
@@ -45,7 +65,7 @@ function onResize() // full screen
 
 function imageLoadingDoneSoStartGame() {
   requestAnimationFrame(updateAll);
-  setupInput();
+  Input.setupInput();
   loadLevel();
 }
 
@@ -55,7 +75,7 @@ function resetGame() {
   score = 0;
   waves = 0;
   lives = 3;
-  scoreMultiplier = 1;
+  Stat.scoreMultiplier = 1;
   clearAllAsteroids();
   loadLevel();
   showingGameOverScreen = true;
@@ -64,15 +84,15 @@ function resetGame() {
 function resetRound() {
   endScore = score;
   endWave = waves;
-  scoreMultiplier = 1;
+  Stat.scoreMultiplier = 1;
   clearAllAsteroids();
   loadLevel();
   showingGameOverScreen = true;
 }
 
 function loadLevel(whichLevel) {
-  ship.reset(shipPic);
-  spawnAndResetAsteroids();
+  ship.reset(Image.shipPic);
+  Asteroid.spawnAndResetAsteroids(colliders);
 }
 
 function updateAll() {
@@ -88,29 +108,29 @@ function moveAll() {
   else if (showingTitleScreen) {
     return
   }
-  sweepAsteroidsReadyForRemoval();
+  Asteroid.sweepAsteroidsReadyForRemoval(colliders);
   ship.move(colliders);
-  moveAsteroids();
+  Asteroid.moveAsteroids(colliders);
 }
 
 function drawAll() {
 
   if (MOTION_BLUR) {
-	darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
+	Graphics.darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
   }
   else {
-  	colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque
+  	Graphics.colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque
   }
 
   if (showingTitleScreen) {
-    titleScreen();
+    UI.titleScreen();
   }
   else if (showingGameOverScreen) {
     gameOverScreen();
   }
   else {
-    drawUI();
+    UI.drawUI(score, waves, lives, Stat.scoreMultiplier);
     ship.draw();
-    drawAsteroids();
+    Asteroid.drawAsteroids(colliders);
   }
 }
