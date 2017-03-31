@@ -127,7 +127,7 @@ function Asteroid(max_radius) {
   this.explode = function() {
     //TODO when this is done by # of wrap it'll need to be 3, not 4.
     // Explode into multiple smaller asteroids if still big enough
-    if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 4) { //why is scoreMultiplier in here??? o_0
+    if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 2) { //why is scoreMultiplier in here??? o_0
       for (var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++) {
         var tempAsteroid = new Asteroid(this.radius/2);
         tempAsteroid.reset();

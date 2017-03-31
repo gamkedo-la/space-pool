@@ -57,7 +57,8 @@ function Cannon() {
             numberOfSuccessfulShots++;
           }
 
-          if (colliders[currentCollider].radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS) {
+          //allows 2nd wrapped shot to keep going
+          if (colliders[currentCollider].radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier != 4) {
             this.shotArray[i].reset();
           }
 

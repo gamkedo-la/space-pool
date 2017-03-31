@@ -60,7 +60,7 @@ function RailSlug() {
 	}
 
 	this.increaseScoreMultiplier = function(){
-		if(scoreMultiplier < 8){
+		if(scoreMultiplier < 4){
 			scoreMultiplier *= 2;
 			timesShotWrap++;
 		} else {
@@ -110,7 +110,7 @@ function RailSlug() {
 
 	this.hitTest = function(thisEnemy) {
 		if(this.edgeCrossCount == 0 && testingCheats == false){
-			return false;
+			//return false;
 		} // prevent the rail from destroying rocks without wrapping at least once.
 
 		if(this.shotLife <= 0){
@@ -123,7 +123,8 @@ function RailSlug() {
 	}
 
 	this.draw = function() {
-		var shotSize = 3
+		var shotSize = 5;
+		var shotLength = 40;
 		if(scoreMultiplier == 1){
 			this.railColor = 'white';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
@@ -132,16 +133,20 @@ function RailSlug() {
 		if(scoreMultiplier == 2){
 			this.railColor = 'green';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-			shotSize = 6
+			shotSize = 30;
+			shotLength = 240;
 		}
 
-		if(scoreMultiplier == 4){
+		if(testingCheats == true || scoreMultiplier == 4){
 			this.railColor = 'blue';
+			//scoreMultiplier = 4;
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-			shotSize = 8
+			shotSize = 50;
+			shotLength = 400;
 		}
 
 		if(scoreMultiplier == 8){
+			this.reset();
 			this.railColor = 'purple';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 			shotSize = 15
@@ -149,7 +154,7 @@ function RailSlug() {
 
 		if(this.shotLife > 0){
 			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,40,shotSize,this.railColor, this.shotAng);
+			colorRect(this.x,this.y,shotLength,shotSize,this.railColor, this.shotAng);
 		}
 	}
 }
