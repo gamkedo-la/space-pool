@@ -5,6 +5,7 @@ const SHIP_COLLISION_RADIUS = 30;
 
 const MULTIPLIER_LIFESPAN = 150;
 
+var shipCanMove = true;
 var endScore;
 var endWave;
 var scoreMultiplier = 1;
@@ -92,15 +93,15 @@ function Ship() {
       scoreMultiplier = 1;
     }
 
-    if (this.keyHeld_Gas) {
+    if (this.keyHeld_Gas && shipCanMove == true) {
       fuelUsed++
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
     }
-    if (this.keyHeld_TurnLeft) {
+    if (this.keyHeld_TurnLeft && shipCanMove == true) {
       this.ang -= TURN_RATE * Math.PI;
     }
-    if (this.keyHeld_TurnRight) {
+    if (this.keyHeld_TurnRight && shipCanMove == true) {
       this.ang += TURN_RATE * Math.PI;
     }
 

@@ -27,6 +27,7 @@ function RailSlug() {
 	this.reset = function() {
 		this.superClassReset();
 		this.shotLife = 0;
+		//shipCanMove = false;
 	} // end of shotReset func
 
 	this.isShotReadyToFire = function(){
@@ -64,6 +65,7 @@ function RailSlug() {
 			scoreMultiplier *= 2;
 			timesShotWrap++;
 		} else {
+			shipCanMove = true;
 			this.shotLife = 0;
 		}
 	}

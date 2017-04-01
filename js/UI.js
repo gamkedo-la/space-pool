@@ -49,7 +49,6 @@ function gameOverScreen() {
   console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
   console.log('FuelUsed: ' + fuelUsed);
   console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
-  //console.log('totalNumberOfShotsFired' + totalNumberOfShotsFired);
   timesShotWrap=0;
   timesShot=0;
   asteroidsHit=0;
