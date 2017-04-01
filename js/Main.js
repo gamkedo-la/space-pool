@@ -59,6 +59,7 @@ function resetGame() {
   clearAllAsteroids();
   loadLevel();
   showingGameOverScreen = true;
+  shipCanMove = true;
 }
 
 function resetRound() {
@@ -68,6 +69,7 @@ function resetRound() {
   clearAllAsteroids();
   loadLevel();
   showingGameOverScreen = true;
+  shipCanMove = true;
 }
 
 function loadLevel(whichLevel) {

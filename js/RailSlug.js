@@ -27,7 +27,7 @@ function RailSlug() {
 	this.reset = function() {
 		this.superClassReset();
 		this.shotLife = 0;
-		//shipCanMove = false;
+		shipCanMove = false;
 	} // end of shotReset func
 
 	this.isShotReadyToFire = function(){
