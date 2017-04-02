@@ -77,6 +77,11 @@ function Asteroid(max_radius) {
     });
   }
 
+  //set the width, height, and update the partial dimensions after the asteroid is generated 
+  this.width = this.radius*2;
+  this.height = this.radius*2;
+  this.updatePartialDimensions();
+
   this.isReadyToRemove = false;
   this.invincibilityTimer = INVINCIBILITY_TIMER;
 

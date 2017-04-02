@@ -1,16 +1,21 @@
 const RAIL_SPEED = 15.5;
-const RAIL_LIFE = 3000; //3000
-const RAIL_DISPLAY_RADIUS = 3;
+const RAIL_LIFE = 3000;
 const SHOT_OFFSET = 30;
 
 RailSlug.prototype = new MovingWrapPosition();
 
 function RailSlug() {
 	this.attackValue = 4;
+
+	this.width = 40;
+	this.height = 5;
+
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;
 	this.xv = 0;
 	this.yv = 0;
+
+
 	this.deltaX = 0;
 	this.deltaY = 0;
 
@@ -125,8 +130,6 @@ function RailSlug() {
 	}
 
 	this.draw = function() {
-		var shotSize = 5;
-		var shotLength = 40;
 		if(scoreMultiplier == 1){
 			this.railColor = 'white';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
@@ -135,28 +138,21 @@ function RailSlug() {
 		if(scoreMultiplier == 2){
 			this.railColor = 'green';
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-			shotSize = 30;
-			shotLength = 240;
+			this.width = 240;
+			this.height = 30;
+			this.updatePartialDimensions();
 		}
 
 		if(testingCheats == true || scoreMultiplier == 4){
 			this.railColor = 'blue';
-			//scoreMultiplier = 4;
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-			shotSize = 50;
-			shotLength = 400;
-		}
-
-		if(scoreMultiplier == 8){
-			this.reset();
-			this.railColor = 'purple';
-			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-			shotSize = 15
+			this.height = 50;
+			this.width = 400;
+			this.updatePartialDimensions();
 		}
 
 		if(this.shotLife > 0){
-			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			colorRect(this.x,this.y,shotLength,shotSize,this.railColor, this.shotAng);
+			colorRect(this.x,this.y,this.width,this.height,this.railColor, this.shotAng);
 		}
 	}
 }
