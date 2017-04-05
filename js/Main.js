@@ -1,6 +1,7 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
-const MOTION_BLUR = true;
+const DEBUG = true;
+const MOTION_BLUR = !DEBUG;
 
 var testingCheats = false;
 
@@ -96,7 +97,7 @@ function moveAll() {
 function drawAll() {
 
   if (MOTION_BLUR) {
-	darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
+    darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
   }
   else {
   	colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque

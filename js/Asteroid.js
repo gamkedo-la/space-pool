@@ -23,12 +23,10 @@ function clearAllAsteroids() {
 
 function spawnAndResetAsteroids() {
   var i;
-  var tempAsteroidWave = [];
   for (i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++) {
     var tempAsteroid = new Asteroid();
     colliders.push(tempAsteroid);
     tempAsteroid.reset();
-    tempAsteroidWave.push(tempAsteroid);
   }
 } //spawns the initial set of asteroids?
 
@@ -115,15 +113,6 @@ function Asteroid(max_radius) {
     return (dist <= this.radius);
   };
 
-  this.bounds = function(){
-    var bounds = [];
-    for(var i = 0; i < this.verts.length; i++){
-      //TODO make asteroids rotate again
-      bounds.push({x: this.verts[i].x + this.x, y: this.verts[i].y + this.y})
-    }
-    return bounds;
-  }
-
   this.shootFrom = function(asteroidDestroyed) {
     var distFromCenter = 20 + Math.random() * 30;
     var randAng = Math.PI * 2.0 * Math.random();
@@ -161,15 +150,13 @@ function Asteroid(max_radius) {
     this.superClassMove();
   };
 
+  this.superClassDraw = this.draw;
   this.draw = function() {
     var i;
     var strokeColor = 'white';
     var fillColor = 'rgba(200,200,255,0.07)';
 
-    canvasContext.save();
-    //canvasContext.translate(this.x,this.y);
     var bounds = this.bounds();
-    //canvasContext.rotate(this.ang);
 
     // Draw the asteroid
     canvasContext.beginPath();
@@ -191,6 +178,6 @@ function Asteroid(max_radius) {
     canvasContext.fill();
     canvasContext.stroke();
 
-    canvasContext.restore();
+    this.superClassDraw();
   }
 }

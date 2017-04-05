@@ -19,6 +19,7 @@ function Ship() {
 
   this.x = canvas.width / 2;
   this.y = canvas.height / 2;
+  this.verts = [];
   this.ang = 0;
   this.xv = 0;
   this.yv = 0;
@@ -94,7 +95,7 @@ function Ship() {
     }
 
     if (this.keyHeld_Gas && shipCanMove == true) {
-      fuelUsed++
+      fuelUsed++;
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
     }
@@ -114,8 +115,10 @@ function Ship() {
     this.cannon.iterateShotsandColliders(colliders, this);
   };
 
+  this.superClassDraw = this.draw;
   this.draw = function() {
     this.cannon.drawShots(this.myShotArray);
     drawBitmapCenteredWithRotation(this.myShipPic, this.x, this.y, this.ang);
+    this.superClassDraw();
   };
 }
