@@ -9,10 +9,13 @@ function randomFloat(min, max) {
 }
 
 function checkCollisionShapes(shape1, shape2) {
-  var r1 = shape1.boundingBox();
-  var r2 = shape2.boundingBox();
+  var deltaX = shape1.x - shape2.x;
+  var deltaY = shape1.y - shape2.y;
+  var largestRadius = Math.max(shape1.radius, shape2.radius);
+  var squareRadius = largestRadius * largestRadius;
+  var dist = (deltaX * deltaX) + (deltaY * deltaY);
 
-  if ((r2.left > r1.right || r2.right < r1.left || r2.top > r1.bottom || r2.bottom < r1.top)) {
+  if(squareRadius < dist){
     return false;
   }
 

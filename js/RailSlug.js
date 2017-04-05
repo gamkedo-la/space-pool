@@ -10,6 +10,8 @@ function RailSlug() {
 	this.width = 40;
 	this.height = 5;
 
+	this.verts = [];
+
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;
 	this.xv = 0;
@@ -140,7 +142,6 @@ function RailSlug() {
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 			this.width = 240;
 			this.height = 30;
-			this.updatePartialDimensions();
 		}
 
 		if(testingCheats == true || scoreMultiplier == 4){
@@ -148,7 +149,6 @@ function RailSlug() {
 			scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 			this.height = 50;
 			this.width = 400;
-			this.updatePartialDimensions();
 		}
 
 		if(this.shotLife > 0){

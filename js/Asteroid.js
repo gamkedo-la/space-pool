@@ -72,15 +72,14 @@ function Asteroid(max_radius) {
   var ang = (Math.PI * 2) / num_verts;
   for (var i = 0; i < num_verts; i++) {
     this.verts.push({
-      x: Math.cos(ang * i) * (this.radius + randomFloat(-sizeNoise, sizeNoise)),
-      y: Math.sin(ang * i) * (this.radius + randomFloat(-sizeNoise, sizeNoise))
+      x: Math.cos(ang * i) * (this.radius + randomFloat(-sizeNoise, 0)),
+      y: Math.sin(ang * i) * (this.radius + randomFloat(-sizeNoise, 0))
     });
   }
 
-  //set the width, height, and update the partial dimensions after the asteroid is generated 
+  //set the width, height, and update the partial dimensions after the asteroid is generated
   this.width = this.radius*2;
   this.height = this.radius*2;
-  this.updatePartialDimensions();
 
   this.isReadyToRemove = false;
   this.invincibilityTimer = INVINCIBILITY_TIMER;
@@ -115,6 +114,15 @@ function Asteroid(max_radius) {
     var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     return (dist <= this.radius);
   };
+
+  this.bounds = function(){
+    var bounds = [];
+    for(var i = 0; i < this.verts.length; i++){
+      //TODO make asteroids rotate again
+      bounds.push({x: this.verts[i].x + this.x, y: this.verts[i].y + this.y})
+    }
+    return bounds;
+  }
 
   this.shootFrom = function(asteroidDestroyed) {
     var distFromCenter = 20 + Math.random() * 30;
@@ -159,14 +167,15 @@ function Asteroid(max_radius) {
     var fillColor = 'rgba(200,200,255,0.07)';
 
     canvasContext.save();
-    canvasContext.translate(this.x,this.y);
-    canvasContext.rotate(this.ang);
+    //canvasContext.translate(this.x,this.y);
+    var bounds = this.bounds();
+    //canvasContext.rotate(this.ang);
 
     // Draw the asteroid
     canvasContext.beginPath();
-    canvasContext.moveTo(this.verts[0].x, this.verts[0].y);
-    for (i = 1; i < this.verts.length; i++) {
-      canvasContext.lineTo(this.verts[i].x, this.verts[i].y);
+    canvasContext.moveTo(bounds[0].x, bounds[0].y);
+    for (i = 1; i < bounds.length; i++) {
+      canvasContext.lineTo(bounds[i].x, bounds[i].y);
     }
     canvasContext.lineWidth = 2;
     canvasContext.strokeStyle = strokeColor;
