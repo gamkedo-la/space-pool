@@ -1,4 +1,4 @@
-const RAIL_SPEED = 15.5;
+const RAIL_SPEED = 15.0;
 const RAIL_LIFE = 3000;
 const SHOT_OFFSET = 30;
 
@@ -63,7 +63,7 @@ function RailSlug() {
     this.ang = shipFiring.ang;
 
     this.shotLife = RAIL_LIFE;
-    scoreMultiplier = 1;
+    scoreMultiplier = 2;
     timesShot++;
     //console.log(timesShot)
   };
