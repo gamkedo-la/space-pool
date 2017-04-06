@@ -53,6 +53,7 @@ function MovingWrapPosition() {
       var bounds = this.bounds();
       for (var i = 0; i < bounds.length; i++) {
         colorCircle(bounds[i].x, bounds[i].y, 5, 'red');
+		// TODO: render on opposide screen edge if overlapping wrap - see Asteroid draw
       }
     }
   }
