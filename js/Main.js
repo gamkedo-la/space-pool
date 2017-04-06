@@ -3,6 +3,12 @@ const FULL_SIZE_CANVAS = true;
 const DEBUG = true;
 const MOTION_BLUR = !DEBUG;
 
+// framerate-independent movement in ms 
+const SIXTY_FPS_IN_MS = 16.666666;
+var timestampNow = 0; // when did this frame start?
+var timestampPrev = 0; // when was the last frame?
+var timestampDelta = 0; // elapsed time since last frame
+
 var testingCheats = false;
 
 var canvas, canvasContext;
@@ -51,6 +57,11 @@ function imageLoadingDoneSoStartGame() {
 }
 
 function resetGame() {
+  timestampNow = 0;
+  timestampPrev = 0;
+  timestampDelta = 0;
+  ship.xv = 0;
+  ship.yv = 0;
   endScore = score;
   endWave = waves;
   score = 0;
@@ -76,7 +87,10 @@ function loadLevel(whichLevel) {
   spawnAndResetAsteroids();
 }
 
-function updateAll() {
+function updateAll(now) {
+  timestampPrev = timestampNow;
+  timestampNow = now;
+  timestampDelta = timestampNow - timestampPrev;
   moveAll();
   drawAll();
   requestAnimationFrame(updateAll);

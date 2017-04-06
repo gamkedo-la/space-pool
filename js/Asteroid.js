@@ -1,14 +1,12 @@
-const ASTEROID_SPEED_MIN = 0.25;
-const ASTEROID_SPEED_MAX = 1.25;//2.0
+const ASTEROID_SPEED_MIN = 0.25 / SIXTY_FPS_IN_MS;
+const ASTEROID_SPEED_MAX = 1.25 / SIXTY_FPS_IN_MS;//2.0
 const ASTEROID_SPIN_MAX = 0.01;
 const ASTEROID_DEFAULT_RADIUS = 100;
 const ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS = 20;
 const START_NUMBER_OF_ASTEROIDS = 5;
-
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5 * GLOBAL_SPEED_SCALE;
-
-const INVINCIBILITY_TIMER = 4;
+const INVINCIBILITY_TIMER = 4  / SIXTY_FPS_IN_MS;
 
 function sweepAsteroidsReadyForRemoval() {
   for (var i = colliders.length - 1; i >= 0; i--) {
@@ -55,8 +53,8 @@ function Asteroid(max_radius) {
   var randSpeed = randomFloat(ASTEROID_SPEED_MIN, ASTEROID_SPEED_MAX);
 
   var driftAngle = Math.PI * 2.0 * Math.random();
-  this.xv = Math.cos(driftAngle) * randSpeed;
-  this.yv = Math.sin(driftAngle) * randSpeed;
+  this.xv = Math.cos(driftAngle) * randSpeed * timestampDelta;
+  this.yv = Math.sin(driftAngle) * randSpeed * timestampDelta;
 
   // Tweak these numbers a bit to change the shape of the asteroid
   var num_verts = randomFloat(6, 10);
@@ -119,8 +117,8 @@ function Asteroid(max_radius) {
     this.x = asteroidDestroyed.x + distFromCenter * Math.cos(randAng);
     this.y = asteroidDestroyed.y + distFromCenter * Math.sin(randAng);
     //TODO you can maybe have the child asteroids fire out in a random direction based on the rock's ang variable.
-    this.xv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
-    this.yv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
+    this.xv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.xv * timestampDelta;
+    this.yv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.yv * timestampDelta;
     //this.xv = ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
     //this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
   };
