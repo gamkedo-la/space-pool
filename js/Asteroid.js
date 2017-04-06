@@ -1,12 +1,13 @@
 const ASTEROID_SPEED_MIN = 0.25 / SIXTY_FPS_IN_MS;
 const ASTEROID_SPEED_MAX = 1.25 / SIXTY_FPS_IN_MS;//2.0
-const ASTEROID_SPIN_MAX = 0.01;
+const ASTEROID_SPIN_MAX = 0.01 / SIXTY_FPS_IN_MS;
 const ASTEROID_DEFAULT_RADIUS = 100;
 const ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS = 20;
 const START_NUMBER_OF_ASTEROIDS = 5;
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5 * GLOBAL_SPEED_SCALE;
-const INVINCIBILITY_TIMER = 4  / SIXTY_FPS_IN_MS;
+const INVINCIBILITY_TIMER = 4 / SIXTY_FPS_IN_MS;
+const DRAW_ASTEROIDS_WRAPPED = true; // render a 2nd asteroid on opposite screen edge of overlapping?
 
 function sweepAsteroidsReadyForRemoval() {
   for (var i = colliders.length - 1; i >= 0; i--) {
@@ -53,8 +54,8 @@ function Asteroid(max_radius) {
   var randSpeed = randomFloat(ASTEROID_SPEED_MIN, ASTEROID_SPEED_MAX);
 
   var driftAngle = Math.PI * 2.0 * Math.random();
-  this.xv = Math.cos(driftAngle) * randSpeed * timestampDelta;
-  this.yv = Math.sin(driftAngle) * randSpeed * timestampDelta;
+  this.xv = Math.cos(driftAngle) * randSpeed;
+  this.yv = Math.sin(driftAngle) * randSpeed;
 
   // Tweak these numbers a bit to change the shape of the asteroid
   var num_verts = randomFloat(6, 10);
@@ -117,8 +118,8 @@ function Asteroid(max_radius) {
     this.x = asteroidDestroyed.x + distFromCenter * Math.cos(randAng);
     this.y = asteroidDestroyed.y + distFromCenter * Math.sin(randAng);
     //TODO you can maybe have the child asteroids fire out in a random direction based on the rock's ang variable.
-    this.xv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.xv * timestampDelta;
-    this.yv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.yv * timestampDelta;
+    this.xv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
+    this.yv = Math.random() * ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
     //this.xv = ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
     //this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
   };
@@ -141,9 +142,9 @@ function Asteroid(max_radius) {
 
   this.superClassMove = this.move; //saving reference to parent class' move.
   this.move = function() {
-    this.ang += this.spin;
+    this.ang += this.spin * timestampDelta;
     if (this.invincibilityTimer > 0) {
-      this.invincibilityTimer--;
+      this.invincibilityTimer -= timestampDelta;
     }
     this.superClassMove();
   };
@@ -153,28 +154,58 @@ function Asteroid(max_radius) {
     var i;
     var strokeColor = 'white';
     var fillColor = 'rgba(200,200,255,0.07)';
-
     var bounds = this.bounds();
-
-    // Draw the asteroid
+	
+    // setup  glowing lines and transparent fill
+    canvasContext.lineWidth = 2;
+    canvasContext.strokeStyle = strokeColor;
+    canvasContext.fillStyle = fillColor;
+    canvasContext.shadowColor = '#ffffff';
+    canvasContext.shadowBlur = 8;
+    canvasContext.shadowOffsetX = 0;
+    canvasContext.shadowOffsetY = 0;
+	
+    // define the asteroid polygon
     canvasContext.beginPath();
     canvasContext.moveTo(bounds[0].x, bounds[0].y);
     for (i = 1; i < bounds.length; i++) {
       canvasContext.lineTo(bounds[i].x, bounds[i].y);
     }
-    canvasContext.lineWidth = 2;
-    canvasContext.strokeStyle = strokeColor;
-    canvasContext.fillStyle = fillColor;
-
-    // make the lines glow
-    canvasContext.shadowColor = '#ffffff';
-    canvasContext.shadowBlur = 8;
-    canvasContext.shadowOffsetX = 0;
-    canvasContext.shadowOffsetY = 0;
-
     canvasContext.closePath();
-    canvasContext.fill();
+	canvasContext.fill();
     canvasContext.stroke();
+	
+	if (DRAW_ASTEROIDS_WRAPPED)
+	{
+		// a second on the opposite side of the screen (often OFFSCREEN)
+		// FIXME: optimize: only draw if edge overlap
+		// FIXME: collision routines need to check two places when an asteroid is straddling a screen edge
+		// which screen edge(s) are we straddling?
+		var onEdge = false;
+		var clone_offset_x = 0;
+		var clone_offset_y = 0;
+		var maxx = canvas.width - this.radius;
+		var maxy = canvas.height - this.radius;
+		var minx = this.radius;
+		var miny = this.radius;
+		if (this.x > maxx) { clone_offset_x = -canvas.width; onEdge = true; }
+		if (this.x < minx) { clone_offset_x = canvas.width; onEdge = true; }
+		if (this.y > maxy) { clone_offset_y = -canvas.height; onEdge = true; }
+		if (this.y < miny) { clone_offset_y = canvas.height; onEdge = true; }
+		if (onEdge)
+		{
+			canvasContext.beginPath();
+			canvasContext.moveTo(bounds[0].x + clone_offset_x, bounds[0].y + clone_offset_y);
+			for (i = 1; i < bounds.length; i++) {
+			  canvasContext.lineTo(
+				bounds[i].x + clone_offset_x,
+				bounds[i].y + clone_offset_y);
+			}
+			canvasContext.closePath();
+			canvasContext.fill();
+			canvasContext.stroke();
+		}
+	}	
 
     this.superClassDraw();
   }
