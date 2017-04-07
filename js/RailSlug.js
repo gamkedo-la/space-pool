@@ -1,4 +1,4 @@
-const RAIL_SPEED = 15.0 / SIXTY_FPS_IN_MS;
+const RAIL_SPEED = 15.0;
 const RAIL_LIFE = 3000;
 const SHOT_OFFSET = 30;
 
@@ -57,8 +57,8 @@ function RailSlug() {
     this.x = shipFiring.x + Math.cos(shipFiring.ang) * shotDistFromShipCenter;
     this.y = shipFiring.y + Math.sin(shipFiring.ang) * shotDistFromShipCenter;
 
-    this.xv = Math.cos(shipFiring.ang) * (RAIL_SPEED * timestampDelta) + shipFiring.xv;
-    this.yv = Math.sin(shipFiring.ang) * (RAIL_SPEED * timestampDelta) + shipFiring.yv;
+    this.xv = Math.cos(shipFiring.ang) * RAIL_SPEED + shipFiring.xv;
+    this.yv = Math.sin(shipFiring.ang) * RAIL_SPEED + shipFiring.yv;
 
     this.ang = shipFiring.ang;
 
