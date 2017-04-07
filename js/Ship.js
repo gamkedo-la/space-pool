@@ -1,8 +1,9 @@
-const SPACESPEED_DECAY_MULT = 0.99 / SIXTY_FPS_IN_MS;
-const THRUST_POWER = 0.075 / SIXTY_FPS_IN_MS;
-const TURN_RATE = 0.015 / SIXTY_FPS_IN_MS;
-const MULTIPLIER_LIFESPAN = 150 / SIXTY_FPS_IN_MS;
+const SPACESPEED_DECAY_MULT = 0.99;
+const THRUST_POWER = 0.075;
+const TURN_RATE = 0.015;
 const SHIP_COLLISION_RADIUS = 30;
+
+const MULTIPLIER_LIFESPAN = 150;
 
 var shipCanMove = true;
 var endScore;
@@ -53,13 +54,6 @@ function Ship() {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.cannon.clearShots();
-    this.ang = 0;
-    this.xv = 0;
-    this.yv = 0;
-    this.keyHeld_Gas = false;
-    this.keyHeld_Reverse = false;
-    this.keyHeld_TurnLeft = false;
-    this.keyHeld_TurnRight = false;
   }; // end of shipReset func
 
   this.isOverlappingPoint = function(testX, testY) {
@@ -94,7 +88,7 @@ function Ship() {
   this.move = function(colliders) {
 
     if (scoreMultiplierLifeSpan > 0) {
-      scoreMultiplierLifeSpan -= timestampDelta;
+      scoreMultiplierLifeSpan--;
     }
     if (scoreMultiplierLifeSpan == 0) {
       scoreMultiplier = 1;
@@ -102,18 +96,18 @@ function Ship() {
 
     if (this.keyHeld_Gas && shipCanMove == true) {
       fuelUsed++;
-      this.xv += Math.cos(this.ang) * THRUST_POWER * timestampDelta;
-      this.yv += Math.sin(this.ang) * THRUST_POWER * timestampDelta;
+      this.xv += Math.cos(this.ang) * THRUST_POWER;
+      this.yv += Math.sin(this.ang) * THRUST_POWER;
     }
     if (this.keyHeld_TurnLeft && shipCanMove == true) {
-      this.ang -= TURN_RATE  * timestampDelta * Math.PI;
+      this.ang -= TURN_RATE * Math.PI;
     }
     if (this.keyHeld_TurnRight && shipCanMove == true) {
-      this.ang += TURN_RATE * timestampDelta * Math.PI;
+      this.ang += TURN_RATE * Math.PI;
     }
 
-    this.xv *= SPACESPEED_DECAY_MULT * timestampDelta;
-    this.yv *= SPACESPEED_DECAY_MULT * timestampDelta;
+    this.xv *= SPACESPEED_DECAY_MULT;
+    this.yv *= SPACESPEED_DECAY_MULT;
 
     this.superClassMove();
     this.checkMyShipCollisonAgainst(colliders);
