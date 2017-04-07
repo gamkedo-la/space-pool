@@ -113,6 +113,8 @@ function RailSlug() {
       { x: this.halfWidth, y: -this.halfHeight },
       { x: -this.halfWidth, y: -this.halfHeight }
     ];
+
+    this.radius = Math.sqrt(this.halfWidth * this.halfWidth + this.halfHeight * this.halfHeight);
   };
   // Make sure we have some verts to start with.
   this.recalcVerts();

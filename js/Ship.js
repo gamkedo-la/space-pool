@@ -25,10 +25,10 @@ function Ship() {
     { x: -16, y: 13 },
     { x: 16, y: 0 }
   ];
+  this.radius = 21;
   this.ang = 0;
   this.xv = 0;
   this.yv = 0;
-  this.myShipPic; // which picture to use
 
   this.keyHeld_Gas = false;
   this.keyHeld_Reverse = false;
@@ -51,13 +51,9 @@ function Ship() {
   };
 
   this.superClassReset = this.reset;
-  this.reset = function(whichImage) {
+  this.reset = function() {
     this.superClassReset();
-    this.myShipPic = whichImage;
-    this.xv = 0;
-    this.yv = 0;
-    this.x = canvas.width / 2;
-    this.y = canvas.height / 2;
+    this.xv = this.yv = 0.0;
     this.cannon.clearShots();
   }; // end of shipReset func
 
@@ -115,7 +111,29 @@ function Ship() {
   this.superClassDraw = this.draw;
   this.draw = function() {
     this.cannon.drawShots();
-    drawBitmapCenteredWithRotation(this.myShipPic, this.x, this.y, this.ang);
+
+    setDrawColors();
+    var shipLines = [
+      [{ x: -16, y: -13 }, { x: 16, y: 0 }],
+      [{ x: 16, y: 0 }, { x: -16, y: 13 }],
+      [{ x: -9, y: -10 }, { x: -9, y: 10 }]
+    ];
+
+    var cos = Math.cos(this.ang);
+    var sin = Math.sin(this.ang);
+    canvasContext.beginPath();
+    for (var i = 0; i < shipLines.length; i++) {
+      var fromX = shipLines[i][0].x * cos - shipLines[i][0].y * sin;
+      var fromY = shipLines[i][0].x * sin + shipLines[i][0].y * cos;
+      var toX = shipLines[i][1].x * cos - shipLines[i][1].y * sin;
+      var toY = shipLines[i][1].x * sin + shipLines[i][1].y * cos;
+      canvasContext.moveTo(fromX + this.x, fromY + this.y);
+      canvasContext.lineTo(toX + this.x, toY + this.y);
+    }
+    canvasContext.closePath();
+    canvasContext.fill();
+    canvasContext.stroke();
+
     this.superClassDraw();
   };
 }

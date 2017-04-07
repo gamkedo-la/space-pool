@@ -15,6 +15,10 @@ const KEY_1 = 49;
 const KEY_2 = 50;
 const KEY_3 = 51;
 
+// Reload keys
+const KEY_F5 = 116;
+const KEY_R = 82;
+
 const KEY_C = 67; //toggle cheats
 
 var peaShooterActive = false;
@@ -99,7 +103,10 @@ function keyPressed(evt) {
     repeat = true;
   }
   //console.log(evt.keyCode);
-  evt.preventDefault();
+  // Do not prevent F5 or Ctrl+R
+  if (evt.keyCode != KEY_F5 && !(evt.keyCode == KEY_R && evt.ctrlKey == true)) {
+    evt.preventDefault();
+  }
 }
 
 function keyReleased(evt) {

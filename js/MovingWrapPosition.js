@@ -9,7 +9,6 @@ function MovingWrapPosition() {
   this.verts = [];
 
   this.reset = function() {
-    //this.xv = this.yv = 0.0;
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
   }; // end of reset func
@@ -53,6 +52,10 @@ function MovingWrapPosition() {
       var bounds = this.bounds();
       for (var i = 0; i < bounds.length; i++) {
         colorCircle(bounds[i].x, bounds[i].y, 5, 'red');
+      }
+
+      if (this.radius) {
+        strokeCircle(this.x, this.y, this.radius, 'green');
       }
     }
   }

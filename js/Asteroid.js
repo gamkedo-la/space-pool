@@ -147,18 +147,8 @@ function Asteroid(max_radius) {
   this.superClassDraw = this.draw;
   this.draw = function() {
     var i;
-    var strokeColor = 'white';
-    var fillColor = 'rgba(200,200,255,0.07)';
     var bounds = this.bounds();
-	
-    // setup  glowing lines and transparent fill
-    canvasContext.lineWidth = 2;
-    canvasContext.strokeStyle = strokeColor;
-    canvasContext.fillStyle = fillColor;
-    canvasContext.shadowColor = '#ffffff';
-    canvasContext.shadowBlur = 8;
-    canvasContext.shadowOffsetX = 0;
-    canvasContext.shadowOffsetY = 0;
+    setDrawColors();
 	
     // define the asteroid polygon
     canvasContext.beginPath();
@@ -167,7 +157,7 @@ function Asteroid(max_radius) {
       canvasContext.lineTo(bounds[i].x, bounds[i].y);
     }
     canvasContext.closePath();
-	canvasContext.fill();
+    canvasContext.fill();
     canvasContext.stroke();
 	
 	if (DRAW_ASTEROIDS_WRAPPED)

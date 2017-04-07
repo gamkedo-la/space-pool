@@ -1,3 +1,13 @@
+function setDrawColors() {
+  canvasContext.lineWidth = 2;
+  canvasContext.strokeStyle = 'white';
+  canvasContext.fillStyle = 'rgba(200,200,255,0.07)';
+  canvasContext.shadowColor = '#ffffff';
+  canvasContext.shadowBlur = 8;
+  canvasContext.shadowOffsetX = 0;
+  canvasContext.shadowOffsetY = 0;
+}
+
 function drawBitmapCenteredWithRotation(useBitmap, atX,atY, withAng) {
   canvasContext.save();
   canvasContext.translate(atX,atY);
@@ -39,6 +49,13 @@ function colorCircle(centerX,centerY, radius, fillColor) {
   canvasContext.beginPath();
   canvasContext.arc(centerX,centerY, radius, 0, Math.PI * 2, true);
   canvasContext.fill();
+}
+
+function strokeCircle(centerX,centerY, radius, fillColor) {
+  canvasContext.strokeStyle = fillColor;
+  canvasContext.beginPath();
+  canvasContext.arc(centerX,centerY, radius, 0, Math.PI * 2, true);
+  canvasContext.stroke();
 }
 
 function colorText(showWords, textX,textY, fillColor) {

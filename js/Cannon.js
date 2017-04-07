@@ -32,7 +32,7 @@ function Cannon() {
         this.shotArray[i].shootFrom(ship);
       }
 
-      if (checkCollisionShapes(this.shotArray[i], ship)) {
+      if (this.shotArray[i].edgeCrossCount > 0 && checkCollisionShapes(this.shotArray[i], ship)) {
         if (lives == 0) {
           resetGame();
         }
