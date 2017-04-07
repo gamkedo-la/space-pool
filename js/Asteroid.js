@@ -60,8 +60,10 @@ function Asteroid(max_radius) {
   this.yv = Math.sin(driftAngle) * randSpeed;
 
   // Tweak these numbers a bit to change the shape of the asteroid
-  var num_verts = randomFloat(6, 10);
   this.radius = randomInteger(max_radius * .8, max_radius);
+  var min_verts = Math.round(lerp(5, 6, this.radius / ASTEROID_DEFAULT_RADIUS));
+  var max_verts = Math.round(lerp(7, 10, this.radius / ASTEROID_DEFAULT_RADIUS));
+  var num_verts = randomInteger(min_verts, max_verts);
   // This makes the irregular shape of the asteroid
   var sizeNoise = randomFloat(this.radius * 0.4, this.radius * 0.5);
 

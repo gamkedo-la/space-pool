@@ -8,6 +8,10 @@ function randomFloat(min, max) {
   return (Math.random() * (max - min)) + min;
 }
 
+function lerp(value1, value2, percentage) {
+  return value1 + (value2 - value1) * percentage;
+}
+
 function checkCollisionShapes(shape1, shape2) {
   var deltaX = shape1.x - shape2.x;
   var deltaY = shape1.y - shape2.y;
