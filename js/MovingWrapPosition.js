@@ -51,7 +51,7 @@ function MovingWrapPosition() {
     if (DEBUG) {
       var bounds = this.bounds();
       for (var i = 0; i < bounds.length; i++) {
-        colorCircle(bounds[i].x, bounds[i].y, 5, 'red');
+        strokeCircle(bounds[i].x, bounds[i].y, 5, 'red');
       }
 
       if (this.radius) {
