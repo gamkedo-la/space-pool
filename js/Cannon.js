@@ -32,7 +32,7 @@ function Cannon() {
         this.shotArray[i].shootFrom(ship);
       }
 
-      if (this.shotArray[i].hitTest(ship)) {
+      if (checkCollisionShapes(this.shotArray[i], ship)) {
         if (lives == 0) {
           resetGame();
         }
@@ -47,8 +47,7 @@ function Cannon() {
 
       for (var currentCollider = 0; currentCollider < colliders.length; currentCollider++) {
         //checkCollisionShapes(shape1, shape2)
-        //this.shotArray[i].hitTest(colliders[currentCollider])
-        if (checkCollisionShapes(this.shotArray[i], colliders[currentCollider]) && colliders[currentCollider].invincibilityTimer == 0) {
+        if (colliders[currentCollider].invincibilityTimer == 0 && checkCollisionShapes(this.shotArray[i], colliders[currentCollider])) {
 
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if (colliders[currentCollider].hp < 0) {

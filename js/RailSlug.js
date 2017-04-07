@@ -29,7 +29,7 @@ function RailSlug() {
   this.shotLife = 30;
   this.timeUntilCanHitAgain = 0;
 
-  this.ang;
+  this.ang = 0;
 
   this.superClassReset = this.reset;
   this.reset = function() {
@@ -131,20 +131,6 @@ function RailSlug() {
       this.y += this.yv;
       this.handleScreenWrap();
     }
-  };
-
-  this.hitTest = function(thisEnemy) {
-    if (this.edgeCrossCount == 0 && testingCheats == false) {
-      //return false;
-    } // prevent the rail from destroying rocks without wrapping at least once.
-
-    if (this.shotLife <= 0) {
-      return false;
-    }
-    if (this.timeUntilCanHitAgain != 0) {
-      return false;
-    }
-    return thisEnemy.isOverlappingPoint(this.x, this.y);
   };
 
   this.superClassDraw = this.draw;

@@ -19,12 +19,16 @@ function Ship() {
 
   this.x = canvas.width / 2;
   this.y = canvas.height / 2;
-  this.verts = [];
+  // image is 48x32
+  this.verts = [
+    { x: -16, y: -13 },
+    { x: -16, y: 13 },
+    { x: 16, y: 0 }
+  ];
   this.ang = 0;
   this.xv = 0;
   this.yv = 0;
   this.myShipPic; // which picture to use
-  this.name = "Untitled Ship";
 
   this.keyHeld_Gas = false;
   this.keyHeld_Reverse = false;
@@ -50,24 +54,17 @@ function Ship() {
   this.reset = function(whichImage) {
     this.superClassReset();
     this.myShipPic = whichImage;
-    this.speed = 0;
+    this.xv = 0;
+    this.yv = 0;
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.cannon.clearShots();
   }; // end of shipReset func
 
-  this.isOverlappingPoint = function(testX, testY) {
-    var deltaX = testX - this.x;
-    var deltaY = testY - this.y;
-    var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-    var didHit = dist <= SHIP_COLLISION_RADIUS;
-    return didHit;
-  };
-
   this.checkMyShipCollisonAgainst = function(colliders) {
     for (var c = 0; c < colliders.length; c++) {
-      if (colliders[c].isOverlappingPoint(this.x, this.y)) {
-        if(testingCheats){
+      if (checkCollisionShapes(this, colliders[c])) {
+        if (testingCheats) {
           console.log('player collison detected - cheatmode on!');
           return;
         }
@@ -117,7 +114,7 @@ function Ship() {
 
   this.superClassDraw = this.draw;
   this.draw = function() {
-    this.cannon.drawShots(this.myShotArray);
+    this.cannon.drawShots();
     drawBitmapCenteredWithRotation(this.myShipPic, this.x, this.y, this.ang);
     this.superClassDraw();
   };

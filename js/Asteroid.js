@@ -107,13 +107,6 @@ function Asteroid(max_radius) {
     }
   }; // end of asteroidReset func
 
-  this.isOverlappingPoint = function(testX, testY) {
-    var deltaX = testX - this.x;
-    var deltaY = testY - this.y;
-    var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-    return (dist <= this.radius);
-  };
-
   this.shootFrom = function(asteroidDestroyed) {
     var distFromCenter = 20 + Math.random() * 30;
     var randAng = Math.PI * 2.0 * Math.random();
