@@ -5,7 +5,6 @@ const MOTION_BLUR = !DEBUG;
 
 // framerate-independent movement in ms 
 const SIXTY_FPS_IN_MS = 16.666666;
-const ALMOST_ZERO = 0.000001; // to avoid divide by zero
 var timestampNow = 0; // when did this frame start?
 var timestampPrev = 0; // when was the last frame?
 var timestampDelta = 0; // elapsed time since last frame
@@ -60,7 +59,7 @@ function imageLoadingDoneSoStartGame() {
 function resetGame() {
   timestampNow = 0;
   timestampPrev = 0;
-  timestampDelta = ALMOST_ZERO; 
+  timestampDelta = 0;
   ship.xv = 0;
   ship.yv = 0;
   endScore = score;
@@ -92,8 +91,6 @@ function updateAll(now) {
   timestampPrev = timestampNow;
   timestampNow = now;
   timestampDelta = timestampNow - timestampPrev;
-  // I am not sure if we need this line at all:
-  if (timestampDelta <= 0) timestampDelta = ALMOST_ZERO; // avoid divide by 0 elsewhere?
   moveAll();
   drawAll();
   requestAnimationFrame(updateAll);
