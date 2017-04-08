@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Space Pool</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8">
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100% height: 100%;
+        overflow: hidden;
+        background: black;
+    }
+    
+    #overlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-image: url(images/oldschool_scanline_grid.png);
+        pointer-events: none;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <div id="overlay"></div>
+    <p id="debugText"></p>
+    <script src="client.min.js"></script>
+</body>
+
+</html>
