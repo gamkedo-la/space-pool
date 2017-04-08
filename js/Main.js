@@ -31,7 +31,12 @@ window.onload = function() {
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
-  loadImages();
+  // loadImages() will now be invoked after loading sounds from SoundLoading.js
+  Sound.load(loadImages);
+  //setting main theme to loop then playing song at loudest volume
+  Sound.loop("_spacepool");
+  Sound.play("_spacepool", 1);
+
   if (FULL_SIZE_CANVAS) {
     window.addEventListener("resize", onResize);
     onResize();
