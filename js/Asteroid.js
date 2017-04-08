@@ -7,7 +7,7 @@ const START_NUMBER_OF_ASTEROIDS = 5;
 const DRAW_ASTEROIDS_WRAPPED = true; // render a 2nd asteroid on opposite screen edge of overlapping?
 
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
-const ASTEROID_CHILD_SPEED = 1.5 * GLOBAL_SPEED_SCALE;
+const ASTEROID_CHILD_SPEED = .75;
 
 const INVINCIBILITY_TIMER = 4;
 
