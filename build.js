@@ -38,12 +38,14 @@ console.log("loggin rawww")
 var parsed = babel.transform(raw, {presets: ["es2015"] });
 
 //minify
-var result = UglifyJS.minify(parsed.code, {
-	mangle: false,
-	compress: false,
-	fromString: true
-});
-
+// var result = UglifyJS.minify(parsed.code, {	
+// 	beautify: true,
+// 	mangle : false,
+// 	compress : false,
+// 	fromString: true
+// });
+// test with just parsed code. 
+result = parsed;
 //write
 fs.outputFile(output + "client.min.js", result.code, err => {
   if (err) return console.error(err)
