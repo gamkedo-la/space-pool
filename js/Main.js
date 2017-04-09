@@ -1,11 +1,11 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
-const DEBUG = true;
+const DEBUG = false;
 const MOTION_BLUR = !DEBUG;
 
 var testingCheats = false;
 
-var canvas, canvasContext;
+var canvas, canvasContext, hiddenCanvas, hiddenCanvasContext;
 
 var ship;
 var score = 0;
@@ -26,8 +26,15 @@ window.onload = function() {
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
   }
+
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
+  //<canvas style = "display:none;" id="hiddenGameCanvas" width="600" height="600"></canvas>
+  hiddenCanvas = document.createElement('canvas');
+  hiddenCanvas.id = 'hiddenGameCanvas';
+  hiddenCanvas.style.display = 'none';
+  hiddenCanvasContext = canvas.getContext('2d');
+
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
@@ -45,8 +52,8 @@ window.onload = function() {
 
 function onResize() // full screen
 {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	hiddenCanvas.width = canvas.width = window.innerWidth;
+	hiddenCanvas.height = canvas.height = window.innerHeight;
 }
 
 function imageLoadingDoneSoStartGame() {
@@ -118,5 +125,24 @@ function drawAll() {
     drawUI();
     ship.draw();
     drawAsteroids();
+
+    var srcX, srcY, copyW, copyH, destX, destY;
+    srcX = 200;
+    srcY = 50;
+    copyW = 150; //canvas.width/2;
+    copyH = 150; //canvas.height/2;
+    destX = 300//canvas.width/2;
+    destY = 250//canvas.height/2;
+
+    hiddenCanvasContext.drawImage(canvas, destX, destY, copyW, copyH,
+      srcX, srcY, copyW, copyH);
+
+    canvasContext.drawImage(canvas, srcX, srcY, copyW, copyH,
+      destX, destY, copyW, copyH);
+
+    /*
+    canvasContext.drawImage(hiddenCanvas, 0, 0, copyW, copyH,
+      srcX, srcY, copyW, copyH);
+    */
   }
 }
