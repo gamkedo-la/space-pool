@@ -1,7 +1,7 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
 const DEBUG = false;
-const MOTION_BLUR = !DEBUG;
+const MOTION_BLUR = false; //!DEBUG;
 
 var testingCheats = false;
 
