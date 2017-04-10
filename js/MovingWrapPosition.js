@@ -89,7 +89,7 @@ function MovingWrapPosition() {
         if (this.y > maxy) { clone_offset_y = -canvas.height; onEdge = true; }
         if (this.y < miny) { clone_offset_y = canvas.height; onEdge = true; }
         if (onEdge) {
-          drawBitmapCenteredWithRotation(this.img, clone_offset_x, clone_offset_y, this.ang);
+          drawBitmapCenteredWithRotation(this.img, this.x + clone_offset_x, this.y + clone_offset_y, this.ang);
         }
       }
     }
