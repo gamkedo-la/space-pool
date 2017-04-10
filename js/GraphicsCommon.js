@@ -1,4 +1,4 @@
-function setDrawColors() {
+function setDrawColors(canvasContext) {
   canvasContext.lineWidth = 2;
   canvasContext.strokeStyle = 'white';
   canvasContext.fillStyle = 'rgba(200,200,255,0.07)';

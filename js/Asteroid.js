@@ -82,6 +82,8 @@ function Asteroid(max_radius) {
   this.width = this.radius*2;
   this.height = this.radius*2;
 
+  this.buildCanvas();
+
   this.isReadyToRemove = false;
   this.invincibilityTimer = INVINCIBILITY_TIMER;
 
@@ -145,55 +147,4 @@ function Asteroid(max_radius) {
     }
     this.superClassMove();
   };
-
-  this.superClassDraw = this.draw;
-  this.draw = function() {
-    var i;
-    var bounds = this.bounds();
-    setDrawColors();
-	
-    // define the asteroid polygon
-    canvasContext.beginPath();
-    canvasContext.moveTo(bounds[0].x, bounds[0].y);
-    for (i = 1; i < bounds.length; i++) {
-      canvasContext.lineTo(bounds[i].x, bounds[i].y);
-    }
-    canvasContext.closePath();
-    canvasContext.fill();
-    canvasContext.stroke();
-	
-	if (DRAW_ASTEROIDS_WRAPPED)
-	{
-		// a second on the opposite side of the screen (often OFFSCREEN)
-		// FIXME: optimize: only draw if edge overlap
-		// FIXME: collision routines need to check two places when an asteroid is straddling a screen edge
-		// which screen edge(s) are we straddling?
-		var onEdge = false;
-		var clone_offset_x = 0;
-		var clone_offset_y = 0;
-		var maxx = canvas.width - this.radius;
-		var maxy = canvas.height - this.radius;
-		var minx = this.radius;
-		var miny = this.radius;
-		if (this.x > maxx) { clone_offset_x = -canvas.width; onEdge = true; }
-		if (this.x < minx) { clone_offset_x = canvas.width; onEdge = true; }
-		if (this.y > maxy) { clone_offset_y = -canvas.height; onEdge = true; }
-		if (this.y < miny) { clone_offset_y = canvas.height; onEdge = true; }
-		if (onEdge)
-		{
-			canvasContext.beginPath();
-			canvasContext.moveTo(bounds[0].x + clone_offset_x, bounds[0].y + clone_offset_y);
-			for (i = 1; i < bounds.length; i++) {
-			  canvasContext.lineTo(
-				bounds[i].x + clone_offset_x,
-				bounds[i].y + clone_offset_y);
-			}
-			canvasContext.closePath();
-			canvasContext.fill();
-			canvasContext.stroke();
-		}
-	}	
-
-    this.superClassDraw();
-  }
 }

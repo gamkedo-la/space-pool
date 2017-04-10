@@ -1,7 +1,7 @@
 const NUMBER_OF_LIVES = 3;
 const FULL_SIZE_CANVAS = true;
 const DEBUG = false;
-const MOTION_BLUR = false; //!DEBUG;
+const MOTION_BLUR = !DEBUG;
 
 var testingCheats = false;
 
@@ -131,8 +131,8 @@ function drawAll() {
     srcY = 50;
     copyW = 150; //canvas.width/2;
     copyH = 150; //canvas.height/2;
-    destX = 300//canvas.width/2;
-    destY = 250//canvas.height/2;
+    destX = 300; //canvas.width/2;
+    destY = 250; //canvas.height/2;
 
     hiddenCanvasContext.drawImage(canvas, destX, destY, copyW, copyH,
       srcX, srcY, copyW, copyH);

@@ -4,9 +4,13 @@ function MovingWrapPosition() {
   this.xv = 0;
   this.yv = 0;
 
+  this.width = 0;
+  this.height = 0;
   this.ang = 0;
   this.radius = 0;
   this.verts = [];
+
+  this.img;
 
   this.reset = function() {
     this.x = canvas.width / 2;
@@ -47,7 +51,68 @@ function MovingWrapPosition() {
     return bounds;
   };
 
+  this.buildLines = function() {
+    var num_verts = this.verts.length;
+    if (num_verts < 2) {
+      return [];
+    }
+
+    var lines = [];
+    lines.push([
+      { x: this.verts[0].x, y: this.verts[0].y},
+      { x: this.verts[num_verts - 1].x, y: this.verts[num_verts - 1].y}
+    ]);
+    for (var j = 1; j < num_verts; j++) {
+      lines.push([
+        { x: this.verts[j - 1].x, y: this.verts[j - 1].y},
+        { x: this.verts[j].x, y: this.verts[j].y}
+      ]);
+    }
+
+    return lines;
+  };
+
+  this.buildCanvas = function() {
+    var lines = this.buildLines();
+    this.img = document.createElement('canvas');
+    this.img.width = this.width;
+    this.img.height = this.height;
+    var ctx = this.img.getContext('2d');
+    ctx.translate(this.width / 2, this.height / 2);
+
+    setDrawColors(ctx);
+    ctx.beginPath();
+    for (var i = 0; i < lines.length; i++) {
+      ctx.moveTo(lines[i][0].x, lines[i][0].y);
+      ctx.lineTo(lines[i][1].x, lines[i][1].y);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  };
+
   this.draw = function() {
+    if (this.img) {
+      drawBitmapCenteredWithRotation(this.img, this.x, this.y, this.ang);
+
+      if (DRAW_ASTEROIDS_WRAPPED) {
+        var onEdge = false;
+        var clone_offset_x = 0;
+        var clone_offset_y = 0;
+        var maxx = canvas.width - this.radius;
+        var maxy = canvas.height - this.radius;
+        var minx = this.radius;
+        var miny = this.radius;
+        if (this.x > maxx) { clone_offset_x = -canvas.width; onEdge = true; }
+        if (this.x < minx) { clone_offset_x = canvas.width; onEdge = true; }
+        if (this.y > maxy) { clone_offset_y = -canvas.height; onEdge = true; }
+        if (this.y < miny) { clone_offset_y = canvas.height; onEdge = true; }
+        if (onEdge) {
+          drawBitmapCenteredWithRotation(this.img, clone_offset_x, clone_offset_y, this.ang);
+        }
+      }
+    }
+
     if (DEBUG) {
       var bounds = this.bounds();
       for (var i = 0; i < bounds.length; i++) {

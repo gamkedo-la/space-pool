@@ -20,6 +20,8 @@ function Ship() {
   this.x = canvas.width / 2;
   this.y = canvas.height / 2;
   // image is 48x32
+  this.width = 48;
+  this.height = 32;
   this.verts = [
     { x: -16, y: -13 },
     { x: -16, y: 13 },
@@ -41,6 +43,16 @@ function Ship() {
   this.controlKeyRight;
   this.controlKeyDown;
   this.controlKeyLeft;
+
+  this.buildLines = function() {
+    return [
+      [{ x: -16, y: -13 }, { x: 16, y: 0 }],
+      [{ x: 16, y: 0 }, { x: -16, y: 13 }],
+      [{ x: -9, y: -10 }, { x: -9, y: 10 }]
+    ];
+  };
+
+  this.buildCanvas();
 
   this.setupInput = function(upKey, rightKey, downKey, leftKey, shotKey) {
     this.controlKeyUp = upKey;
@@ -111,28 +123,6 @@ function Ship() {
   this.superClassDraw = this.draw;
   this.draw = function() {
     this.cannon.drawShots();
-
-    setDrawColors();
-    var shipLines = [
-      [{ x: -16, y: -13 }, { x: 16, y: 0 }],
-      [{ x: 16, y: 0 }, { x: -16, y: 13 }],
-      [{ x: -9, y: -10 }, { x: -9, y: 10 }]
-    ];
-
-    var cos = Math.cos(this.ang);
-    var sin = Math.sin(this.ang);
-    canvasContext.beginPath();
-    for (var i = 0; i < shipLines.length; i++) {
-      var fromX = shipLines[i][0].x * cos - shipLines[i][0].y * sin;
-      var fromY = shipLines[i][0].x * sin + shipLines[i][0].y * cos;
-      var toX = shipLines[i][1].x * cos - shipLines[i][1].y * sin;
-      var toY = shipLines[i][1].x * sin + shipLines[i][1].y * cos;
-      canvasContext.moveTo(fromX + this.x, fromY + this.y);
-      canvasContext.lineTo(toX + this.x, toY + this.y);
-    }
-    canvasContext.closePath();
-    canvasContext.fill();
-    canvasContext.stroke();
 
     this.superClassDraw();
   };
