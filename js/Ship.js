@@ -44,14 +44,21 @@ function Ship() {
   this.controlKeyDown;
   this.controlKeyLeft;
 
-  this.buildLines = function() {
-    return [
+  this.drawCanvas = function(ctx) {
+    var lines = [
       [{ x: -16, y: -13 }, { x: 16, y: 0 }],
       [{ x: 16, y: 0 }, { x: -16, y: 13 }],
       [{ x: -9, y: -10 }, { x: -9, y: 10 }]
     ];
-  };
 
+    setDrawColors(ctx);
+    ctx.beginPath();
+    for (var i = 0; i < this.verts.length; i++) {
+      ctx.moveTo(lines[i][0].x, lines[i][0].y);
+      ctx.lineTo(lines[i][1].x, lines[i][1].y);
+    }
+    ctx.stroke();
+  };
   this.buildCanvas();
 
   this.setupInput = function(upKey, rightKey, downKey, leftKey, shotKey) {

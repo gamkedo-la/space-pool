@@ -51,40 +51,21 @@ function MovingWrapPosition() {
     return bounds;
   };
 
-  this.buildLines = function() {
-    var num_verts = this.verts.length;
-    if (num_verts < 2) {
-      return [];
-    }
-
-    var lines = [];
-    lines.push([
-      { x: this.verts[0].x, y: this.verts[0].y},
-      { x: this.verts[num_verts - 1].x, y: this.verts[num_verts - 1].y}
-    ]);
-    for (var j = 1; j < num_verts; j++) {
-      lines.push([
-        { x: this.verts[j - 1].x, y: this.verts[j - 1].y},
-        { x: this.verts[j].x, y: this.verts[j].y}
-      ]);
-    }
-
-    return lines;
-  };
-
   this.buildCanvas = function() {
-    var lines = this.buildLines();
     this.img = document.createElement('canvas');
     this.img.width = this.width;
     this.img.height = this.height;
     var ctx = this.img.getContext('2d');
     ctx.translate(this.width / 2, this.height / 2);
+    this.drawCanvas(ctx);
+  };
 
+  this.drawCanvas = function(ctx) {
     setDrawColors(ctx);
     ctx.beginPath();
-    for (var i = 0; i < lines.length; i++) {
-      ctx.moveTo(lines[i][0].x, lines[i][0].y);
-      ctx.lineTo(lines[i][1].x, lines[i][1].y);
+    ctx.moveTo(this.verts[0].x, this.verts[0].y);
+    for (var i = 0; i < this.verts.length; i++) {
+      ctx.lineTo(this.verts[i].x, this.verts[i].y);
     }
     ctx.closePath();
     ctx.fill();
