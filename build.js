@@ -4,21 +4,21 @@ const babel = require("babel-core");
 
 var bundle = [
 	"./js/Tools.js",
-    "./js/Asteroid.js",
-		"./js/Blitting.js", 
-    "./js/Cannon.js",
-    "./js/Collision.js",
-    "./js/GraphicsCommon.js",
-    "./js/ImageLoading.js",
-    "./js/Input.js",
-    "./js/Main.js",
-    "./js/MovingWrapPosition.js",
-    "./js/RailSlug.js",
-    "./js/Scratch.js",
-    "./js/Ship.js",
-    "./js/SoundLoading.js",
-    "./js/Stats.js",
-    "./js/UI.js",
+  "./js/Asteroid.js",
+  "./js/Blitting.js",
+  "./js/Cannon.js",
+  "./js/Collision.js",
+  "./js/GraphicsCommon.js",
+  "./js/ImageLoading.js",
+  "./js/Input.js",
+  "./js/Main.js",
+  "./js/MovingWrapPosition.js",
+  "./js/RailSlug.js",
+  "./js/Scratch.js",
+  "./js/Ship.js",
+  "./js/SoundLoading.js",
+  "./js/Stats.js",
+  "./js/UI.js",
 ];
 
 //Bundle JS
@@ -33,8 +33,9 @@ fs.emptyDirSync(output)
 for(var i in bundle){
 	raw += fs.readFileSync(bundle[i])
 }
-console.log("loggin rawww")
-//console.log(raw)
+
+console.log("Files read!")
+
 //es6
 var parsed = babel.transform(raw, {presets: ["es2015"] });
 
@@ -46,6 +47,7 @@ var parsed = babel.transform(raw, {presets: ["es2015"] });
 // 	fromString: true
 // });
 // test with just parsed code.
+
 result = parsed;
 //write
 fs.outputFile(output + "client.min.js", result.code, err => {
@@ -65,6 +67,6 @@ var includeDir = ["images", "music"]
 for(var path of includeDir){
 	fs.copy(input + path, output + path, err => {
 	  if (err) return console.error(err)
-	  	console.log("Wrote " + path)
+  	console.log("Wrote " + path)
 });
 }

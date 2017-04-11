@@ -32,7 +32,6 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1"
   }
