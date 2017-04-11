@@ -4,7 +4,8 @@ const babel = require("babel-core");
 
 var bundle = [
 	"./js/Tools.js",
-    "./js/Asteroid.js", 
+    "./js/Asteroid.js",
+		"./js/Blitting.js", 
     "./js/Cannon.js",
     "./js/Collision.js",
     "./js/GraphicsCommon.js",
@@ -38,13 +39,13 @@ console.log("loggin rawww")
 var parsed = babel.transform(raw, {presets: ["es2015"] });
 
 //minify
-// var result = UglifyJS.minify(parsed.code, {	
+// var result = UglifyJS.minify(parsed.code, {
 // 	beautify: true,
 // 	mangle : false,
 // 	compress : false,
 // 	fromString: true
 // });
-// test with just parsed code. 
+// test with just parsed code.
 result = parsed;
 //write
 fs.outputFile(output + "client.min.js", result.code, err => {
@@ -67,5 +68,3 @@ for(var path of includeDir){
 	  	console.log("Wrote " + path)
 });
 }
-
-
