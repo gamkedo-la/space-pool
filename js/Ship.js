@@ -115,6 +115,7 @@ function Ship() {
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
       createParticles();
+
     }
     if (this.keyHeld_TurnLeft && shipCanMove == true) {
       this.ang -= TURN_RATE * Math.PI;

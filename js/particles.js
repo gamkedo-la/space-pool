@@ -1,10 +1,9 @@
 //ball subtle puff on wall bounce
 var particleList=[];
-var PARTICLESNUM=5;
-var CYCLEANCHOR=4;//MINCYCLE + 1*CYCLEANCHOR = max cyclesLeft
-var MINCYCLE=1;
-var MINPARTICLESIZE=3;
+var PARTICLESNUM=60;
 var GRAVITY_PER_CYCLE=0.1;
+const MINCYCLE=1;
+const CYCLEANCHOR=4;//MINCYCLE + 1*CYCLEANCHOR = max cyclesLeft
 
 
 function createParticles(){
@@ -33,9 +32,9 @@ function createParticles(){
 			particleList.push(particlesClass);
 
 			if(Math.random()<0.5){
-				particlesClass.myColor="#7f7677";//burnt red
+				particlesClass.myColor="#ED1313";//red
 			} else {
-				particlesClass.myColor="#7f7f76";//burnt yellow
+				particlesClass.myColor="#E4E418  ";//yellow 
 			}
 			/*particlesClass.random = Math.random();
 			var interval=particlesClass.random* (0.7 - 0.3) + 0.3;
@@ -120,8 +119,24 @@ this.readyToRemove=false;
 	}
 
 	this.draw=function(){
-		colorRect(this.x,this.y,2,2,this.myColor,ship.ang);
-		colorRect(this.x2,this.y2,2,2,this.myColor,ship.ang);
+		const MINPARTICLESIZE=3;
+		const RECTWIDTH=-(4+MINPARTICLESIZE*this.cyclesLeft/(MINCYCLE+CYCLEANCHOR));
+		const RECTHEIGHT=MINPARTICLESIZE*this.cyclesLeft/(MINCYCLE+CYCLEANCHOR);
+		
+
+		if (ship.keyHeld_Gas && shipCanMove == true){
+		colorRect(this.x,this.y,RECTWIDTH,RECTHEIGHT,this.myColor,ship.ang);	
+		colorRect(this.x2,this.y2,RECTWIDTH,RECTHEIGHT,this.myColor,ship.ang);
+		}
+		if (ship.keyHeld_TurnLeft && shipCanMove == true){
+		colorRect(this.x2,this.y2,RECTWIDTH,RECTHEIGHT,this.myColor,ship.ang);
 		//MINPARTICLESIZE*this.cyclesLeft/(MINCYCLE+CYCLEANCHOR)
+		}
+		if (ship.keyHeld_TurnRight && shipCanMove == true){
+		colorRect(this.x,this.y,RECTWIDTH,RECTHEIGHT,this.myColor,ship.ang);
+		//MINPARTICLESIZE*this.cyclesLeft/(MINCYCLE+CYCLEANCHOR)
+		}
 	}
 }
+
+ 
