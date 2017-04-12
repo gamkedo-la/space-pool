@@ -12,6 +12,7 @@ var bundle = [
   "./js/ImageLoading.js",
   "./js/Input.js",
   "./js/Main.js",
+  "./js/particles.js",
   "./js/MovingWrapPosition.js",
   "./js/RailSlug.js",
   "./js/Scratch.js",
