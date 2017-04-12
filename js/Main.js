@@ -103,6 +103,7 @@ function moveAll() {
   }
   sweepAsteroidsReadyForRemoval();
   ship.move(colliders);
+  moveAllParticles();
   moveAsteroids();
 }
 
@@ -124,6 +125,7 @@ function drawAll() {
   else {
     drawUI();
     ship.draw();
+    drawAllParticles();
     drawAsteroids();
     basicBlit();
   }

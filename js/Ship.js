@@ -19,6 +19,8 @@ function Ship() {
 
   this.x = canvas.width / 2;
   this.y = canvas.height / 2;
+  this.x2;//rotated location of thrusts
+  this.y2;//rotated location of thrusts
   // image is 48x32
   this.width = 48;
   this.height = 32;
@@ -43,6 +45,8 @@ function Ship() {
   this.controlKeyRight;
   this.controlKeyDown;
   this.controlKeyLeft;
+
+
 
   this.drawCanvas = function(ctx) {
     var lines = [
@@ -114,13 +118,26 @@ function Ship() {
     }
     if (this.keyHeld_TurnLeft && shipCanMove == true) {
       this.ang -= TURN_RATE * Math.PI;
+      createParticles();
     }
     if (this.keyHeld_TurnRight && shipCanMove == true) {
       this.ang += TURN_RATE * Math.PI;
+      createParticles();
     }
 
     this.xv *= SPACESPEED_DECAY_MULT;
     this.yv *= SPACESPEED_DECAY_MULT;
+
+    const DISTCENTERTOTHRUST1=-10;//lenght from center of ship pic to thrust1
+    const DISTCENTERTOTHRUST2=-10;//lenght from center of ship pic to thrust2
+
+    //thurst positions
+    var thrust1ang=1.95*Math.PI+this.ang
+    var thrust2ang=1.61*Math.PI+this.ang
+    this.x2=Math.cos(thrust1ang)*DISTCENTERTOTHRUST1-Math.sin(thrust1ang)*DISTCENTERTOTHRUST1;
+    this.y2=Math.sin(thrust1ang)*DISTCENTERTOTHRUST1+Math.cos(thrust1ang)*DISTCENTERTOTHRUST1;
+    this.x3=Math.cos(thrust2ang)*DISTCENTERTOTHRUST2-Math.sin(thrust2ang)*DISTCENTERTOTHRUST2;
+    this.y3=Math.sin(thrust2ang)*DISTCENTERTOTHRUST2+Math.cos(thrust2ang)*DISTCENTERTOTHRUST2;
 
     this.superClassMove();
     this.checkMyShipCollisonAgainst(colliders);
@@ -131,7 +148,6 @@ function Ship() {
   this.superClassDraw = this.draw;
   this.draw = function() {
     this.cannon.drawShots();
-
     this.superClassDraw();
   };
 }
