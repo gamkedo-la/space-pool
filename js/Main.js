@@ -122,9 +122,9 @@ function drawAll() {
     gameOverScreen();
   }
   else {
+    basicBlit();
     drawUI();
     ship.draw();
     drawAsteroids();
-    basicBlit();
   }
 }
