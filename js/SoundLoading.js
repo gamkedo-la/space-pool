@@ -16,7 +16,6 @@ Sound.cache = {};
 
 //load sounds
 Sound.load = function( callBack ) {
-
   /*
     array.map works with => as if you were looping over an anonymous function.
     The same could have been done with:
@@ -68,22 +67,38 @@ Sound.load = function( callBack ) {
 }
 
 /*
-  A last minute nicety, as volume tends to be something
-  we want to easily manipulate.
+  Audio.playbackRate modifies the speed at which
+  the audio is played. playbackRate takes a value between 0.5 and 4:
+  e.g. playbackRate = .5 will play at half speed,
+       playbackRate = 2 will play at double
+*/
+Sound.playbackRate = function(fileName, playbackRate) {
+  if( this.cache[fileName] == null ) return;
 
-  Audio.volume is controlled by a normal:
+  if(playbackRate != undefined)
+    this.cache[fileName].playbackRate = playbackRate;
+}
+
+/*
+  Audio.volume is controlled by a value between 0 - 1:
   e.g. volume = 1 is the loudest, volume = 0 is mute
 */
-Sound.volume = function(fileName, vol = .5) {
-  this.cache[fileName].volume = vol;
+Sound.volume = function(fileName, volume) {
+  if( this.cache[fileName] == null ) return;
+
+  if(volume != undefined)
+    this.cache[fileName].volume = volume;
 }
 
 /*
   Audio elements have a loop property that when set to true
   will play the sound on loop
 */
-Sound.loop = function(fileName, toggle = true) {
-  this.cache[fileName].loop = toggle;
+Sound.loop = function(fileName, loop) {
+  if( this.cache[fileName] == null ) return;
+
+  if(loop != undefined)
+    this.cache[fileName].loop = loop;
 }
 
 /*
@@ -94,8 +109,14 @@ Sound.loop = function(fileName, toggle = true) {
 
   Leveraging the volume control from above.
 */
-Sound.play = function(fileName, volume = .5) {
+Sound.play = function(fileName, volume, loop, playbackRate) {
+  if( this.cache[fileName] == null ) return;
+
   this.volume(fileName, volume);
-  this.cache[fileName].currentTime = 0;
-  this.cache[fileName].play();
+  this.loop(fileName, loop);
+  this.playbackRate(fileName, playbackRate);
+
+  var audio = this.cache[fileName];
+  audio.currentTime = 0;
+  audio.play();
 }
