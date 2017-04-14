@@ -44,7 +44,7 @@ window.onload = function() {
   //setting main theme to loop then playing song at medium volume
   Sound.volume("spacepool", .5);
   Sound.loop("spacepool", true);
-  Sound.playbackRate("spacepool", 1);
+  Sound.playbackRate("spacepool", .5);
   Sound.play("spacepool");
 
   if (FULL_SIZE_CANVAS) {
