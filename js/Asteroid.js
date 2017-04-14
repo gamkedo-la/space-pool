@@ -136,7 +136,7 @@ function Asteroid(max_radius) {
     }
     this.isReadyToRemove = true;
     asteroidsHit++;
-    var tempBlit = new Blit(200, 0, 150, canvas.height, 0, 0);
+    var tempBlit = new Blit(randomInteger(1, 600), 0, randomInteger(1, 150), canvas.height, 0, 0);
     blits.push(tempBlit);
   };
 
