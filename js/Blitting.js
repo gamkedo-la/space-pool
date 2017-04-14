@@ -1,25 +1,42 @@
-var blitTimer = 0;
+function drawBlits(){
+  for(var i = 0; i < blits.length; i++){
+    blits[i].draw();
+  }
+}
 
-function basicBlit(){
-  var srcX, srcY, copyW, copyH, destX, destY;
-  srcX = 0;
-  srcY = 0;
-  copyW = 150; //canvas.width/2;
-  copyH = canvas.height; //canvas.height/2;
-  destX = 300; //canvas.width/2;
-  destY = 0; //canvas.height/2;
+function moveBlits(){
+  for(var i = 0; i < blits.length; i++){
+    blits[i].move();
+  }
+}
 
-  hiddenCanvasContext.drawImage(canvas, destX, destY, copyW, copyH, 0, 0, copyW, copyH );
-  canvasContext.drawImage(canvas, srcX, srcY, copyW, copyH,
-    destX, destY, copyW, copyH);
-  canvasContext.drawImage(hiddenCanvas, 0, 0, copyW, copyH,
-    srcX, srcY, copyW, copyH);
+function Blit(srcX, srcY, copyW, copyH, destX, destY){
+  this.blitTimer = 0;
 
-  if(blitTimer < 60){
-    blitTimer++;
-    console.log(blitTimer);
-  } else if (blitTimer == 60) {
-    colorRect(srcX, srcY, 150, canvas.height, "rgba(255,255,255,0.5)");
-    blitTimer = 0;
+  this.srcX = srcX;
+  this.srcY = srcY;
+  this.copyW = copyW;
+  this.copyH = copyH;
+  this.destX = destX;
+  this.destY = destY;
+
+  this.reset();
+
+  this.move(){
+    if(this.blitTimer < 60){
+      this.blitTimer++;
+      console.log(this.blitTimer);
+    } else if (this.blitTimer == 60) {
+      colorRect(this.srcX, this.srcY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
+      this.blitTimer = 0;
+    }
+  }
+
+  this.draw(){
+    hiddenCanvasContext.drawImage(canvas, this.destX, this.destY, this.copyW, this.copyH, 0, 0, this.copyW, this.copyH );
+    canvasContext.drawImage(canvas, this.srcX, this.srcY, this.copyW, this.copyH,
+      this.destX, this.destY, this.copyW, this.copyH);
+    canvasContext.drawImage(hiddenCanvas, 0, 0, this.copyW, this.copyH,
+      this.srcX, this.srcY, this.copyW, this.copyH);
   }
 }

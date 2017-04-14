@@ -14,6 +14,7 @@ var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
+var blits[];
 
 var timesShotWrap=0;//used for Stats
 var timesShot=0;//used for Stats
@@ -105,6 +106,7 @@ function moveAll() {
   ship.move(colliders);
   moveAllParticles();
   moveAsteroids();
+  moveBlits();
 }
 
 function drawAll() {
@@ -127,6 +129,6 @@ function drawAll() {
     ship.draw();
     drawAllParticles();
     drawAsteroids();
-    basicBlit();
+    drawBlits();
   }
 }

@@ -134,9 +134,10 @@ function Asteroid(max_radius) {
         colliders.push(tempAsteroid);
       }
     }
-
     this.isReadyToRemove = true;
     asteroidsHit++;
+    var tempBlit = new Blit(200, 0, 150, canvas.height, 0, 0);
+    blits.push(tempBlit);
   };
 
   this.superClassMove = this.move; //saving reference to parent class' move.
