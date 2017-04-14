@@ -20,9 +20,9 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
   this.destX = destX;
   this.destY = destY;
 
-  this.reset();
+  this.reset = function(){};
 
-  this.move(){
+  this.move = function(){
     if(this.blitTimer < 60){
       this.blitTimer++;
       console.log(this.blitTimer);
@@ -32,7 +32,8 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
     }
   }
 
-  this.draw(){
+  this.draw = function(){
+    console.log('I should be called lots and lots, no love?');
     hiddenCanvasContext.drawImage(canvas, this.destX, this.destY, this.copyW, this.copyH, 0, 0, this.copyW, this.copyH );
     canvasContext.drawImage(canvas, this.srcX, this.srcY, this.copyW, this.copyH,
       this.destX, this.destY, this.copyW, this.copyH);

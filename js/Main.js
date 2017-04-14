@@ -14,7 +14,7 @@ var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
-var blits[];
+var blits = [];
 
 var timesShotWrap=0;//used for Stats
 var timesShot=0;//used for Stats
