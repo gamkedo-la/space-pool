@@ -10,6 +10,10 @@ function moveBlits(){
   }
 }
 
+function clearAllBlits(){
+  blits = [];
+}
+
 function Blit(srcX, srcY, copyW, copyH, destX, destY){
   this.blitTimer = 0;
 

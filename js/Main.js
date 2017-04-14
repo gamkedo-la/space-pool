@@ -71,6 +71,7 @@ function resetGame() {
   lives = 3;
   scoreMultiplier = 1;
   clearAllAsteroids();
+  clearAllBlits();
   loadLevel();
   showingGameOverScreen = true;
 }
@@ -80,6 +81,7 @@ function resetRound() {
   endWave = waves;
   scoreMultiplier = 1;
   clearAllAsteroids();
+  clearAllBlits();
   loadLevel();
   showingGameOverScreen = true;
 }
