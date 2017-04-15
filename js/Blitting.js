@@ -40,7 +40,7 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
       this.destX = this.destX + randomInteger(1, 10)
       
     } else if (this.blitTimer == this.lifespan) {
-      this.destX = randomInteger(1, 600);
+      this.destX = randomInteger(1, canvas.width);
       console.log("DestX: " + this.destX)
       this.lifespan = randomInteger(1, 200);
       colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");

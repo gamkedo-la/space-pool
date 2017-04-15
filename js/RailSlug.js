@@ -100,7 +100,7 @@ function RailSlug() {
     if (edgeCrossed) {
       this.edgeCrossCount++;
       this.increaseScoreMultiplier();
-      var tempBlit = new Blit(randomInteger(1, 600), 0, canvas.width, randomInteger(1, 150), randomInteger(1, 600), 0);
+      var tempBlit = new Blit(randomInteger(1, canvas.width), randomInteger(0, canvas.height), canvas.width, randomInteger(1, 150), randomInteger(1, 600), randomInteger(0, canvas.height));
       blits.push(tempBlit);
     }
   };
