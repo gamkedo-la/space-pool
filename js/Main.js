@@ -1,4 +1,4 @@
-const NUMBER_OF_LIVES = 3;
+const NUMBER_OF_LIVES = 1;
 const FULL_SIZE_CANVAS = true;
 const DEBUG = false;
 const MOTION_BLUR = !DEBUG;
@@ -127,6 +127,11 @@ function drawAll() {
   }
   else if (showingGameOverScreen) {
     gameOverScreen();
+    console.log('Number of Astroids Destroyed: ' + asteroidsHit);
+    console.log('Number of Shots Fired: '+timesShot);
+    console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
+    console.log('FuelUsed: ' + fuelUsed);
+    console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
   }
   else {
     drawUI();

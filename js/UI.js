@@ -44,14 +44,11 @@ function gameOverScreen() {
   canvasContext.font = "20px Arial";
   canvasContext.fillText((titleText), canvas.width / 2, 250);
   Stats();
-  console.log('Number of Astroids Destroyed: ' + asteroidsHit);
-  console.log('Number of Shots Fired: '+timesShot);
-  console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
-  console.log('FuelUsed: ' + fuelUsed);
-  console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
+  /*
   timesShotWrap=0;
   timesShot=0;
   asteroidsHit=0;
   fuelUsed=0;
   accuracy=0;
+  */
 }
