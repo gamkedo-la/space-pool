@@ -85,7 +85,7 @@ function resetRound() {
   clearAllAsteroids();
   clearAllBlits();
   loadLevel();
-  showingGameOverScreen = true;
+  //showingGameOverScreen = true;
 }
 
 function loadLevel(whichLevel) {

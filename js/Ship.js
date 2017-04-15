@@ -93,7 +93,7 @@ function Ship() {
         else {
           resetRound();
           if (lives > 0) {
-            lives--;
+            //lives--; //commmenting out temporarily
           }
         } //if lives > 0, reset the round
       } // check if the current collider is overlapping the ship
