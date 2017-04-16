@@ -77,7 +77,7 @@ function checkWave(){
 
 var breakRecursion = false;
 function canHasScene(){
-  if(waves > 2){
+  if(blits.length > 10){
     breakRecursion = true;
     debugger;
     setTimeout(slideScreen, 2000);
@@ -170,5 +170,6 @@ function drawAll() {
     drawAllParticles();
     drawAsteroids();
     drawBlits();
+    ship.draw();
   }
 }

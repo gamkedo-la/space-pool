@@ -1,7 +1,7 @@
 function setDrawColors(canvasContext) {
   canvasContext.lineWidth = 2;
-  canvasContext.strokeStyle = 'white';
-  canvasContext.fillStyle = 'rgba(200,200,255,0.07)';
+  canvasContext.strokeStyle = 'rgba(255,255,255,0.3)';
+  canvasContext.fillStyle = 'rgba(200,200,255,0.035)';
   canvasContext.shadowColor = '#ffffff';
   canvasContext.shadowBlur = 8;
   canvasContext.shadowOffsetX = 0;
