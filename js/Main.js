@@ -43,10 +43,10 @@ window.onload = function() {
   // loadImages() will now be invoked after loading sounds from SoundLoading.js
   Sound.load(loadImages);
   //setting main theme to loop then playing song at medium volume
-  Sound.volume("spacepool", .5);
-  Sound.loop("spacepool", true);
-  Sound.playbackRate("spacepool", .5);
-  Sound.play("spacepool");
+  Sound.volume("spacepool-slow", .1);
+  Sound.loop("spacepool-slow", true);
+  Sound.playbackRate("spacepool-slow", 1);
+  Sound.play("spacepool-slow");
 
   if (FULL_SIZE_CANVAS) {
     window.addEventListener("resize", onResize);
@@ -77,10 +77,13 @@ function checkWave(){
 
 var breakRecursion = false;
 function canHasScene(){
-  if(blits.length > 10){
+  if(blits.length > 1){
     breakRecursion = true;
     debugger;
     setTimeout(slideScreen, 2000);
+    Sound.volume("marc-1", .5);
+    Sound.playbackRate("marc-1", 1);
+    Sound.play("marc-1");
   }
 }
 

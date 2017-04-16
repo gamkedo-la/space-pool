@@ -5,7 +5,8 @@ var Sound = {};
 
 //list of path, file name
 Sound.queue = [
-  ["music/", "spacepool.wav"]
+  ["music/", "spacepool-slow.wav"],
+  ["music/", "marc-1.mp3"]
 ];
 
 //for load checking
