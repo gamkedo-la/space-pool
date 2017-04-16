@@ -63,7 +63,7 @@ function RailSlug() {
     this.ang = shipFiring.ang;
 
     this.shotLife = RAIL_LIFE;
-    scoreMultiplier = 2;
+    scoreMultiplier = 4;
     timesShot++;
     //console.log(timesShot)
   };
