@@ -126,11 +126,11 @@ function updateAll() {
 var slidex = 0;
 var slidey = 0;
 function slideScreen(){
-  if(randomInteger(1, 100) < 4){
+  if(randomInteger(1, 5) < 2){
     canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
       slidex, slidey, canvas.width, canvas.height);
-    slidex += randomInteger(1, canvas.width/700);
-    slidey += randomInteger(1, canvas.height/700);
+    slidex = randomInteger(1, canvas.width/700);
+    slidey = randomInteger(1, canvas.height/300);
     //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
   requestAnimationFrame(slideScreen);
