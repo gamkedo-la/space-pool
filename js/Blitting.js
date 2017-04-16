@@ -1,6 +1,11 @@
 function drawBlits(){
   for(var i = 0; i < blits.length; i++){
+      
     blits[i].draw();
+    if(blits.length > maxBlits && randomInteger(1,100) > 60){
+      blits.splice(i, 1);
+      console.log(blits.length)
+    }
   }
 }
 
@@ -41,7 +46,7 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
       
     } else if (this.blitTimer == this.lifespan) {
       this.destX = randomInteger(1, canvas.width);
-      console.log("DestX: " + this.destX)
+      
       this.lifespan = randomInteger(1, 200);
       colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
       this.blitTimer = 0;

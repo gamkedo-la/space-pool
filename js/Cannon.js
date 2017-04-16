@@ -23,10 +23,7 @@ function Cannon() {
   };
 
   this.iterateThroughShotArray = function(colliders, ship) {
-    if (colliders.length < (START_NUMBER_OF_ASTEROIDS / 2) && colliders.length != 0) {
-      spawnAndResetAsteroids();
-      waves++;
-    } //spawn a new wave of asteroids after half of the current batch is destroyed
+
     for (var i = 0; i < this.shotArray.length; i++) {
       if (this.shotArray[i].isShotReadyToFire()) {
         this.shotArray[i].shootFrom(ship);
