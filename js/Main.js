@@ -166,9 +166,10 @@ function drawAll() {
   }
   else {
     drawUI();
-    ship.draw();
+    
     drawAllParticles();
     drawAsteroids();
     drawBlits();
+    ship.draw();
   }
 }
