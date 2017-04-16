@@ -1,6 +1,11 @@
 function drawBlits(){
   for(var i = 0; i < blits.length; i++){
+      
     blits[i].draw();
+    if(blits.length > maxBlits && randomInteger(1,100) > 60){
+      blits.splice(i, 1);
+      console.log(blits.length)
+    }
   }
 }
 
@@ -26,6 +31,17 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
   this.reset = function(){};
 
   this.move = function(){
+    if(this.blitTimer < this.lifespan){
+      this.blitTimer = this.blitTimer + 1;
+      this.destX = this.destX + randomInteger(1, 10)
+      
+    } else if (this.blitTimer == this.lifespan) {
+      this.destX = randomInteger(1, canvas.width);
+      
+      this.lifespan = randomInteger(1, 200);
+      colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
+      this.blitTimer = 0;
+    }
   }
 
   this.draw = function(){
@@ -34,17 +50,5 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
       this.destX, this.destY, this.copyW, this.copyH);
     // canvasContext.drawImage(hiddenCanvas, 0, 0, this.copyW, this.copyH,
     //   this.srcX, this.srcY, this.copyW, this.copyH);
-
-    if(this.blitTimer < this.lifespan){
-      this.blitTimer = this.blitTimer + 1;
-      this.destX = this.destX + randomInteger(1, 10)
-      
-    } else if (this.blitTimer == this.lifespan) {
-      this.destX = randomInteger(1, 600);
-      console.log("DestX: " + this.destX)
-      this.lifespan = randomInteger(1, 200);
-      colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
-      this.blitTimer = 0;
-    }
   }
 }

@@ -1,7 +1,7 @@
 function drawUI() {
   var upperRightText = 'lives: ' + lives + ' ' + 'score: ' + ' ' + score.toString() + ' ' + scoreMultiplier.toString() + 'x';
   canvasContext.font = "14px Arial";
-  colorText(upperRightText, canvas.width - 100, 50, 'white');
+  //colorText(upperRightText, canvas.width - 100, 50, 'white'); //REMOVING SCORE TEMPORARILY TO DEGAMIFY 
   if(testingCheats){
     canvasContext.textAlign = 'left';
     colorText('CHEATS ENABLED, C KEY TO TOGGLE', 80, 50, 'red');

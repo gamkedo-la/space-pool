@@ -15,6 +15,7 @@ var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var colliders = [];
 var blits = [];
+var maxBlits = 9;
 
 var timesShotWrap=0;//used for Stats
 var timesShot=0;//used for Stats
@@ -65,6 +66,24 @@ function imageLoadingDoneSoStartGame() {
   loadLevel();
 }
 
+function checkWave(){
+  if (colliders.length < (START_NUMBER_OF_ASTEROIDS / 2) && colliders.length != 0) {
+    spawnAndResetAsteroids();
+    waves++;
+    maxBlits += waves * randomInteger(1, 5);
+
+  } //spawn a new wave of asteroids after half of the current batch is destroyed
+}
+
+var breakRecursion = false;
+function canHasScene(){
+  if(blits.length > 10){
+    breakRecursion = true;
+    debugger;
+    setTimeout(slideScreen, 2000);
+  }
+}
+
 function resetGame() {
   endScore = score;
   endWave = waves;
@@ -85,7 +104,7 @@ function resetRound() {
   clearAllAsteroids();
   clearAllBlits();
   loadLevel();
-  showingGameOverScreen = true;
+  //showingGameOverScreen = true;
 }
 
 function loadLevel(whichLevel) {
@@ -94,11 +113,28 @@ function loadLevel(whichLevel) {
 }
 
 function updateAll() {
+  checkWave();
   moveAll();
   drawAll();
+  canHasScene()
+  if(breakRecursion == true){
+    return;
+  }
   requestAnimationFrame(updateAll);
 }
 
+var slidex = 0;
+var slidey = 0;
+function slideScreen(){
+  if(randomInteger(1, 5) < 2){
+    canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
+      slidex, slidey, canvas.width, canvas.height);
+    slidex = randomInteger(1, canvas.width/700);
+    slidey = randomInteger(1, canvas.height/300);
+    //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  }
+  requestAnimationFrame(slideScreen);
+}
 function moveAll() {
   if (showingGameOverScreen) {
     return;
@@ -139,5 +175,6 @@ function drawAll() {
     drawAllParticles();
     drawAsteroids();
     drawBlits();
+    ship.draw();
   }
 }
