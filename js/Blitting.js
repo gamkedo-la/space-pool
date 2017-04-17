@@ -1,4 +1,5 @@
 function drawBlits(){
+	hiddenCanvasContext.drawImage(canvas, 0, 0)
   for(var i = 0; i < blits.length; i++){
       
     blits[i].draw();
@@ -7,6 +8,7 @@ function drawBlits(){
       console.log(blits.length)
     }
   }
+	canvasContext.drawImage(hiddenCanvas, 0, 0);
 }
 
 function moveBlits(){
@@ -39,16 +41,17 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
       this.destX = randomInteger(1, canvas.width);
       
       this.lifespan = randomInteger(1, 200);
-      colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
       this.blitTimer = 0;
     }
   }
 
   this.draw = function(){
-    //hiddenCanvasContext.drawImage(canvas, this.destX, this.destY, this.copyW, this.copyH, 0, 0, this.copyW, this.copyH );
-    canvasContext.drawImage(canvas, this.srcX, this.srcY, this.copyW, this.copyH,
-      this.destX, this.destY, this.copyW, this.copyH);
-    // canvasContext.drawImage(hiddenCanvas, 0, 0, this.copyW, this.copyH,
-    //   this.srcX, this.srcY, this.copyW, this.copyH);
+    if(this.blitTimer == this.lifespan){
+			console.log("Flash");
+      colorRectContext(hiddenCanvasContext, this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
+    } else {
+      hiddenCanvasContext.drawImage(canvas, this.srcX, this.srcY, this.copyW, this.copyH,
+        this.destX, this.destY, this.copyW, this.copyH);
+    }
   }
 }

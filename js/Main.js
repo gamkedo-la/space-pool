@@ -35,7 +35,9 @@ window.onload = function() {
   hiddenCanvas = document.createElement('canvas');
   hiddenCanvas.id = 'hiddenGameCanvas';
   hiddenCanvas.style.display = 'none';
-  hiddenCanvasContext = canvas.getContext('2d');
+  hiddenCanvasContext = hiddenCanvas.getContext('2d');
+  hiddenCanvas.width = canvas.width;
+  hiddenCanvas.height = canvas.height;
 
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
