@@ -79,8 +79,7 @@ var breakRecursion = false;
 function canHasScene(){
   if(blits.length > 10){
     breakRecursion = true;
-    debugger;
-    setTimeout(slideScreen, 2000);
+    setTimeout(slideScreen, 500);
   }
 }
 
@@ -126,13 +125,13 @@ function updateAll() {
 var slidex = 0;
 var slidey = 0;
 function slideScreen(){
-  if(randomInteger(1, 5) < 2){
-    canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
-      slidex, slidey, canvas.width, canvas.height);
-    slidex = randomInteger(1, canvas.width/700);
-    slidey = randomInteger(1, canvas.height/300);
-    //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  }
+  slidex = randomInteger(1, canvas.width/350);
+  slidey = randomInteger(1, canvas.height/150);
+  canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
+  slidex, slidey, canvas.width, canvas.height);
+  
+  //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  if(slidey > canvas.height) return;
   requestAnimationFrame(slideScreen);
 }
 function moveAll() {
