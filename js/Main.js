@@ -24,9 +24,6 @@ var asteroidsHit=0;
 var fuelUsed=0;
 var accuracy=0;
 
-var roundCounter = 0;
-var cutsceneTimer = 30;
-
 window.onload = function() {
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
@@ -48,10 +45,10 @@ window.onload = function() {
   // loadImages() will now be invoked after loading sounds from SoundLoading.js
   Sound.load(loadImages);
   //setting main theme to loop then playing song at medium volume
-  Sound.volume("spacepool-slow", .5);
-  Sound.loop("spacepool-slow", true);
-  Sound.playbackRate("spacepool-slow", .5);
-  Sound.play("spacepool-slow");
+  Sound.volume("spacepool", .5);
+  Sound.loop("spacepool", true);
+  Sound.playbackRate("spacepool", .5);
+  Sound.play("spacepool");
 
   if (FULL_SIZE_CANVAS) {
     window.addEventListener("resize", onResize);
@@ -81,6 +78,12 @@ function checkWave(){
 }
 
 var breakRecursion = false;
+function canHasScene(){
+  if(blits.length > 10){
+    breakRecursion = true;
+    setTimeout(slideScreen, 500);
+  }
+}
 
 function resetGame() {
   endScore = score;
@@ -96,7 +99,6 @@ function resetGame() {
 }
 
 function resetRound() {
-  console.log('reset called');
   endScore = score;
   endWave = waves;
   scoreMultiplier = 1;
