@@ -7,6 +7,7 @@ var bundle = [
   "./js/Asteroid.js",
   "./js/Blitting.js",
   "./js/Cannon.js",
+	"./js/Cutscenes.js",
   "./js/Collision.js",
   "./js/GraphicsCommon.js",
   "./js/ImageLoading.js",
