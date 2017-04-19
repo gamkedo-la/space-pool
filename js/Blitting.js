@@ -1,14 +1,14 @@
+var oldBlit = false;
+
 function drawBlits(){
 	hiddenCanvasContext.drawImage(canvas, 0, 0)
   for(var i = 0; i < blits.length; i++){
-      
     blits[i].draw();
     if(blits.length > maxBlits && randomInteger(1,100) > 60){
       blits.splice(i, 1);
       console.log(blits.length)
     }
   }
-	canvasContext.drawImage(hiddenCanvas, 0, 0);
 }
 
 function moveBlits(){
@@ -47,10 +47,9 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
 
   this.draw = function(){
     if(this.blitTimer == this.lifespan){
-			console.log("Flash");
       colorRectContext(hiddenCanvasContext, this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
     } else {
-      hiddenCanvasContext.drawImage(canvas, this.srcX, this.srcY, this.copyW, this.copyH,
+      canvasContext.drawImage(hiddenCanvas, this.srcX, this.srcY, this.copyW, this.copyH,
         this.destX, this.destY, this.copyW, this.copyH);
     }
   }
