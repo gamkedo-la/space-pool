@@ -1,5 +1,3 @@
-var oldBlit = false;
-
 function drawBlits(){
 	hiddenCanvasContext.drawImage(canvas, 0, 0)
   for(var i = 0; i < blits.length; i++){
@@ -47,7 +45,7 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
 
   this.draw = function(){
     if(this.blitTimer == this.lifespan){
-      colorRectContext(hiddenCanvasContext, this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
+      colorRect(this.destX, this.destY, this.copyW, this.copyH, "rgba(255,255,255,0.5)");
     } else {
       canvasContext.drawImage(hiddenCanvas, this.srcX, this.srcY, this.copyW, this.copyH,
         this.destX, this.destY, this.copyW, this.copyH);

@@ -35,15 +35,6 @@ function colorRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor, withAng) {
   canvasContext.restore();
 }
 
-function colorRectContext(context, topLeftX,topLeftY, boxWidth,boxHeight, fillColor, withAng) {
-  context.save();
-  context.fillStyle = fillColor;
-  context.translate(topLeftX,topLeftY); // added, sets position 'after' rotation
-  context.rotate(withAng);
-  context.fillRect(0, 0, boxWidth,boxHeight);
-  context.restore();
-}
-
 function colorRotatedRect(centerX,centerY, boxWidth,boxHeight, fillColor, withAng) {
   canvasContext.save();
   canvasContext.fillStyle = fillColor;
