@@ -1,9 +1,7 @@
 function canHasScene(){
   if(blits.length > 10 && cutsceneTimer >= 0){
-    /*
     breakRecursion = true;
     setTimeout(slideScreen, 500);
-    */
     cutsceneTimer--;
     console.log(cutsceneTimer);
     if (cutsceneTimer == 0) {
@@ -18,7 +16,7 @@ function canHasScene(){
       }
       if(roundCounter == 3){
         Sound.volume("daeve-4", .2);
-        Sound.play("daeve-4");  
+        Sound.play("daeve-4");
       }
       resetRound();
     }
