@@ -81,14 +81,7 @@ function checkWave(){
 }
 
 var breakRecursion = false;
-/*
-function canHasScene(){
-  if(blits.length > 10){
-    breakRecursion = true;
-    setTimeout(slideScreen, 500);
-  }
-}
-*/
+
 
 function resetGame() {
   endScore = score;
@@ -123,9 +116,6 @@ function updateAll() {
   moveAll();
   drawAll();
   canHasScene()
-  if(breakRecursion == true){
-    //return;
-  }
   requestAnimationFrame(updateAll);
 }
 
@@ -138,7 +128,9 @@ function slideScreen(){
   slidex, slidey, canvas.width, canvas.height);
 
   //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  if(slidey > canvas.height) return;
+  if(breakRecursion) {
+    return
+  };
   requestAnimationFrame(slideScreen);
 }
 function moveAll() {
