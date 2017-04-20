@@ -119,7 +119,7 @@ function updateAll() {
   drawAll();
   canHasScene()
   if(breakRecursion == true){
-    return;
+    //return;
   }
   requestAnimationFrame(updateAll);
 }
