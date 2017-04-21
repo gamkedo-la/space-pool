@@ -1,3 +1,4 @@
+const COLORFUL_ASTEROIDS = true;
 const ASTEROID_SPEED_MIN = 0.25;
 const ASTEROID_SPEED_MAX = 1.25;//2.0
 const ASTEROID_SPIN_MAX = 0.01;
@@ -69,6 +70,23 @@ function Asteroid(max_radius) {
 
   this.verts = [];
 
+  if (COLORFUL_ASTEROIDS)
+  {
+	  var baseR = 128;
+	  var randR = randomInteger(0,100) - 50;
+	  var baseG = 128;
+	  var randG = randomInteger(0,100) - 50;
+	  var baseB = 128;
+	  var randB = randomInteger(0,100) - 50;
+	  var alpha = 0.05;
+	  
+	  this.fillColor = 'rgba(' 
+		+ (baseR + randR) + ',' +
+		+ (baseG + randG) + ',' +
+		+ (baseB + randB) + ',' +
+		+ alpha + ')';
+  }
+  
   // Generate the asteroid verticies
   var ang = (Math.PI * 2) / num_verts;
   for (var i = 0; i < num_verts; i++) {
