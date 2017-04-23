@@ -1,9 +1,10 @@
 function canHasScene(){
   if(blits.length > 10 && cutsceneTimer >= 0){
     breakRecursion = true;
-    setTimeout(slideScreen, 500);
+    //setTimeout(slideScreen, 500);
+		startSliding(-1, 1);
     cutsceneTimer--;
-    console.log(cutsceneTimer);
+//    console.log(cutsceneTimer);
     if (cutsceneTimer == 0) {
       roundCounter++;
       if(roundCounter == 1){
@@ -22,6 +23,6 @@ function canHasScene(){
     }
   } else {
     cutsceneTimer = 300;
-    console.log(cutsceneTimer);
+//    console.log(cutsceneTimer);
   }
 }

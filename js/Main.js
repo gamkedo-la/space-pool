@@ -16,6 +16,7 @@ var showingGameOverScreen = false;
 var colliders = [];
 var blits = [];
 var maxBlits = 9;
+var sliding = false;
 
 var timesShotWrap=0;//used for Stats
 var timesShot=0;//used for Stats
@@ -35,13 +36,14 @@ window.onload = function() {
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
   //<canvas style = "display:none;" id="hiddenGameCanvas" width="600" height="600"></canvas>
-  hiddenCanvas = document.createElement('canvas');
+  
+	hiddenCanvas = document.createElement('canvas');
   hiddenCanvas.id = 'hiddenGameCanvas';
   hiddenCanvas.style.display = 'none';
   hiddenCanvasContext = hiddenCanvas.getContext('2d');
   hiddenCanvas.width = canvas.width;
   hiddenCanvas.height = canvas.height;
-
+	
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
@@ -76,7 +78,7 @@ function checkWave(){
     spawnAndResetAsteroids();
     waves++;
     maxBlits += waves * randomInteger(1, 5);
-
+		stopSliding();
   } //spawn a new wave of asteroids after half of the current batch is destroyed
 }
 
@@ -122,31 +124,16 @@ function updateAll() {
   checkWave();
   moveAll();
   drawAll();
-  canHasScene()
-  if(breakRecursion == true){
-    //return;
-  }
+  canHasScene();
   requestAnimationFrame(updateAll);
 }
 
-var slidex = 0;
-var slidey = 0;
-function slideScreen(){
-  slidex = randomInteger(1, canvas.width/350);
-  slidey = randomInteger(1, canvas.height/150);
-  canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
-  slidex, slidey, canvas.width, canvas.height);
-
-  //canvasContext.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  if(slidey > canvas.height) return;
-  requestAnimationFrame(slideScreen);
-}
 function moveAll() {
   if (showingGameOverScreen) {
     return;
   }
   else if (showingTitleScreen) {
-    return
+    return;
   }
   sweepAsteroidsReadyForRemoval();
   ship.move(colliders);
@@ -155,14 +142,44 @@ function moveAll() {
   moveBlits();
 }
 
-function drawAll() {
-
-  if (MOTION_BLUR) {
+function drawBackground() {
+  if(sliding){
+		slideScreen();
+    darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.025)"); // More transparent
+  }
+  else if (MOTION_BLUR) {
     darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
   }
   else {
   	colorRect(0, 0, canvas.width, canvas.height, "black"); // opaque
   }
+}
+
+var slideDirectionX = 1, slideDirectonY = 1;
+
+function startSliding(x, y) {
+	sliding = true;
+	
+	slideDirectionX = x;
+	slideDirectonY = y;
+}
+
+function stopSliding() {
+  sliding = false;
+}
+
+var slideMovementX = 0;
+var slideMovementY = 0;
+
+function slideScreen(){
+  slideMovementX = randomInteger(1, canvas.width/350) * slideDirectionX;
+  slideMovementY = randomInteger(1, canvas.height/150) * slideDirectonY;
+  canvasContext.drawImage(canvas, 0, 0, canvas.width, canvas.height,
+    slideMovementX, slideMovementY, canvas.width, canvas.height);
+}
+
+function drawAll() {
+  drawBackground();
 
   if (showingTitleScreen) {
     titleScreen();

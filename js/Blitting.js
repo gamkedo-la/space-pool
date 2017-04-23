@@ -1,10 +1,10 @@
 function drawBlits(){
-	hiddenCanvasContext.drawImage(canvas, 0, 0)
+	hiddenCanvasContext.drawImage(canvas, 0, 0);
   for(var i = 0; i < blits.length; i++){
     blits[i].draw();
     if(blits.length > maxBlits && randomInteger(1,100) > 60){
       blits.splice(i, 1);
-      console.log(blits.length)
+      console.log(blits.length);
     }
   }
 }
@@ -33,7 +33,7 @@ function Blit(srcX, srcY, copyW, copyH, destX, destY){
   this.move = function(){
     if(this.blitTimer < this.lifespan){
       this.blitTimer = this.blitTimer + 1;
-      this.destX = this.destX + randomInteger(1, 10)
+      this.destX = this.destX + randomInteger(1, 10);
       
     } else if (this.blitTimer == this.lifespan) {
       this.destX = randomInteger(1, canvas.width);
