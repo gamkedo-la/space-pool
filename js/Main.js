@@ -83,14 +83,7 @@ function checkWave(){
 }
 
 var breakRecursion = false;
-/*
-function canHasScene(){
-  if(blits.length > 10){
-    breakRecursion = true;
-    setTimeout(slideScreen, 500);
-  }
-}
-*/
+
 
 function resetGame() {
   endScore = score;

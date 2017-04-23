@@ -61,7 +61,8 @@ function MovingWrapPosition() {
   };
 
   this.drawCanvas = function(ctx) {
-    setDrawColors(ctx);
+    // fillColor is optional - see setDrawColors() in GraphicsCommoin.js
+    setDrawColors(ctx,this.fillColor); // it's okay if fillColor is undefined. see Asteroid() for example
     ctx.beginPath();
     ctx.moveTo(this.verts[0].x, this.verts[0].y);
     for (var i = 0; i < this.verts.length; i++) {
