@@ -63,18 +63,18 @@ function RailSlug() {
     this.ang = shipFiring.ang;
 
     this.shotLife = RAIL_LIFE;
-    scoreMultiplier = 4;
+
     timesShot++;
-    //console.log(timesShot)
   };
 
   this.increaseScoreMultiplier = function() {
     if (scoreMultiplier < 4) {
-      scoreMultiplier *= 2;
+      scoreMultiplier *= 4;
       timesShotWrap++;
     }
     else {
       shipCanMove = true;
+      scoreMultiplier = 1;
       this.shotLife = 0;
     }
   };
