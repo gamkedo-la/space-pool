@@ -29,19 +29,6 @@ function Cannon() {
         this.shotArray[i].shootFrom(ship);
       }
 
-      if (this.shotArray[i].edgeCrossCount > 0 && checkCollisionShapes(this.shotArray[i], ship)) {
-        if (lives == 0) {
-          resetGame();
-        }
-        else {
-          resetRound();
-          if (lives > 0) {
-            lives--;
-          }
-        }
-        return; // bail to avoid null this.shotArray[i]
-      }
-
       for (var currentCollider = 0; currentCollider < colliders.length; currentCollider++) {
         //checkCollisionShapes(shape1, shape2)
         if (colliders[currentCollider].invincibilityTimer == 0 && checkCollisionShapes(this.shotArray[i], colliders[currentCollider])) {
