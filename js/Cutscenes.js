@@ -4,18 +4,18 @@ function canHasScene(){
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
     cutsceneTimer--;
-//    console.log(cutsceneTimer);
+    console.log("cutsceneTimer: "+cutsceneTimer);
     if (cutsceneTimer == 0) {
       roundCounter++;
       if(roundCounter == 1){
-        sceneAudio = "daeve-2" 
+        sceneAudio = "daeve-2"
       }
       if(roundCounter == 2){
         sceneAudio = "daeve-3"
       }
       if(roundCounter == 3){
         sceneAudio = "daeve-4"
-      } 
+      }
 
       if(roundCounter == 4){
         colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");

@@ -36,14 +36,14 @@ window.onload = function() {
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
   //<canvas style = "display:none;" id="hiddenGameCanvas" width="600" height="600"></canvas>
-  
+
 	hiddenCanvas = document.createElement('canvas');
   hiddenCanvas.id = 'hiddenGameCanvas';
   hiddenCanvas.style.display = 'none';
   hiddenCanvasContext = hiddenCanvas.getContext('2d');
   hiddenCanvas.width = canvas.width;
   hiddenCanvas.height = canvas.height;
-	
+
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
@@ -152,7 +152,7 @@ var slideDirectionX = 1, slideDirectonY = 1;
 
 function startSliding(x, y) {
 	sliding = true;
-	
+
 	slideDirectionX = x;
 	slideDirectonY = y;
 }
@@ -192,5 +192,6 @@ function drawAll() {
     drawAsteroids();
     drawBlits();
     ship.draw();
+    console.log(blits.length);
   }
 }

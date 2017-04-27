@@ -144,14 +144,6 @@ function RailSlug() {
       scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
     }
 
-    if (scoreMultiplier == 2) {
-      this.railColor = 'green';
-      scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-      this.width = 240;
-      this.height = 30;
-      this.recalcVerts();
-    }
-
     if (testingCheats == true || scoreMultiplier == 4) {
       this.railColor = 'blue';
       scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
