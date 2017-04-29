@@ -23,7 +23,7 @@ function canHasScene(){
         //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
       }
 
-      Sound.volume("spacepool-slow", .1);
+      Sound.volume("spacepool-low-volume", .5);
       Sound.volume(sceneAudio, 1);
       Sound.play(sceneAudio);
       resetRound();
@@ -31,7 +31,7 @@ function canHasScene(){
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
     //every, please don't do this. I'm just tired and need to make progress v.v
     //this polymorphism, in this case, is bad
-    Sound.volume("spacepool-slow", 1);
+    Sound.volume("spacepool-low-volume", 1);
     sceneAudio = false;
     breakRecursion = true;
     console.log("Round: ", roundCounter);
