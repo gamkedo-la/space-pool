@@ -23,7 +23,8 @@ function canHasScene(){
         //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
       }
 
-      Sound.volume(sceneAudio, .2);
+      Sound.volume("spacepool-slow", .1);
+      Sound.volume(sceneAudio, 1);
       Sound.play(sceneAudio);
       resetRound();
     }
@@ -35,6 +36,7 @@ function canHasScene(){
     console.log("Round: ", roundCounter)
   }else {
     cutsceneTimer = 300;
+    //Sound.volume("spacepool-slow", 1);
 //    console.log(cutsceneTimer);
   }
 }

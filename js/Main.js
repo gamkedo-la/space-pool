@@ -50,10 +50,10 @@ window.onload = function() {
   // loadImages() will now be invoked after loading sounds from SoundLoading.js
   Sound.load(loadImages);
   //setting main theme to loop then playing song at medium volume
-  Sound.volume("spacepool-slow", .5);
+  Sound.volume("spacepool-slow", 1);
   Sound.loop("spacepool-slow", true);
   Sound.playbackRate("spacepool-slow", .5);
-  //Sound.play("spacepool-slow");
+  Sound.play("spacepool-slow");
 
   if (FULL_SIZE_CANVAS) {
     window.addEventListener("resize", onResize);
