@@ -8,18 +8,19 @@ function canHasScene(){
     if (cutsceneTimer == 0) {
       roundCounter++;
       if(roundCounter == 1){
-        sceneAudio = "daeve-2"
+        sceneAudio = "tape-1"
       }
       if(roundCounter == 2){
-        sceneAudio = "daeve-3"
+        sceneAudio = "tape-2"
       }
       if(roundCounter == 3){
-        sceneAudio = "daeve-4"
+        sceneAudio = "tape-3"
       }
 
       if(roundCounter == 4){
-        colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
-        throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ"
+        sceneAudio = "tape-4"
+        //colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
+        //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
       }
 
       Sound.volume(sceneAudio, .2);
