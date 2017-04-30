@@ -1,9 +1,11 @@
 var sceneAudio = false
+var isJumping = false;
 function canHasScene(){
-  if(blits.length > 10){
+  if(blits.length > 10 && !isJumping ){
     console.log('y u no work =<');
     Sound.volume('drift', 1);
     Sound.play('drift');
+    isJumping = true;
   }
   if(blits.length > 10 && cutsceneTimer >= 0){
     isInHyperSpace = true;
@@ -40,6 +42,7 @@ function canHasScene(){
     Sound.volume("spacepool-low-volume", 1);
     sceneAudio = false;
     breakRecursion = true;
+    isJumping = false;
   }else {
     cutsceneTimer = 500;
     isInHyperSpace = false;
