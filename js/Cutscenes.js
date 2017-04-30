@@ -43,6 +43,7 @@ function canHasScene(){
     sceneAudio = false;
     breakRecursion = true;
     isJumping = false;
+    stopSliding();
   }else {
     cutsceneTimer = 500;
     isInHyperSpace = false;
