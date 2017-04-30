@@ -15,6 +15,8 @@ const KEY_1 = 49;
 const KEY_2 = 50;
 const KEY_3 = 51;
 
+const KEY_PAUSE = 80;
+
 // Reload keys
 const KEY_F5 = 116;
 const KEY_R = 82;
@@ -88,6 +90,10 @@ function keySet(keyEvent, setTo) {
     if(keyEvent.keyCode == KEY_C){
       testingCheats = !testingCheats;
       console.log('testingCheats is ' + testingCheats);
+    }
+    if(keyEvent.keyCode == KEY_PAUSE)
+    {
+      showingPauseScreen = !showingPauseScreen;
     }
   }
 }

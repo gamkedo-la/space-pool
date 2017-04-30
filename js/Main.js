@@ -13,6 +13,7 @@ var waves = 0;
 var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
+var showingPauseScreen = false;
 var colliders = [];
 var blits = [];
 var maxBlits = 9;
@@ -38,7 +39,7 @@ window.onload = function() {
   canvasContext = canvas.getContext('2d');
   //<canvas style = "display:none;" id="hiddenGameCanvas" width="600" height="600"></canvas>
 
-	hiddenCanvas = document.createElement('canvas');
+  hiddenCanvas = document.createElement('canvas');
   hiddenCanvas.id = 'hiddenGameCanvas';
   hiddenCanvas.style.display = 'none';
   hiddenCanvasContext = hiddenCanvas.getContext('2d');
@@ -116,7 +117,9 @@ function loadLevel(whichLevel) {
 
 function updateAll() {
   checkWave();
-  moveAll();
+  if (!showingPauseScreen) {
+      moveAll();
+  }
   drawAll();
   canHasScene();
   requestAnimationFrame(updateAll);
@@ -193,5 +196,8 @@ function drawAll() {
     drawAsteroids();
     drawBlits();
     ship.draw();
+    if (showingPauseScreen){
+      pauseScreen();    
+    }
   }
 }
