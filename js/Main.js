@@ -179,6 +179,7 @@ function drawAll() {
   drawBackground();
 
   if (showingTitleScreen) {
+    showingPauseScreen = false;
     titleScreen();
   }
   else if (showingGameOverScreen) {
