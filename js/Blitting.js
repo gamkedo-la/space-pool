@@ -4,7 +4,6 @@ function drawBlits(){
     blits[i].draw();
     if(blits.length > maxBlits && randomInteger(1,100) > 80){
       //blits.splice(i, 1);
-      console.log(blits.length);
     }
   }
 }

@@ -83,19 +83,13 @@ function Ship() {
   this.checkMyShipCollisonAgainst = function(colliders) {
     for (var c = 0; c < colliders.length; c++) {
       if (checkCollisionShapes(this, colliders[c])) {
+        if(isInHyperSpace === false){
+          resetRound();
+        }
         if (testingCheats) {
           console.log('player collison detected - cheatmode on!');
           return;
         }
-        if (lives === 0) {
-          resetGame();
-        } //if the player runs out of lives, end the game
-        else {
-          resetRound();
-          if (lives > 0) {
-            //lives--; //commmenting out temporarily
-          }
-        } //if lives > 0, reset the round
       } // check if the current collider is overlapping the ship
     } //loop through colliders
   }; //end of checkMyShipCollisonAgainst functions

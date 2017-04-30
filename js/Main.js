@@ -27,6 +27,7 @@ var accuracy=0;
 
 var cutsceneTimer = 300;
 var roundCounter = 0;
+var isInHyperSpace = false;
 
 window.onload = function() {
   if(testingCheats){
@@ -192,6 +193,5 @@ function drawAll() {
     drawAsteroids();
     drawBlits();
     ship.draw();
-    console.log(blits.length);
   }
 }

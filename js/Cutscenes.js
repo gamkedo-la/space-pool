@@ -1,10 +1,12 @@
 var sceneAudio = false
 function canHasScene(){
   if(blits.length > 10 && cutsceneTimer >= 0){
+    isInHyperSpace = true;
+    console.log(isInHyperSpace);
+    
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
     cutsceneTimer--;
-    console.log("cutsceneTimer: "+cutsceneTimer);
     if (cutsceneTimer == 0) {
       roundCounter++;
       if(roundCounter == 1){
@@ -31,12 +33,12 @@ function canHasScene(){
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
     //every, please don't do this. I'm just tired and need to make progress v.v
     //this polymorphism, in this case, is bad
+    //BOOLEAN FOR ISIN HYPERSPACE
     Sound.volume("spacepool-low-volume", 1);
     sceneAudio = false;
     breakRecursion = true;
-    console.log("Round: ", roundCounter);
   }else {
     cutsceneTimer = 300;
-//    console.log(cutsceneTimer);
+    isInHyperSpace = false;
   }
 }
