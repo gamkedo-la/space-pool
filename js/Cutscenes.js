@@ -1,9 +1,12 @@
 var sceneAudio = false
 function canHasScene(){
+  if(blits.length > 10){
+    console.log('y u no work =<');
+    Sound.volume('drift', 1);
+    Sound.play('drift');
+  }
   if(blits.length > 10 && cutsceneTimer >= 0){
     isInHyperSpace = true;
-    console.log(isInHyperSpace);
-    
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
     cutsceneTimer--;
@@ -38,7 +41,7 @@ function canHasScene(){
     sceneAudio = false;
     breakRecursion = true;
   }else {
-    cutsceneTimer = 300;
+    cutsceneTimer = 500;
     isInHyperSpace = false;
   }
 }

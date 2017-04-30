@@ -25,7 +25,7 @@ var asteroidsHit=0;
 var fuelUsed=0;
 var accuracy=0;
 
-var cutsceneTimer = 300;
+var cutsceneTimer = 500;
 var roundCounter = 0;
 var isInHyperSpace = false;
 

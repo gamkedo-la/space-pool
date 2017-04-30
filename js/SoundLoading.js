@@ -9,7 +9,8 @@ Sound.queue = [
   ["music/", "tape-1.wav"],
   ["music/", "tape-2.wav"],
   ["music/", "tape-3.wav"],
-  ["music/", "tape-4.wav"]
+  ["music/", "tape-4.wav"],
+  ["music/", "drift.wav"]
 ];
 
 //for load checking
