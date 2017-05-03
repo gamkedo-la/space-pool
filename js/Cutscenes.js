@@ -1,13 +1,15 @@
+var hyperSpaceThreshold = 20;
 var sceneAudio = false
 var isJumping = false;
 function canHasScene(){
-  if(blits.length > 10 && !isJumping ){
+  console.log(blits.length);
+  if(blits.length > hyperSpaceThreshold && !isJumping ){
     console.log('y u no work =<');
     Sound.volume('drift', 1);
     Sound.play('drift');
     isJumping = true;
   }
-  if(blits.length > 10 && cutsceneTimer >= 0){
+  if(blits.length > hyperSpaceThreshold && cutsceneTimer >= 0){
     isInHyperSpace = true;
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
@@ -33,6 +35,7 @@ function canHasScene(){
       Sound.volume("spacepool-low-volume", .5);
       Sound.volume(sceneAudio, 1);
       Sound.play(sceneAudio);
+      hyperSpaceThreshold+=10;
       resetRound();
     }
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
