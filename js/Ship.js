@@ -108,16 +108,25 @@ function Ship() {
       fuelUsed++;
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
-      createParticles();
-
+      createParticles(
+        this.x+this.x2,
+        this.y+this.y2);
+        
+      createParticles(
+			  this.x+this.x3,
+		    this.y+this.y3);
     }
     if (this.keyHeld_TurnLeft && shipCanMove == true) {
       this.ang -= TURN_RATE * Math.PI;
-      createParticles();
+      createParticles(
+        this.x+this.x3,
+        this.y+this.y3);
     }
     if (this.keyHeld_TurnRight && shipCanMove == true) {
       this.ang += TURN_RATE * Math.PI;
-      createParticles();
+      createParticles(
+        this.x+this.x2,
+        this.y+this.y2);
     }
 
     this.xv *= SPACESPEED_DECAY_MULT;

@@ -2,9 +2,7 @@ var hyperSpaceThreshold = 20;
 var sceneAudio = false
 var isJumping = false;
 function canHasScene(){
-  console.log(blits.length);
   if(blits.length > hyperSpaceThreshold && !isJumping ){
-    console.log('y u no work =<');
     Sound.volume('drift', 1);
     Sound.play('drift');
     isJumping = true;

@@ -37,6 +37,7 @@ function Cannon() {
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();
             colliders[currentCollider].explode();
+            createParticles(this.shotArray[i].x, this.shotArray[i].y, 20, 5.0);
           }
 
           //allows 2nd wrapped shot to keep going

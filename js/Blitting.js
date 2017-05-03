@@ -1,3 +1,13 @@
+var blitDeleteCycle = 0;
+
+function randomlyDeleteBlit(){
+	blitDeleteCycle++
+	if(blitDeleteCycle>10){
+		blitDeleteCycle = 0;
+	}
+	console.log(blitDeleteCycle);
+}
+
 function drawBlits(){
 	hiddenCanvasContext.drawImage(canvas, 0, 0);
   for(var i = 0; i < blits.length; i++){
@@ -12,6 +22,7 @@ function moveBlits(){
   for(var i = 0; i < blits.length; i++){
     blits[i].move();
   }
+	randomlyDeleteBlit();
 }
 
 function clearAllBlits(){
