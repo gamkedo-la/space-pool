@@ -21,6 +21,7 @@ var bundle = [
   "./js/SoundLoading.js",
   "./js/Stats.js",
   "./js/UI.js",
+  "./js/GamepadKeyboardEventEmulator.js",
 ];
 
 //Bundle JS
