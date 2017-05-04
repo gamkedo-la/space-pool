@@ -3,6 +3,7 @@ const FULL_SIZE_CANVAS = true;
 const DEBUG = false;
 const MOTION_BLUR = !DEBUG;
 
+var showBlits = true;
 var testingCheats = false;
 
 var canvas, canvasContext, hiddenCanvas, hiddenCanvasContext;
@@ -195,10 +196,12 @@ function drawAll() {
     ship.draw();
     drawAllParticles();
     drawAsteroids();
-    drawBlits();
+    if(showBlits){
+      drawBlits();
+    }
     ship.draw();
     if (showingPauseScreen){
-      pauseScreen();    
+      pauseScreen();
     }
   }
 }

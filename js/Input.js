@@ -22,6 +22,7 @@ const KEY_F5 = 116;
 const KEY_R = 82;
 
 const KEY_C = 67; //toggle cheats
+const KEY_B = 66; //toggle blits
 
 var peaShooterActive = false;
 var railGunActive = true;
@@ -90,6 +91,10 @@ function keySet(keyEvent, setTo) {
     if(keyEvent.keyCode == KEY_C){
       testingCheats = !testingCheats;
       console.log('testingCheats is ' + testingCheats);
+    }
+    if(keyEvent.keyCode == KEY_B){
+      showBlits = !showBlits;
+      console.log('showBlits is ' + showBlits);
     }
     if(keyEvent.keyCode == KEY_PAUSE)
     {
