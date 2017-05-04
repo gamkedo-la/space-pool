@@ -104,6 +104,7 @@ function resetGame() {
 function resetRound() {
   endScore = score;
   endWave = waves;
+  waves = 0;
   scoreMultiplier = 1;
   clearAllAsteroids();
   clearAllBlits();
@@ -114,6 +115,7 @@ function resetRound() {
 function loadLevel(whichLevel) {
   ship.reset(shipPic);
   spawnAndResetAsteroids();
+  console.log(waves);
 }
 
 function updateAll() {
