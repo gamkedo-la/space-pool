@@ -46,7 +46,9 @@ window.onload = function() {
   hiddenCanvasContext = hiddenCanvas.getContext('2d');
   hiddenCanvas.width = canvas.width;
   hiddenCanvas.height = canvas.height;
-
+	
+	waveController = new WaveController();
+	
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
@@ -145,9 +147,11 @@ function moveAll() {
 function drawBackground() {
   if(sliding){
 		slideScreen();
+		waveController.drawWave();
     darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.025)"); // More transparent
   }
   else if (MOTION_BLUR) {
+		waveController.drawWave();
     darkenRect(0, 0, canvas.width, canvas.height, "rgba(0,0,0,0.25)"); // transparent
   }
   else {
