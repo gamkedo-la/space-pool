@@ -46,9 +46,9 @@ window.onload = function() {
   hiddenCanvasContext = hiddenCanvas.getContext('2d');
   hiddenCanvas.width = canvas.width;
   hiddenCanvas.height = canvas.height;
-	
+
 	waveController = new WaveController();
-	
+
   ship = new Ship();
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   colorText("LOADING IMAGES", canvas.width / 2, canvas.height / 2, 'white');
@@ -183,6 +183,8 @@ function slideScreen(){
 }
 
 function drawAll() {
+  console.log(waves);
+
   drawBackground();
 
   if (showingTitleScreen) {
