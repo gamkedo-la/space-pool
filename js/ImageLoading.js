@@ -1,4 +1,5 @@
 var shipPic = document.createElement("img");
+var titlePic = document.createElement("img");
 
 var worldPics = [];
 
@@ -23,7 +24,8 @@ function loadImageForWorldCode(worldCode, fileName) {
 
 function loadImages() {
   var imageList = [
-    { varName: shipPic, theFile: "player1.png" }
+    { varName: shipPic, theFile: "player1.png" },
+    { varName: titlePic, theFile: "drift_bravely.png" }
   ];
 
   picsToLoad = imageList.length;

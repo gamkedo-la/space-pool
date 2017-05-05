@@ -16,11 +16,10 @@ function titleScreen() {
   canvasContext.fillStyle = "white";
   canvasContext.textAlign = "center";
   canvasContext.font = "14px Arial";
-  canvasContext.fillText((subText), canvas.width / 2, 270);
+  canvasContext.fillText((subText), canvas.width / 2, 370);
   canvasContext.font = "14px Arial";
-  canvasContext.fillText((subSubText), canvas.width / 2, 300);
-  canvasContext.font = "20px Arial";
-  canvasContext.fillText((titleText), canvas.width / 2, 250);
+  canvasContext.fillText((subSubText), canvas.width / 2, 400);
+  drawBitmapCenteredWithRotation(titlePic, canvas.width / 2, 250);
 }
 
 function gameOverScreen() {
@@ -55,7 +54,7 @@ function gameOverScreen() {
 
 function pauseScreen() {
   var titleText = "Game Paused";
-  var subText = "press P to continue";    
+  var subText = "press P to continue";
   colorRotatedRect(canvas.width/2, canvas.height/2, canvas.width * 0.90, canvas.height * 0.90, 'rgba(64,64,64,0.1)',0 );
   canvasContext.fillStyle = "white";
   canvasContext.textAlign = "center";
