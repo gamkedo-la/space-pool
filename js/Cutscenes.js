@@ -34,6 +34,7 @@ function canHasScene(){
       Sound.volume(sceneAudio, 1);
       Sound.play(sceneAudio);
       hyperSpaceThreshold++;
+      waveController.startSingleWave();
       resetRound();
     }
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
