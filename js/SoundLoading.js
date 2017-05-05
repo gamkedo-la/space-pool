@@ -10,6 +10,14 @@ Sound.queue = [
   ["music/", "tape-2.wav"],
   ["music/", "tape-3.wav"],
   ["music/", "tape-4.wav"],
+  ["music/", "mark-1.wav"],
+  ["music/", "mark-2.wav"],
+  ["music/", "mark-3.wav"],
+  ["music/", "mark-4.wav"],
+  ["music/", "mirror-1.wav"],
+  ["music/", "mirror-2.wav"],
+  ["music/", "mirror-3.wav"],
+  ["music/", "mirror-4.wav"],
   ["music/", "drift.wav"]
 ];
 

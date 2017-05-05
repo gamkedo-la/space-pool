@@ -15,17 +15,40 @@ function canHasScene(){
     if (cutsceneTimer == 0) {
       roundCounter++;
       if(roundCounter == 1){
-        sceneAudio = "tape-1"
+        sceneAudio = "mark-1"
       }
       if(roundCounter == 2){
-        sceneAudio = "tape-2"
+        sceneAudio = "mark-2"
       }
       if(roundCounter == 3){
+        sceneAudio = "mark-3"
+      }
+      if(roundCounter == 4){
+        sceneAudio = "mark-4"
+      }
+      if(roundCounter == 5){
+        sceneAudio = "tape-1"
+      }
+      if(roundCounter == 6){
+        sceneAudio = "tape-2"
+      }
+      if(roundCounter == 7){
         sceneAudio = "tape-3"
       }
-
-      if(roundCounter == 4){
+      if(roundCounter == 8){
         sceneAudio = "tape-4"
+      }
+      if(roundCounter == 9){
+        sceneAudio = "mirror-1"
+      }
+      if(roundCounter == 10){
+        sceneAudio = "mirror-2"
+      }
+      if(roundCounter == 11){
+        sceneAudio = "mirror-3"
+      }
+      if(roundCounter == 12){
+        sceneAudio = "mirror-4"
         //colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
         //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
       }
