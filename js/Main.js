@@ -2,6 +2,8 @@ const NUMBER_OF_LIVES = 1;
 const FULL_SIZE_CANVAS = true;
 const DEBUG = false;
 const MOTION_BLUR = !DEBUG;
+const GLITCH_THE_SCANLINE_OVERLAY = false;;
+const SCROLL_THE_SCANLINE_OVERLAY = !DEBUG;
 
 var showBlits = true;
 var testingCheats = false;
@@ -64,6 +66,12 @@ window.onload = function() {
     window.addEventListener("resize", onResize);
     onResize();
   }
+  
+  if (GLITCH_THE_SCANLINE_OVERLAY) 
+	  glitchScanlineOverlay();
+  if (SCROLL_THE_SCANLINE_OVERLAY)
+	  scrollScanlineOverlay();
+  
 };
 
 function onResize() // full screen
@@ -159,6 +167,23 @@ function drawBackground() {
   }
 }
 
+var scanline_overlay_div = null;
+var scanline_overlay_div_y = 0;
+function glitchScanlineOverlay()
+{
+	if (!scanline_overlay_div) scanline_overlay_div = document.getElementById('overlay');
+	scanline_overlay_div_y = Math.floor(Math.random()*16);
+	scanline_overlay_div.style.backgroundPosition = '0px ' + scanline_overlay_div_y + 'px';
+	setTimeout(glitchScanlineOverlay,Math.random()*1000);
+}
+function scrollScanlineOverlay()
+{
+	if (!scanline_overlay_div) scanline_overlay_div = document.getElementById('overlay');
+	scanline_overlay_div_y--;
+	scanline_overlay_div.style.backgroundPosition = '0px ' + scanline_overlay_div_y + 'px';
+	setTimeout(scrollScanlineOverlay,50);
+}
+
 var slideDirectionX = 1, slideDirectonY = 1;
 
 function startSliding(x, y) {
@@ -186,7 +211,7 @@ function drawAll() {
   console.log(waves);
 
   drawBackground();
-
+  
   if (showingTitleScreen) {
     showingPauseScreen = false;
     titleScreen();
