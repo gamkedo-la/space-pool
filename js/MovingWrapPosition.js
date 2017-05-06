@@ -74,6 +74,13 @@ function MovingWrapPosition() {
   };
 
   this.draw = function() {
+    /*
+    canvasContext.fillStyle = "white";
+    canvasContext.textAlign = "center";
+    canvasContext.font = "14px Arial";
+    canvasContext.fillText(this.isLargeAsteroid, this.x, this.y);
+    */
+
     if (this.img) {
       drawBitmapCenteredWithRotation(this.img, this.x, this.y, this.ang);
 

@@ -29,6 +29,7 @@ var asteroidsHit=0;
 var fuelUsed=0;
 var accuracy=0;
 
+var largeAsteroidsDestroyedThisWave = 0;
 var cutsceneTimer = 500;
 var roundCounter = 0;
 var isInHyperSpace = false;
@@ -66,12 +67,12 @@ window.onload = function() {
     window.addEventListener("resize", onResize);
     onResize();
   }
-  
-  if (GLITCH_THE_SCANLINE_OVERLAY) 
+
+  if (GLITCH_THE_SCANLINE_OVERLAY)
 	  glitchScanlineOverlay();
   if (SCROLL_THE_SCANLINE_OVERLAY)
 	  scrollScanlineOverlay();
-  
+
 };
 
 function onResize() // full screen
@@ -87,7 +88,10 @@ function imageLoadingDoneSoStartGame() {
 }
 
 function checkWave(){
-  if (colliders.length < (START_NUMBER_OF_ASTEROIDS / 2) && colliders.length != 0) {
+  //colliders.length < (START_NUMBER_OF_ASTEROIDS / 2) original check
+  //
+  if (largeAsteroidsDestroyedThisWave > 2 && colliders.length != 0) {
+    largeAsteroidsDestroyedThisWave = 0;
     spawnAndResetAsteroids();
     waves++;
     maxBlits += waves * randomInteger(1, 5);
@@ -208,10 +212,9 @@ function slideScreen(){
 }
 
 function drawAll() {
-  console.log(waves);
 
   drawBackground();
-  
+
   if (showingTitleScreen) {
     showingPauseScreen = false;
     titleScreen();

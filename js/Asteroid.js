@@ -27,6 +27,7 @@ function spawnAndResetAsteroids() {
   var i;
   for (i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++) {
     var tempAsteroid = new Asteroid();
+    tempAsteroid.isLargeAsteroid = true;
     colliders.push(tempAsteroid);
     tempAsteroid.reset();
   }
@@ -54,6 +55,8 @@ function Asteroid(max_radius) {
   this.ang = Math.random() * Math.PI;
   this.hp = 3;
 
+  this.isLargeAsteroid = false;
+
   var randSpeed = randomFloat(ASTEROID_SPEED_MIN, ASTEROID_SPEED_MAX);
 
   var driftAngle = Math.PI * 2.0 * Math.random();
@@ -79,14 +82,14 @@ function Asteroid(max_radius) {
 	  var baseB = 128;
 	  var randB = randomInteger(0,100) - 50;
 	  var alpha = 0.05;
-	  
-	  this.fillColor = 'rgba(' 
+
+	  this.fillColor = 'rgba('
 		+ (baseR + randR) + ',' +
 		+ (baseG + randG) + ',' +
 		+ (baseB + randB) + ',' +
 		+ alpha + ')';
   }
-  
+
   // Generate the asteroid verticies
   var ang = (Math.PI * 2) / num_verts;
   for (var i = 0; i < num_verts; i++) {

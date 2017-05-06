@@ -34,6 +34,10 @@ function Cannon() {
         if (colliders[currentCollider].invincibilityTimer == 0 && checkCollisionShapes(this.shotArray[i], colliders[currentCollider])) {
 
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
+          if(colliders[currentCollider].isLargeAsteroid == true){
+            largeAsteroidsDestroyedThisWave++;
+            console.log(largeAsteroidsDestroyedThisWave);
+          }
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();
             colliders[currentCollider].explode();
