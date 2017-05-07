@@ -18,7 +18,10 @@ Sound.queue = [
   ["music/", "mirror-2.wav"],
   ["music/", "mirror-3.wav"],
   ["music/", "mirror-4.wav"],
-  ["music/", "drift.wav"]
+  ["music/", "drift.wav"],
+  ["music/", "sfx_asteroid_explo.wav"],
+  ["music/", "sfx_laser.wav"],
+  ["music/", "sfx_ship_thrust.wav"]
 ];
 
 //for load checking

@@ -145,6 +145,8 @@ function Asteroid(max_radius) {
   };
 
   this.explode = function() {
+  Sound.volume('sfx_asteroid_explo', 0.5);
+  Sound.play('sfx_asteroid_explo');
     //TODO when this is done by # of wrap it'll need to be 3, not 4.
     // Explode into multiple smaller asteroids if still big enough
     if (this.radius >= ASTEROID_MIN_RADIUS_TO_EXPLODE_INTO_ASTEROIDS && scoreMultiplier < 4) { //why is scoreMultiplier in here??? o_0

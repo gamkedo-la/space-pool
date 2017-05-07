@@ -105,6 +105,8 @@ function Ship() {
     }
 
     if (this.keyHeld_Gas && shipCanMove == true) {
+    Sound.volume('sfx_ship_thrust', 0.4);
+    Sound.play('sfx_ship_thrust');
       fuelUsed++;
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;

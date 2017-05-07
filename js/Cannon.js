@@ -12,6 +12,8 @@ function Cannon() {
       if (railGunActive) {
         var tempShot = new RailSlug();
       }
+      Sound.volume('sfx_laser', 0.2);
+      Sound.play('sfx_laser');
       this.shotArray.push(tempShot);
       tempShot.reset();
     }
