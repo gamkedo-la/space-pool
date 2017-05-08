@@ -17,6 +17,7 @@ var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var showingPauseScreen = false;
+var showingQuitScreen = false;
 var colliders = [];
 var blits = [];
 var maxBlits = 9;
@@ -134,9 +135,7 @@ function loadLevel(whichLevel) {
 
 function updateAll() {
   checkWave();
-  if (!showingPauseScreen) {
-      moveAll();
-  }
+  moveAll();
   drawAll();
   canHasScene();
   requestAnimationFrame(updateAll);
@@ -147,6 +146,15 @@ function moveAll() {
     return;
   }
   else if (showingTitleScreen) {
+    showingPauseScreen = false;
+    showingQuitScreen = false;
+    return;
+  }
+  else if (showingPauseScreen) {
+    return;
+  }
+  else if (showingQuitScreen)
+  {
     return;
   }
   sweepAsteroidsReadyForRemoval();
@@ -216,8 +224,7 @@ function drawAll() {
   drawBackground();
 
   if (showingTitleScreen) {
-    showingPauseScreen = false;
-    titleScreen();
+  titleScreen();
   }
   else if (showingGameOverScreen) {
     gameOverScreen();
@@ -237,7 +244,10 @@ function drawAll() {
     }
     ship.draw();
     if (showingPauseScreen){
-      pauseScreen();
+        pauseScreen();
+    }
+    else if (showingQuitScreen){
+        quitScreen();
     }
   }
 }

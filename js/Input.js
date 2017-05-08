@@ -15,7 +15,9 @@ const KEY_1 = 49;
 const KEY_2 = 50;
 const KEY_3 = 51;
 
-const KEY_PAUSE = 80;
+const KEY_P = 80;
+const KEY_Q = 81;
+const KEY_ESC = 27;
 
 // Reload keys
 const KEY_F5 = 116;
@@ -45,8 +47,8 @@ function setupInput() {
   });
   document.addEventListener("keydown", function() {
   });
-
-  ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR, KEY_C);
+  ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR);
+  //ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR, KEY_C);
 }
 
 function updateMousePos(evt) {
@@ -96,10 +98,30 @@ function keySet(keyEvent, setTo) {
       showBlits = !showBlits;
       console.log('showBlits is ' + showBlits);
     }
-    if(keyEvent.keyCode == KEY_PAUSE)
+    if(keyEvent.keyCode == KEY_P)
     {
+      if (showingQuitScreen || showingTitleScreen){
+          return;
+      }
+      if (showBlits && !showingPauseScreen){
+          // turn off blitting during pause
+          showBlits = false;
+      }
       showingPauseScreen = !showingPauseScreen;
+      showingQuitScreen = false;
     }
+    if(keyEvent.keyCode == KEY_ESC || keyEvent.keyCode == KEY_Q)
+    {
+      if (showingPauseScreen){
+        return;        
+      }
+      if (showingQuitScreen && keyEvent.keyCode == KEY_Q){
+        showingTitleScreen = true;
+        return;
+      }
+      showingQuitScreen = !showingQuitScreen;
+      showingPauseScreen = false;
+      }
   }
 }
 
