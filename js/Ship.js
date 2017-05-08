@@ -104,9 +104,31 @@ function Ship() {
       scoreMultiplier = 1;
     }
 
+	// maybe turn off thrust sound
+	if (!this.keyHeld_Gas && shipCanMove) {
+		if (Sound && Sound.cache['sfx_ship_thrust'])
+			Sound.volume('sfx_ship_thrust', 0);
+	}
+
     if (this.keyHeld_Gas && shipCanMove == true) {
-    Sound.volume('sfx_ship_thrust', 0.4);
-    Sound.play('sfx_ship_thrust');
+    
+		if (Sound && Sound.cache['sfx_ship_thrust'])
+		{
+			// I can't seem to loop the sound - so this just replays if not playing! =)
+			if ((Sound.cache['sfx_ship_thrust'].currentTime < 0.0001) ||
+				(Sound.cache['sfx_ship_thrust'].currentTime >= (Sound.cache['sfx_ship_thrust'].duration-0.0001)) || 
+				(Sound.cache['sfx_ship_thrust'].ended))
+			{
+				//console.log("Playing THRUST sfx...");
+				Sound.volume('sfx_ship_thrust', 0.4);
+				// Sound.loop('sfx_ship_thrust'); // no effect?
+				Sound.play('sfx_ship_thrust');
+			}
+			
+			// adjust the volume based on speed
+			Sound.volume('sfx_ship_thrust', Math.max(0.4,0.1 * (this.xv + this.yv)));
+		}
+		
       fuelUsed++;
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
