@@ -3,7 +3,7 @@ var sceneAudio = false
 var isJumping = false;
 function canHasScene(){
   if(waves > hyperSpaceThreshold && !isJumping ){
-    Sound.volume('drift', 1);
+    Sound.volume('drift', 0.2);
     Sound.play('drift');
     isJumping = true;
   }
@@ -54,7 +54,7 @@ function canHasScene(){
       }
 
       Sound.volume("spacepool-low-volume", .5);
-      Sound.volume(sceneAudio, 1);
+      Sound.volume(sceneAudio, 0.2);
       Sound.play(sceneAudio);
       hyperSpaceThreshold++;
       waveController.startSingleWave();
