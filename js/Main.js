@@ -13,6 +13,7 @@ var canvas, canvasContext, hiddenCanvas, hiddenCanvasContext;
 var ship;
 var score = 0;
 var waves = 0;
+var asteroidsDestroyedThisRound = 0;
 var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
@@ -120,6 +121,7 @@ function resetRound() {
   endScore = score;
   endWave = waves;
   waves = 0;
+  asteroidsDestroyedThisRound = 0;
   scoreMultiplier = 1;
   clearAllAsteroids();
   clearAllBlits();
@@ -220,6 +222,7 @@ function slideScreen(){
 }
 
 function drawAll() {
+  console.log(blits.length);
 
   drawBackground();
 

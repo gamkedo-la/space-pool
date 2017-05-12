@@ -38,7 +38,8 @@ function Cannon() {
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if(colliders[currentCollider].isLargeAsteroid == true){
             largeAsteroidsDestroyedThisWave++;
-            console.log(largeAsteroidsDestroyedThisWave);
+            asteroidsDestroyedThisRound++;
+            //console.log(largeAsteroidsDestroyedThisWave);
           }
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();

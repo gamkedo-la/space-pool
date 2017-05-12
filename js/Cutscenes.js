@@ -1,13 +1,13 @@
-var hyperSpaceThreshold = 0;
+var hyperSpaceThreshold = 2;
 var sceneAudio = false
 var isJumping = false;
 function canHasScene(){
-  if(waves > hyperSpaceThreshold && !isJumping ){
+  if(asteroidsDestroyedThisRound > hyperSpaceThreshold && !isJumping ){
     Sound.volume('drift', 0.2);
     Sound.play('drift');
     isJumping = true;
   }
-  if(waves > hyperSpaceThreshold && cutsceneTimer >= 0){
+  if(asteroidsDestroyedThisRound > hyperSpaceThreshold && cutsceneTimer >= 0){
     isInHyperSpace = true;
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
