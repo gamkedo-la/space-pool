@@ -39,7 +39,6 @@ function Cannon() {
           if(colliders[currentCollider].isLargeAsteroid == true){
             largeAsteroidsDestroyedThisWave++;
             largeAsteroidsDestroyedThisRound++;
-            console.log(largeAsteroidsDestroyedThisWave);
           }
           if (colliders[currentCollider].hp < 0) {
             this.shotArray[i].countdownTimeUntilCanHitAgain();
@@ -75,6 +74,4 @@ function Cannon() {
       if (this.shotArray[i].shotLife > 0) {
         this.shotArray[i].draw();
       }
-    }
-  };
-}
+    

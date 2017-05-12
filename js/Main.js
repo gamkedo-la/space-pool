@@ -152,11 +152,13 @@ function moveAll() {
     return;
   }
   else if (showingTitleScreen) {
+    roundCounter = prompt('select level');
     showingPauseScreen = false;
     showingQuitScreen = false;
     return;
   }
   else if (showingPauseScreen) {
+    console.log(roundCounter);
     return;
   }
   else if (showingQuitScreen)
