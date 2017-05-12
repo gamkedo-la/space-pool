@@ -13,7 +13,7 @@ var canvas, canvasContext, hiddenCanvas, hiddenCanvasContext;
 var ship;
 var score = 0;
 var waves = 0;
-var asteroidsDestroyedThisRound = 0;
+
 var lives = NUMBER_OF_LIVES;
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
@@ -31,7 +31,9 @@ var asteroidsHit=0;
 var fuelUsed=0;
 var accuracy=0;
 
+var largeAsteroidsDestroyedThisRound = 0;
 var largeAsteroidsDestroyedThisWave = 0;
+
 var cutsceneTimer = 500;
 var roundCounter = 0;
 var isInHyperSpace = false;
@@ -107,6 +109,8 @@ var breakRecursion = false;
 function resetGame() {
   endScore = score;
   endWave = waves;
+  largeAsteroidsDestroyedThisRound = 0;
+  largeAsteroidsDestroyedThisWave = 0;
   score = 0;
   waves = 0;
   lives = 3;
@@ -121,7 +125,8 @@ function resetRound() {
   endScore = score;
   endWave = waves;
   waves = 0;
-  asteroidsDestroyedThisRound = 0;
+  largeAsteroidsDestroyedThisRound = 0;
+  largeAsteroidsDestroyedThisWave = 0;
   scoreMultiplier = 1;
   clearAllAsteroids();
   clearAllBlits();
@@ -132,7 +137,6 @@ function resetRound() {
 function loadLevel(whichLevel) {
   ship.reset(shipPic);
   spawnAndResetAsteroids();
-  console.log(waves);
 }
 
 function updateAll() {
@@ -222,8 +226,6 @@ function slideScreen(){
 }
 
 function drawAll() {
-  console.log(blits.length);
-
   drawBackground();
 
   if (showingTitleScreen) {

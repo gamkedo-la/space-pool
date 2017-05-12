@@ -2,12 +2,12 @@ var hyperSpaceThreshold = 2;
 var sceneAudio = false
 var isJumping = false;
 function canHasScene(){
-  if(asteroidsDestroyedThisRound > hyperSpaceThreshold && !isJumping ){
+  if(largeAsteroidsDestroyedThisRound > hyperSpaceThreshold && !isJumping ){
     Sound.volume('drift', 0.2);
     Sound.play('drift');
     isJumping = true;
   }
-  if(asteroidsDestroyedThisRound > hyperSpaceThreshold && cutsceneTimer >= 0){
+  if(largeAsteroidsDestroyedThisRound > hyperSpaceThreshold && cutsceneTimer >= 0){
     isInHyperSpace = true;
 		startSliding(-1, 1);
     setTimeout(slideScreen, 500);
