@@ -5,23 +5,23 @@ var Sound = {};
 
 //list of path, file name
 Sound.queue = [
-  ["music/", "spacepool-low-volume.wav"],
-  ["music/", "tape-1.wav"],
-  ["music/", "tape-2.wav"],
-  ["music/", "tape-3.wav"],
-  ["music/", "tape-4.wav"],
-  ["music/", "mark-1.wav"],
-  ["music/", "mark-2.wav"],
-  ["music/", "mark-3.wav"],
-  ["music/", "mark-4.wav"],
-  ["music/", "mirror-1.wav"],
-  ["music/", "mirror-2.wav"],
-  ["music/", "mirror-3.wav"],
-  ["music/", "mirror-4.wav"],
-  ["music/", "drift.wav"],
-  ["music/", "sfx_asteroid_explo.wav"],
-  ["music/", "sfx_laser.wav"],
-  ["music/", "sfx_ship_thrust.wav"]
+  ["music/", "spacepool-low-volume.webm"],
+  ["music/", "tape-1.webm"],
+  ["music/", "tape-2.webm"],
+  ["music/", "tape-3.webm"],
+  ["music/", "tape-4.webm"],
+  ["music/", "mark-1.webm"],
+  ["music/", "mark-2.webm"],
+  ["music/", "mark-3.webm"],
+  ["music/", "mark-4.webm"],
+  ["music/", "mirror-1.webm"],
+  ["music/", "mirror-2.webm"],
+  ["music/", "mirror-3.webm"],
+  ["music/", "mirror-4.webm"],
+  ["music/", "drift.webm"],
+  ["music/", "sfx_asteroid_explo.webm"],
+  ["music/", "sfx_laser.webm"],
+  ["music/", "sfx_ship_thrust.webm"]
 ];
 
 //for load checking
