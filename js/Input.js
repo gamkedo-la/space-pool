@@ -26,6 +26,9 @@ const KEY_R = 82;
 const KEY_C = 67; //toggle cheats
 const KEY_B = 66; //toggle blits
 
+var debugBoolTurnOffSlide = false;
+var debugBoolTurnOffBlit = false;
+
 var peaShooterActive = false;
 var railGunActive = true;
 var shotSnakeActive = false;
@@ -68,9 +71,11 @@ function updateMousePos(evt) {
 function keySet(keyEvent, setTo) {
   if (keyEvent.keyCode == ship.controlKeyLeft) {
     ship.keyHeld_TurnLeft = setTo;
+    //debugBoolTurnOffSlide = setTo;
   }
   if (keyEvent.keyCode == ship.controlKeyRight) {
     ship.keyHeld_TurnRight = setTo;
+    //debugBoolTurnOffBlit = setTo;
   }
   if (keyEvent.keyCode == ship.controlKeyUp) {
     ship.keyHeld_Gas = setTo;
@@ -113,7 +118,7 @@ function keySet(keyEvent, setTo) {
     if(keyEvent.keyCode == KEY_ESC || keyEvent.keyCode == KEY_Q)
     {
       if (showingPauseScreen){
-        return;        
+        return;
       }
       if (showingQuitScreen && keyEvent.keyCode == KEY_Q){
         showingTitleScreen = true;
@@ -125,13 +130,13 @@ function keySet(keyEvent, setTo) {
   }
 }
 
-
 function keyPressed(evt) {
   // console.log("Key pressed: "+evt.keyCode);
   keySet(evt, true);
   if (!repeat) {
     if (evt.keyCode == ship.controlKeyForShotFire) {
       ship.cannon.cannonFire(ship);
+      startHyperSpace();
     }
     repeat = true;
   }

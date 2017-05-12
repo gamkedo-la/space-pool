@@ -34,7 +34,7 @@ var accuracy=0;
 var largeAsteroidsDestroyedThisRound = 0;
 var largeAsteroidsDestroyedThisWave = 0;
 
-var cutsceneTimer = 500;
+var cutsceneTimer = 0;
 var roundCounter = 0;
 var isInHyperSpace = false;
 
@@ -152,7 +152,7 @@ function moveAll() {
     return;
   }
   else if (showingTitleScreen) {
-    roundCounter = prompt('select level');
+    //roundCounter = prompt('select level');
     showingPauseScreen = false;
     showingQuitScreen = false;
     return;
@@ -169,7 +169,9 @@ function moveAll() {
   ship.move(colliders);
   moveAllParticles();
   moveAsteroids();
-  moveBlits();
+  if(debugBoolTurnOffBlit == false){
+    moveBlits();
+  }
 }
 
 function drawBackground() {
@@ -247,7 +249,9 @@ function drawAll() {
     drawAllParticles();
     drawAsteroids();
     if(showBlits){
-      drawBlits();
+      if(debugBoolTurnOffBlit == false){
+        drawBlits();
+      }
     }
     ship.draw();
     if (showingPauseScreen){

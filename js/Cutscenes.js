@@ -7,59 +7,13 @@ function canHasScene(){
     Sound.play('drift');
     isJumping = true;
   }
-  if(largeAsteroidsDestroyedThisRound > hyperSpaceThreshold && cutsceneTimer >= 0){
-    isInHyperSpace = true;
-		startSliding(-1, 1);
-    setTimeout(slideScreen, 500);
-    cutsceneTimer--;
-    if (cutsceneTimer == 0) {
-      roundCounter++;
-      if(roundCounter == 1){
-        sceneAudio = "mark-1"
-      }
-      if(roundCounter == 2){
-        sceneAudio = "mark-2"
-      }
-      if(roundCounter == 3){
-        sceneAudio = "mark-3"
-      }
-      if(roundCounter == 4){
-        sceneAudio = "mark-4"
-      }
-      if(roundCounter == 5){
-        sceneAudio = "tape-1"
-      }
-      if(roundCounter == 6){
-        sceneAudio = "tape-2"
-      }
-      if(roundCounter == 7){
-        sceneAudio = "tape-3"
-      }
-      if(roundCounter == 8){
-        sceneAudio = "tape-4"
-      }
-      if(roundCounter == 9){
-        sceneAudio = "mirror-1"
-      }
-      if(roundCounter == 10){
-        sceneAudio = "mirror-2"
-      }
-      if(roundCounter == 11){
-        sceneAudio = "mirror-3"
-      }
-      if(roundCounter == 12){
-        sceneAudio = "mirror-4"
-        //colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
-        //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
-      }
-
-      Sound.volume("spacepool-low-volume", .5);
-      Sound.volume(sceneAudio, 0.2);
-      Sound.play(sceneAudio);
-      hyperSpaceThreshold++;
-      waveController.startSingleWave();
-      resetRound();
+  if(isInHyperSpace == false){
+    if(largeAsteroidsDestroyedThisRound > hyperSpaceThreshold){
+      startHyperSpace();
     }
+  }
+  else if(cutsceneTimer >= 0){
+    updateHyperSpace();
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
     //every, please don't do this. I'm just tired and need to make progress v.v
     //this polymorphism, in this case, is bad
@@ -72,5 +26,75 @@ function canHasScene(){
   }else {
     cutsceneTimer = 500;
     isInHyperSpace = false;
+  }
+}
+
+function startHyperSpace(){
+  if(isInHyperSpace){
+    return;
+  }
+
+  setTimeout(startSlideScreen, 500);
+
+  cutsceneTimer = 500;
+  isInHyperSpace = true;
+
+}
+
+function startSlideScreen(){
+  if(debugBoolTurnOffSlide == false){
+      startSliding(-1, 1);
+  }
+}
+
+function updateHyperSpace(){
+  cutsceneTimer--;
+  if (cutsceneTimer == 0) {
+    roundCounter++;
+    if(roundCounter == 1){
+      sceneAudio = "mark-1"
+    }
+    if(roundCounter == 2){
+      sceneAudio = "mark-2"
+    }
+    if(roundCounter == 3){
+      sceneAudio = "mark-3"
+    }
+    if(roundCounter == 4){
+      sceneAudio = "mark-4"
+    }
+    if(roundCounter == 5){
+      sceneAudio = "tape-1"
+    }
+    if(roundCounter == 6){
+      sceneAudio = "tape-2"
+    }
+    if(roundCounter == 7){
+      sceneAudio = "tape-3"
+    }
+    if(roundCounter == 8){
+      sceneAudio = "tape-4"
+    }
+    if(roundCounter == 9){
+      sceneAudio = "mirror-1"
+    }
+    if(roundCounter == 10){
+      sceneAudio = "mirror-2"
+    }
+    if(roundCounter == 11){
+      sceneAudio = "mirror-3"
+    }
+    if(roundCounter == 12){
+      sceneAudio = "mirror-4"
+      //colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
+      //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
+    }
+
+    Sound.volume("spacepool-low-volume", .5);
+    Sound.volume(sceneAudio, 0.2);
+    Sound.play(sceneAudio);
+    hyperSpaceThreshold++;
+    waveController.startSingleWave();
+    resetRound();
   }
 }

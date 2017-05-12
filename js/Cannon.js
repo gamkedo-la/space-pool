@@ -74,4 +74,6 @@ function Cannon() {
       if (this.shotArray[i].shotLife > 0) {
         this.shotArray[i].draw();
       }
-    
+    } //loop though shots
+  } //drawShots
+} //end of Canon function

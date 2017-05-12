@@ -22,7 +22,7 @@ var bundle = [
   "./js/Stats.js",
   "./js/UI.js",
 	"./js/Wave.js",
-  "./js/GamepadKeyboardEventEmulator.js",
+  "./js/GamepadKeyboardEventEmulator.js"
 ];
 
 //Bundle JS
