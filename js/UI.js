@@ -11,7 +11,7 @@ function drawUI() {
 
 function titleScreen() {
   var titleText = "Drift Bravely";
-  var subText = "CW: SEIZURES, MOTION SICKNESS";
+  var subText = "CONTENT WARNING: FLASHING IMAGES, DISORIENTING GRAPHICS";
   var subSubText = "PRESS ENTER";
   canvasContext.fillStyle = "white";
   canvasContext.textAlign = "center";

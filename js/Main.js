@@ -39,6 +39,9 @@ var roundCounter = 0;
 var isInHyperSpace = false;
 
 window.onload = function() {
+  roundCounter = prompt('select level');
+  hyperSpaceThreshold = hyperSpaceThreshold + Number(roundCounter);
+
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
   }
@@ -152,13 +155,13 @@ function moveAll() {
     return;
   }
   else if (showingTitleScreen) {
-    //roundCounter = prompt('select level');
     showingPauseScreen = false;
     showingQuitScreen = false;
     return;
   }
   else if (showingPauseScreen) {
     console.log(roundCounter);
+    console.log(hyperSpaceThreshold);
     return;
   }
   else if (showingQuitScreen)

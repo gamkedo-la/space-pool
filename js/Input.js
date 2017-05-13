@@ -136,7 +136,6 @@ function keyPressed(evt) {
   if (!repeat) {
     if (evt.keyCode == ship.controlKeyForShotFire) {
       ship.cannon.cannonFire(ship);
-      startHyperSpace();
     }
     repeat = true;
   }
