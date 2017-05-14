@@ -1,7 +1,25 @@
 var hyperSpaceThreshold = 2;
 var sceneAudio = false
 var isJumping = false;
+var playEnding = false;
+var endingTimer = 300;
+
+function endingGlitch(){
+  endingTimer--;
+  if(endingTimer == 0){
+    showingEndingScreen = true;
+  }
+  var tempBlit = new Blit(randomInteger(1, canvas.width), randomInteger(0, canvas.height), canvas.width, randomInteger(1, 150), randomInteger(1, 600), randomInteger(0, canvas.height));
+  blits.push(tempBlit);
+  var tempBlit = new Blit(randomInteger(1, 600), 0, randomInteger(1, 150), canvas.height, randomInteger(1, 600), 0);
+  blits.push(tempBlit);
+}
+
 function canHasScene(){
+  console.log(roundCounter);
+  if(playEnding){
+    endingGlitch();
+  }
   if(largeAsteroidsDestroyedThisRound > hyperSpaceThreshold && !isJumping ){
     Sound.volume('drift', 0.2);
     Sound.play('drift');
@@ -85,8 +103,9 @@ function updateHyperSpace(){
       sceneAudio = "mirror-3"
     }
     if(roundCounter == 12){
+      playEnding = true;
       sceneAudio = "mirror-4"
-      //colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
+      colorRect(0, 0, canvas.width, canvas.height, "rgba(255,255,255,0.5)");
       //throw "ᗠ‪ᠬƽ━ᒣǁᑦ૙ቬᶩᘰจۤỴͰ⅖ћ";
     }
 
@@ -94,7 +113,9 @@ function updateHyperSpace(){
     Sound.volume(sceneAudio, 0.2);
     Sound.play(sceneAudio);
     hyperSpaceThreshold++;
-    waveController.startSingleWave();
-    resetRound();
+    if(playEnding == false){
+      waveController.startSingleWave();
+      resetRound();
+    }
   }
 }

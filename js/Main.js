@@ -21,6 +21,7 @@ var showingGameOverScreen = false;
 var showingPauseScreen = false;
 var showingQuitScreen = false;
 var showingCreditsScreen = false;
+var showingEndingScreen = false;
 
 var isAllowedToRenderAndMoveGameObjects = false;
 
@@ -151,9 +152,11 @@ function loadLevel(whichLevel) {
 
 function updateAll() {
   checkWave();
-  moveAll();
+  if(showingEndingScreen == false){
+    moveAll();
+    canHasScene();
+  }
   drawAll();
-  canHasScene();
   requestAnimationFrame(updateAll);
 }
 
@@ -260,6 +263,9 @@ function drawAll() {
       }
     }
     ship.draw();
+    if(showingEndingScreen){
+      endingScreen();
+    }
     if (showingPauseScreen){
         pauseScreen();
     }

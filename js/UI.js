@@ -68,6 +68,14 @@ zak-a - pause menu (edited)
 
 var cursorOnStartGame = true;
 
+function endingScreen(){
+  var endingText = "‪ᠬ  ƽ  ᒣ  ǁ  ᑦ  ૙   E  N  D   ቬ ᶩ ᘰ จ ۤỴ Ͱ⅖ ћ";
+  canvasContext.fillStyle = "white";
+  canvasContext.textAlign = "center";
+  canvasContext.font = "14px Arial";
+  canvasContext.fillText(endingText, canvas.width / 2, canvas.height/2);
+}
+
 function creditsScreen(){
   //console.log(credits[0].name);
   var title = "CREDITS";
