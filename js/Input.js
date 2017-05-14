@@ -129,6 +129,9 @@ function keySet(keyEvent, setTo) {
     }
     if(keyEvent.keyCode == KEY_ESC || keyEvent.keyCode == KEY_Q)
     {
+      if(showingCreditsScreen){
+        showingCreditsScreen = false;
+      }
       if (showingPauseScreen){
         return;
       }
