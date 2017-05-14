@@ -15,10 +15,15 @@ var score = 0;
 var waves = 0;
 
 var lives = NUMBER_OF_LIVES;
+
 var showingTitleScreen = true;
 var showingGameOverScreen = false;
 var showingPauseScreen = false;
 var showingQuitScreen = false;
+var showingCreditsScreen = false;
+
+var isAllowedToRenderAndMoveGameObjects = false;
+
 var colliders = [];
 var blits = [];
 var maxBlits = 9;
@@ -39,8 +44,10 @@ var roundCounter = 0;
 var isInHyperSpace = false;
 
 window.onload = function() {
+  /* QUICK AND DIRTY LEVEL SELECTOR
   roundCounter = prompt('select level');
   hyperSpaceThreshold = hyperSpaceThreshold + Number(roundCounter);
+  */
 
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
@@ -154,7 +161,7 @@ function moveAll() {
   if (showingGameOverScreen) {
     return;
   }
-  else if (showingTitleScreen) {
+  else if (!isAllowedToRenderAndMoveGameObjects) {
     showingPauseScreen = false;
     showingQuitScreen = false;
     return;
@@ -235,18 +242,14 @@ function slideScreen(){
 function drawAll() {
   drawBackground();
 
-  if (showingTitleScreen) {
-  titleScreen();
+  if (showingCreditsScreen) {
+    creditsScreen();
   }
-  else if (showingGameOverScreen) {
-    gameOverScreen();
-    console.log('Number of Astroids Destroyed: ' + asteroidsHit);
-    console.log('Number of Shots Fired: '+timesShot);
-    console.log('Game Average Shots Wrapped: '+Math.floor(avgTimesShotsWrapped));
-    console.log('FuelUsed: ' + fuelUsed);
-    console.log('Accuracy: ' + Math.floor(accuracy*100) + '%');
+
+  if (showingTitleScreen && !showingCreditsScreen) {
+    titleScreen();
   }
-  else {
+  if(isAllowedToRenderAndMoveGameObjects) {
     drawUI();
     ship.draw();
     drawAllParticles();

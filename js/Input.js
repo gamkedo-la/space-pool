@@ -88,11 +88,23 @@ function keySet(keyEvent, setTo) {
   }
   if(setTo){ //only detecting when key goes down not held keys
     if (keyEvent.keyCode == KEY_ENTER) {
-      if (showingTitleScreen) {
+      if(!cursorOnStartGame){
+        showingCreditsScreen = true;
+      }
+      if (showingTitleScreen && cursorOnStartGame) {
         showingTitleScreen = false;
+        isAllowedToRenderAndMoveGameObjects = true;
       }
       if (showingGameOverScreen) {
         showingGameOverScreen = false;
+      }
+    }
+    if(showingTitleScreen){
+      if(keyEvent.keyCode == KEY_UP_ARROW){
+        cursorOnStartGame = !cursorOnStartGame;
+      }
+      if(keyEvent.keyCode == KEY_DOWN_ARROW){
+        cursorOnStartGame = !cursorOnStartGame;
       }
     }
     if(keyEvent.keyCode == KEY_C){

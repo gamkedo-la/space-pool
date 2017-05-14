@@ -1,3 +1,13 @@
+var cursorOnStartGame = true;
+
+function creditsScreen(){
+  var subText = "CREDITS SCREEN! IT'S WORKIN!";
+  canvasContext.fillStyle = "white";
+  canvasContext.textAlign = "center";
+  canvasContext.font = "14px Arial";
+  canvasContext.fillText((subText), canvas.width / 2, 370);
+}
+
 function drawUI() {
   var upperRightText = 'lives: ' + lives + ' ' + 'score: ' + ' ' + score.toString() + ' ' + scoreMultiplier.toString() + 'x';
   canvasContext.font = "14px Arial";
