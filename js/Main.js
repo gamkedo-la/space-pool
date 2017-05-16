@@ -22,6 +22,7 @@ var showingPauseScreen = false;
 var showingQuitScreen = false;
 var showingCreditsScreen = false;
 var showingEndingScreen = false;
+var showingPoemIntro = false;
 
 var isAllowedToRenderAndMoveGameObjects = false;
 
@@ -45,10 +46,10 @@ var roundCounter = 0;
 var isInHyperSpace = false;
 
 window.onload = function() {
-  /* QUICK AND DIRTY LEVEL SELECTOR
+  //QUICK AND DIRTY LEVEL SELECTOR
   roundCounter = prompt('select level');
   hyperSpaceThreshold = hyperSpaceThreshold + Number(roundCounter);
-  */
+  //
 
   if(testingCheats){
     console.log('CHEATS ENABLED SHIP WONT BE DESTROYED DIRECT SHOTS ENABLED, USE C TO TOGGLE');
@@ -263,6 +264,9 @@ function drawAll() {
       }
     }
     ship.draw();
+    if(showingPoemIntro && !showingEndingScreen){
+      poemIntros();
+    }
     if(showingEndingScreen){
       endingScreen();
     }

@@ -66,7 +66,17 @@ thelegendarysquare - music
 zak-a - pause menu (edited)
 */
 
+
 var cursorOnStartGame = true;
+var poemThoughtCounter = 1;
+var poemSubThoughtCounter = 0;
+function poemIntros(roundCounter){
+  var poemIntroText = 'T H O U G H T '+ poemThoughtCounter + '.' + poemSubThoughtCounter;
+  canvasContext.fillStyle = "white";
+  canvasContext.textAlign = "center";
+  canvasContext.font = "14px Arial";
+  canvasContext.fillText(poemIntroText, canvas.width / 2, canvas.height/2 - 30);
+}
 
 function endingScreen(){
   var endingText = "‪ᠬ  ƽ  ᒣ  ǁ  ᑦ  ૙   E  N  D   ቬ ᶩ ᘰ จ ۤỴ Ͱ⅖ ћ";

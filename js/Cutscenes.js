@@ -3,6 +3,7 @@ var sceneAudio = false
 var isJumping = false;
 var playEnding = false;
 var endingTimer = 300;
+var poemIntroCounter = 200;
 
 function endingGlitch(){
   endingTimer--;
@@ -17,6 +18,13 @@ function endingGlitch(){
 
 function canHasScene(){
   console.log(roundCounter);
+  if(showingPoemIntro){
+    poemIntroCounter--;
+  }
+  if(poemIntroCounter == 0){
+    showingPoemIntro = false;
+    poemIntroCounter = 300;
+  }
   if(playEnding){
     endingGlitch();
   }
@@ -114,6 +122,12 @@ function updateHyperSpace(){
     Sound.play(sceneAudio);
     hyperSpaceThreshold++;
     if(playEnding == false){
+      showingPoemIntro = true;
+      if(poemSubThoughtCounter > 3){
+        poemThoughtCounter++;
+        poemSubThoughtCounter = 0;
+      }
+      poemSubThoughtCounter++;
       waveController.startSingleWave();
       resetRound();
     }
