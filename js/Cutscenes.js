@@ -41,8 +41,6 @@ function canHasScene(){
   else if(cutsceneTimer >= 0){
     updateHyperSpace();
   } else if(sceneAudio && Sound.cache[sceneAudio] && Sound.cache[sceneAudio].ended){
-    //every, please don't do this. I'm just tired and need to make progress v.v
-    //this polymorphism, in this case, is bad
     //BOOLEAN FOR ISIN HYPERSPACE
     Sound.volume("spacepool-low-volume", 1);
     sceneAudio = false;
@@ -82,6 +80,7 @@ function updateHyperSpace(){
     }
     if(roundCounter == 2){
       sceneAudio = "mark-2"
+      window.localStorage.setItem('enableLevelSelect', 'Yeah, sure');
     }
     if(roundCounter == 3){
       sceneAudio = "mark-3"

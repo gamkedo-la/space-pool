@@ -47,7 +47,9 @@ var isInHyperSpace = false;
 
 window.onload = function() {
   //QUICK AND DIRTY LEVEL SELECTOR
-  roundCounter = prompt('select level');
+  if(window.localStorage.getItem("enableLevelSelect")){
+    roundCounter = prompt('select level');
+  }
   hyperSpaceThreshold = hyperSpaceThreshold + Number(roundCounter);
   //
 
@@ -263,7 +265,7 @@ function drawAll() {
         drawBlits();
       }
     }
-    ship.draw();
+    ship.superClassDraw();
     if(showingPoemIntro && !showingEndingScreen){
       poemIntros();
     }
