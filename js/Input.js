@@ -99,7 +99,7 @@ function keySet(keyEvent, setTo) {
         showingGameOverScreen = false;
       }
     }
-    if(showingTitleScreen){
+    if(showingTitleScreen && !showingCreditsScreen){
       if(keyEvent.keyCode == KEY_UP_ARROW){
         cursorOnStartGame = !cursorOnStartGame;
       }
