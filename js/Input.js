@@ -83,7 +83,7 @@ function keySet(keyEvent, setTo) {
   if (keyEvent.keyCode == ship.controlKeyDown) {
     ship.keyHeld_Reverse = setTo;
   }
-  if (keyEvent.keyCode == ship.controlKeyForShotFire) {
+  if (keyEvent.keyCode == ship.controlKeyForShotFire && !showingTitleScreen) {
     ship.keyHeld_Fire = setTo;
   }
   if(setTo){ //only detecting when key goes down not held keys
@@ -94,6 +94,7 @@ function keySet(keyEvent, setTo) {
       if (showingTitleScreen && cursorOnStartGame) {
         showingTitleScreen = false;
         isAllowedToRenderAndMoveGameObjects = true;
+        resetRound() 
       }
       if (showingGameOverScreen) {
         showingGameOverScreen = false;
@@ -137,6 +138,7 @@ function keySet(keyEvent, setTo) {
       }
       if (showingQuitScreen && keyEvent.keyCode == KEY_Q){
         showingTitleScreen = true;
+        isAllowedToRenderAndMoveGameObjects = false;
         return;
       }
       showingQuitScreen = !showingQuitScreen;
