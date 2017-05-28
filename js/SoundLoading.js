@@ -136,3 +136,30 @@ Sound.play = function(fileName, volume, loop, playbackRate) {
   audio.currentTime = 0;
   audio.play();
 }
+
+/*
+  Add stop, pause, and continue functionality to allow for more control
+  over sound api.
+  -stop pauses audio and returns the sound file to start position
+  -pause pauses audio
+  -continue plays audio from current time
+*/
+
+Sound.stop = function(fileName) {
+  if( this.cache[fileName] == null ) return;
+  var audio = this.cache[fileName];
+  audio.pause();
+  audio.currentTime = 0;
+}
+
+Sound.pause = function(fileName) {
+  if( this.cache[fileName] == null ) return;
+  var audio = this.cache[fileName];
+  audio.pause();
+}
+
+Sound.continue = function(fileName) {
+  if( this.cache[fileName] == null ) return;
+  var audio = this.cache[fileName];
+  audio.play();
+}
