@@ -1,6 +1,6 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.075;
-const TURN_RATE = 0.015;
+const TURN_RATE = 0.010;
 const SHIP_COLLISION_RADIUS = 30;
 
 const MULTIPLIER_LIFESPAN = 150;
@@ -111,12 +111,12 @@ function Ship() {
 	}
 
     if (this.keyHeld_Gas && shipCanMove == true) {
-    
+
 		if (Sound && Sound.cache['sfx_ship_thrust'])
 		{
 			// I can't seem to loop the sound - so this just replays if not playing! =)
 			if ((Sound.cache['sfx_ship_thrust'].currentTime < 0.0001) ||
-				(Sound.cache['sfx_ship_thrust'].currentTime >= (Sound.cache['sfx_ship_thrust'].duration-0.0001)) || 
+				(Sound.cache['sfx_ship_thrust'].currentTime >= (Sound.cache['sfx_ship_thrust'].duration-0.0001)) ||
 				(Sound.cache['sfx_ship_thrust'].ended))
 			{
 				//console.log("Playing THRUST sfx...");
@@ -124,18 +124,18 @@ function Ship() {
 				// Sound.loop('sfx_ship_thrust'); // no effect?
 				Sound.play('sfx_ship_thrust');
 			}
-			
+
 			// adjust the volume based on speed
 			Sound.volume('sfx_ship_thrust', Math.max(0.4,0.1 * (this.xv + this.yv)));
 		}
-		
+
       fuelUsed++;
       this.xv += Math.cos(this.ang) * THRUST_POWER;
       this.yv += Math.sin(this.ang) * THRUST_POWER;
       createParticles(
         this.x+this.x2,
         this.y+this.y2);
-        
+
       createParticles(
 			  this.x+this.x3,
 		    this.y+this.y3);
